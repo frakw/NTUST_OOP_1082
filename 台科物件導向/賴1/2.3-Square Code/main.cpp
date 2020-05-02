@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
-using std::endl;
+using namespace std;
 int main() {
 	while (!std::cin.eof()) {
 		int square_len;
