@@ -26,13 +26,13 @@ void Fraction::getDouble() {
 void Fraction::outputReducedFraction() {
 	int x = hcf(Numerator, Denominator);
 	std::cout << Numerator / x;
-	if (Denominator / x != 1) {
+	if (Denominator / x != 1) {//消除/1 bug ex: 2/1 -> 2
 		std::cout << "/" << (Denominator / x);
 	}
 	std::cout << std::endl;
 }
 
-static int hcf(int a, int b) {
+static int hcf(int a, int b) {//最大公因
 	if (b) {
 		return hcf(b, a % b);
 	}

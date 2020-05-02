@@ -134,7 +134,7 @@ istream& operator>>(istream& strm, Complex& c) {
 	strm >> input;
 	for (int i = 0;i < input.length();i++) {
 		if (!isdigit(input[i])) {
-			input[i] = ' ';
+			input[i] = ' ';//把非數字替換成空白，讓cin>>可以讀數字
 		}
 	}
 	istringstream iss(input);

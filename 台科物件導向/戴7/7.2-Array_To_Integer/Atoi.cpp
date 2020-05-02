@@ -33,7 +33,7 @@ bool Atoi::IsDigital() {
 		return false;
 	}
 	if (!isdigit(beTrans[0])) {
-		if (!(beTrans[0] == '-' && beTrans.length() != 1)) return false;
+		if (!(beTrans[0] == '-' && beTrans.length() != 1)) return false;//在index為0時且，且該字串不只有負號時，才可接受，其餘return false
 	}
 	for (int i = 1;i < beTrans.length();i++) {
 		if (!isdigit(beTrans[i])) {
@@ -49,7 +49,7 @@ int Atoi::StringToInteger() {
 	}
 	bool negative = beTrans[0] == '-';
 	int result = 0;
-	int end = beTrans[0] == '-' ? 1 : 0;
+	int end = beTrans[0] == '-' ? 1 : 0;//有負號，跑到index為1時就停
 	for (int i = beTrans.length() - 1, j = 0;i >= end;i--, j++) {
 		result += ((beTrans[i] - '0') * pow(10, j));
 	}

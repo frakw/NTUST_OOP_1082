@@ -10,7 +10,7 @@ Polynomial::~Polynomial() {
 	coefficient = nullptr;
 }
 
-Polynomial::Polynomial(const Polynomial& a) {//copy
+Polynomial::Polynomial(const Polynomial& a) {//copy constructor 初始化時賦值一個相同型態的變數 ex: int a=87; int b=a;
 	this->~Polynomial();
 	size = a.size;
 	coefficient = new double[size] {};//{}初始化全部為0
@@ -36,10 +36,10 @@ Polynomial Polynomial::operator+(const Polynomial& a) {
 	}
 	result.size = max_size;
 	result.coefficient = new double[result.size]{};//{}初始化全部為0
-	for (int i = 0;i < min_size;i++) {
+	for (int i = 0;i < min_size;i++) {//2個多項式共同有的項
 		result.coefficient[i] = coefficient[i] + a.coefficient[i];
 	}
-	for (int i = min_size;i < max_size;i++) {
+	for (int i = min_size;i < max_size;i++) {//較多項的多項式，將剩餘係數存入result
 		result.coefficient[i] = size > min_size ? coefficient[i] : a.coefficient[i];
 	}
 	result.clear_zero();
@@ -55,10 +55,10 @@ Polynomial Polynomial::operator-(const Polynomial& a) {
 	}
 	result.size = max_size;
 	result.coefficient = new double[result.size]{};//{}初始化全部為0
-	for (int i = 0;i < min_size;i++) {
+	for (int i = 0;i < min_size;i++) {//2個多項式共同有的項
 		result.coefficient[i] = coefficient[i] - a.coefficient[i];
 	}
-	for (int i = min_size;i < max_size;i++) {
+	for (int i = min_size;i < max_size;i++) {//較多項的多項式，將剩餘係數存入result
 		result.coefficient[i] = size > min_size ? coefficient[i] : (-1 * a.coefficient[i]);
 	}
 	result.clear_zero();
@@ -71,14 +71,14 @@ Polynomial Polynomial::operator*(const Polynomial& a) {
 	result.coefficient = new double[result.size]{};//{}初始化全部為0
 	for (int i = 0;i < size;i++) {
 		for (int j = 0;j < a.size;j++) {
-			result.coefficient[i + j] += coefficient[i] * a.coefficient[j];
+			result.coefficient[i + j] += coefficient[i] * a.coefficient[j];//ex:x^2 * x^3 = x^5 (i+j)
 		}
 	}
 	result.clear_zero();
 	return result;
 }
 
-double& Polynomial::operator[](int index) {
+double& Polynomial::operator[](int index) {//一定要return by reference，否則不能放等號左邊
 	return coefficient[index];
 }
 
@@ -125,13 +125,13 @@ Polynomial Polynomial::operator*(const double& a) {
 
 Polynomial operator+(const double& a,Polynomial& b) {
 	Polynomial result = b;
-	result = b + a;
+	result = b + a;//呼叫上方的 Polynomial Polynomial::operator+(const double& a); 不用再實作
 	return result;
 }
-Polynomial operator-(const double& a,Polynomial& b) {
+Polynomial operator-(const double& a,Polynomial& b) {//常數-多項式，多項式內部係數會變負的
 	Polynomial result ;
-	result = (b * -1.0f);
-	result =  result + a;
+	result = (b * -1.0f);//呼叫上方的 Polynomial Polynomial::operator*(const double& a); 讓所有係數變負的
+	result =  result + a;//呼叫上方的 Polynomial Polynomial::operator+(const double& a); 不用再實作
 	return result;
 }
 Polynomial operator*(const double& a, const Polynomial& b) {

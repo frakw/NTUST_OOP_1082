@@ -8,12 +8,12 @@ int main()
 	f1.setNumerator(4);
 	f1.setDenominator(2);
 	f1.getDouble();
-	f1.outputReducedFraction();
+	f1.outputReducedFraction();//程虏だ计Α
 
 	f2.setNumerator(20);
 	f2.setDenominator(60);
 	f2.getDouble();
-	f2.outputReducedFraction();
+	f2.outputReducedFraction();//程虏だ计Α
 	//system("pause");
 	return 0;
 }

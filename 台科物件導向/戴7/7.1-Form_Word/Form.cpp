@@ -26,7 +26,7 @@ void Form::Load_CompareWord()
 {
 	ifstream file;
 	string input;
-	int alpha_count[26] = { 0 };
+	int alpha_count[26] = { 0 };//a~z
 	file.open(name, ifstream::in);//ios::in 檔案開啟為讀取(輸入)狀態
 	for (int i = 0;i < word.length();i++) {
 		alpha_count[word[i] - 'a']++;
@@ -43,7 +43,7 @@ void Form::Load_CompareWord()
 				break;
 			}
 		}
-		if (i == 26) {
+		if (i == 26) {//代表a~z都沒超過限制，印出
 			output.push_back(input);
 		}
 	}

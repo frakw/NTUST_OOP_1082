@@ -1,6 +1,6 @@
 //FormWord-inputmain1.cpp
 #include"Form.h"
-
+//題目說明:讀入txt檔，判斷每行的的字串各個字母數有沒有任何一個超過input字串各個子母數的數量，如果沒則印出，反之不印出
 int main()
 {
 	Form form1;

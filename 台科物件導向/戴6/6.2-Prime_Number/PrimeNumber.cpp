@@ -44,14 +44,14 @@ PrimeNumber& PrimeNumber::operator--() {//--在前面先--再傳值
 
 PrimeNumber PrimeNumber::operator++(int) {
 	PrimeNumber temp;
-	temp = *this;//++在後面先傳值再++
+	temp = *this;//++在後面先傳值再++，保留未加前的值
 	while (value++, !check_prime(value));
 	return temp;
 }
 
 PrimeNumber PrimeNumber::operator--(int) {
 	PrimeNumber temp;
-	temp = *this;//--在後面先傳值再--
+	temp = *this;//--在後面先傳值再--，保留未減前的值
 	if (value < 3) {
 		temp.value = 1;
 		return temp;
