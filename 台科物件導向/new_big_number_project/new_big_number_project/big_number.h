@@ -27,14 +27,12 @@ public:
 		}
 #endif
 		if (integer.length() == 0) {//整數為空字串時，預設為0
-			std::cout << 0;
+			integer.push_back('0');
 		}
-		else {
-			if (!sign && (integer.length()!=1 || integer[0]!='0')) {//消除 -0 bug
+		if (!sign && (integer.length() != 1 || integer[0] != '0' || decimal.length())) {//消除 -0 bug
 				std::cout << "-";
-			}
-			std::cout << integer;
 		}
+		std::cout << integer;
 		if (decimal.length())//如果小數長度為零，不輸出小數點
 			std::cout << '.' << decimal;
 	}
