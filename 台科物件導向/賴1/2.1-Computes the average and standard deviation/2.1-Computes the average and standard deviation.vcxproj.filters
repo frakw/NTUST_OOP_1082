@@ -15,12 +15,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <None Include="2.1-Computes the average and standard deviation.txt" />
+    <None Include="2.1-Compute_Standard_Deviation.docx">
       <Filter>Source Files</Filter>
-    </ClCompile>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="2.1-Computes the average and standard deviation.txt"/>
-    <None Include="2.1-Compute_Standard_Deviation.docx"/>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,0 +1,317 @@
+Title: 2.2-Adding_Large_Numbers -   lab
+
+Description: 
+
+
+	CPP Problem Design 
+	
+		
+			
+				
+					
+						Subject: Adding Large Numbers 
+					
+				
+			
+			
+				
+					
+						Contributor:&nbsp;謝宜杭&#44;&nbsp;林承達&#44;&nbsp;廖宣瑋 
+					
+				
+			
+			
+				
+					
+						Main testing concept: String Processing 
+						
+							
+								
+									
+										
+											Basics 
+										
+									
+									
+										
+											Functions 
+										
+									
+								
+								
+									
+										
+											□ C++ BASICS&nbsp; 
+										
+										
+											□ FLOW OF CONTROL&nbsp; 
+										
+										
+											□ FUNCTION BASICS&nbsp; 
+										
+										
+											□ PARAMETERS AND OVERLOADING&nbsp; 
+										
+										
+											□ ARRAYS&nbsp; 
+										
+										
+											□ STRUCTURES AND CLASSES&nbsp; 
+										
+										
+											□ CONSTRUCTORS AND OTHER TOOLS&nbsp; 
+										
+										
+											□ OPERATOR OVERLOADING&#44; FRIENDS&#44;AND REFERENCES&nbsp; 
+										
+										
+											■ STRINGS&nbsp; 
+										
+										
+											□ POINTERS AND DYNAMIC ARRAYS&nbsp; 
+										
+									
+									
+										
+											□ SEPARATE COMPILATION AND NAMESPACES&nbsp; 
+										
+										
+											□ STREAMS AND FILE I/O&nbsp; 
+										
+										
+											□ RECURSION&nbsp; 
+										
+										
+											□ INHERITANCE&nbsp; 
+										
+										
+											□ POLYMORPHISM AND VIRTUAL FUNCTIONS&nbsp; 
+										
+										
+											□ TEMPLATES&nbsp; 
+										
+										
+											□ linkED DATA STRUCTURES&nbsp; 
+										
+										
+											□ EXCEPTION HANDLING&nbsp; 
+										
+										
+											□ STANDARD TEMPLATE LIBRARY&nbsp; 
+										
+										
+											□ PATTERNS AND UML 
+										
+									
+								
+							
+						
+					
+					
+						 
+					
+				
+			
+			
+				
+					
+						Description: 
+					
+					
+						Given two Integer A&#44; B. Please calculate the adding result&#44; noticed that the maximum bits of the number can be approximate 10000. 
+					
+					
+						Don’t try to use long long&#44; long long int&#44; etc.(or_m128)&#44; which will be absolutely invalid because the maximum bits of the given number will be approximate 10000((10^10000)-1). 
+					
+					
+						Please make sure the input number is valid. If not&#44; please print “Not a valid number&#44; please try again.”&nbsp; 
+					
+					
+						Please package the big number as structure (Ex: struct BigInt…) with a simple object type for each bit. 
+					
+					
+						Adding of big number please use the "function Add(...)"&#44; like below. 
+					
+					
+						(const&amp; won’t affect the grammar of parameter passing but can avoiding unnecessary memory usage. Use it or not depends on you.) 
+					
+					
+						&nbsp; 
+					
+					
+						Struct BigInt 
+					
+					
+						{ 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;… 
+					
+					
+						} 
+					
+					
+						BigInt Add(const BigInt &amp;lhs&#44;const BigInt &amp;rhs) 
+					
+					
+						{ 
+					
+					
+						&nbsp;&nbsp;//Calculation 
+					
+					
+						&nbsp;&nbsp;Return …; 
+					
+					
+						} 
+					
+					
+						int main() 
+					
+					
+						{ 
+					
+					
+						&nbsp;&nbsp;BigInt a&#44;b; 
+					
+					
+						&nbsp;&nbsp;…Input a&#44;b 
+					
+					
+						&nbsp;&nbsp;BigInt result = Add(a&#44;b); 
+					
+					
+						&nbsp;&nbsp;…Output result 
+					
+					
+						} 
+					
+					
+						&nbsp; 
+					
+					
+						Input: 
+					
+					
+						The first line of the program will enter N(100 &gt; N &gt; 0)，indicates that there’re N input data. Every input data is two big integers A&#44; B with the maximum bits of A&#44; B is（10^l0000)&nbsp;–&nbsp;1. 
+					
+					
+						&nbsp; 
+					
+					
+						Output: 
+					
+					
+						Print&nbsp;A+B。 
+					
+					
+						&nbsp; 
+					
+					
+						Sample Input / Output： 
+						
+							
+								
+									
+										
+											Sample Input 
+										
+									
+									
+										
+											Sample Output 
+										
+									
+								
+								
+									
+										
+											3 
+										
+										
+											43789507384925798320000000000000000000000000001 
+										
+										
+											44997439848794037580000000000000000000000000002 
+										
+										
+											1bbbba45 
+										
+										
+											1234567 
+										
+										
+											1 
+										
+										
+											9 
+										
+									
+									
+										
+											8878694723371983590000000000000000000000000003 
+										
+										
+											Not a valid number&#44; please try again. 
+										
+										
+											10 
+										
+									
+								
+							
+						
+					
+					
+						 
+					
+				
+			
+			
+				
+					
+						□&nbsp;Eazy&#44;Only basic programming syntax and structure are required. 
+					
+					
+						■&nbsp;Medium&#44;Multiple programming grammars and structures are required. 
+					
+					
+						□&nbsp;Hard&#44;Need to use multiple program structures or more complex data types. 
+					
+				
+			
+			
+				
+					
+						Expected solving time: 
+					
+					
+						25 minutes 
+					
+				
+			
+			
+				
+					
+						Other notes: 
+					
+				
+			
+		
+	
+
+
+	&nbsp; 
+
+Input: 
+
+
+Output: 
+
+
+Sample Input: 
+
+
+Sample Output: 
+
+

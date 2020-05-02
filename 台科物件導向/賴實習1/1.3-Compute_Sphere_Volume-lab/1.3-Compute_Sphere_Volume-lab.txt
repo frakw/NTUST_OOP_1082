@@ -1,0 +1,250 @@
+Title: 1.3-Compute_Sphere_Volume-lab
+
+Description: 
+
+
+	CPP Problem Design 
+	
+		
+			
+				
+					
+						Subject: Compute Sphere Volume 
+					
+				
+			
+			
+				
+					
+						Contributor:&nbsp;鄭博安&#44;&nbsp;王聖文&#44;&nbsp;林岳儒 
+					
+				
+			
+			
+				
+					
+						Main testing concept: Basic Computing 
+					
+					
+						&nbsp; 
+						
+							
+								
+									
+										
+											Basics 
+										
+									
+									
+										
+											Functions 
+										
+									
+								
+								
+									
+										
+											■ C++ BASICS&nbsp; 
+										
+										
+											□&nbsp;FLOW OF CONTROL&nbsp; 
+										
+										
+											□ FUNCTION BASICS&nbsp; 
+										
+										
+											□ PARAMETERS AND OVERLOADING&nbsp; 
+										
+										
+											□ ARRAYS&nbsp; 
+										
+										
+											□ STRUCTURES AND CLASSES&nbsp; 
+										
+										
+											□ CONSTRUCTORS AND OTHER TOOLS&nbsp; 
+										
+										
+											□ OPERATOR OVERLOADING&#44; FRIENDS&#44;AND REFERENCES&nbsp; 
+										
+										
+											□&nbsp;STRINGS 
+										
+										
+											□ POINTERS AND DYNAMIC ARRAYS&nbsp; 
+										
+									
+									
+										
+											□ SEPARATE COMPILATION AND NAMESPACES&nbsp; 
+										
+										
+											□ STREAMS AND FILE I/O&nbsp; 
+										
+										
+											□ RECURSION&nbsp; 
+										
+										
+											□ INHERITANCE&nbsp; 
+										
+										
+											□ POLYMORPHISM AND VIRTUAL FUNCTIONS&nbsp; 
+										
+										
+											□ TEMPLATES&nbsp; 
+										
+										
+											□ linkED DATA STRUCTURES&nbsp; 
+										
+										
+											□ EXCEPTION HANDLING&nbsp; 
+										
+										
+											□ STANDARD TEMPLATE LIBRARY&nbsp; 
+										
+										
+											□ PATTERNS AND UML 
+										
+									
+								
+							
+						
+					
+					
+						 
+					
+				
+			
+			
+				
+					
+						Description: 
+					
+					
+						Given a radius r&#44; please compute and output the volume of a sphere with radius&nbsp; 
+					
+					
+						r. 
+					
+					
+						PI = 3.14159265358979323846 
+					
+					
+						&nbsp; 
+					
+					
+						Input: 
+					
+					
+						Input radius r(float).The program continues to request input&#44; and ends if EOF is read. 
+					
+					
+						&nbsp; 
+					
+					
+						Output: 
+					
+					
+						Output the volume of a sphere&#44; and take the decimal point to the sixth&nbsp; 
+					
+					
+						place. 
+					
+					
+						&nbsp; 
+					
+					
+						Sample Input / Output： 
+						
+							
+								
+									
+										
+											Sample Input 
+										
+									
+									
+										
+											Sample Output 
+										
+									
+								
+								
+									
+										
+											47.0 
+										
+										
+											21.682 
+										
+									
+									
+										
+											434892.765432 
+										
+										
+											42695.944922 
+										
+									
+								
+							
+						
+					
+					
+						 
+					
+				
+			
+			
+				
+					
+						■&nbsp;Eazy&#44;Only basic programming syntax and structure are required. 
+					
+					
+						□&nbsp;Medium&#44;Multiple programming grammars and structures are required. 
+					
+					
+						□&nbsp;Hard&#44;Need to use multiple program structures or complex data types. 
+					
+				
+			
+			
+				
+					
+						Expected solving time: 
+					
+					
+						10 minutes 
+					
+				
+			
+			
+				
+					
+						Other notes: 
+					
+					
+						%.6f 
+					
+				
+			
+		
+	
+
+
+	&nbsp; 
+
+Input: 
+47.0 
+21.682
+
+Output: 
+434892.765432 
+42695.944922
+
+Sample Input: 
+
+
+Sample Output: 
+
+

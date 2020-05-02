@@ -1,0 +1,276 @@
+Title: 1.2-Input_Output-lab
+
+Description: 
+
+
+	CPP Problem Design
+
+
+	
+		
+			
+				
+					Subject: Input/Output 1
+				
+			
+		
+		
+			
+				
+					Contributor:&nbsp;鄭鈺哲，鄭博安，林岳儒
+				
+			
+		
+		
+			
+				
+					Main testing concept: String
+				
+				
+					&nbsp;
+				
+				
+					
+						
+							
+								
+									Basics
+								
+							
+							
+								
+									Functions
+								
+							
+						
+						
+							
+								
+									■ C++ BASICS&nbsp;
+								
+								
+									■ FLOW OF CONTROL&nbsp;
+								
+								
+									□ FUNCTION BASICS&nbsp;
+								
+								
+									□ PARAMETERS AND OVERLOADING&nbsp;
+								
+								
+									□ ARRAYS&nbsp;
+								
+								
+									□ STRUCTURES AND CLASSES&nbsp;
+								
+								
+									□ CONSTRUCTORS AND OTHER TOOLS&nbsp;
+								
+								
+									□ OPERATOR OVERLOADING&#44; FRIENDS&#44;AND REFERENCES&nbsp;
+								
+								
+									■ STRINGS&nbsp;
+								
+								
+									□ POINTERS AND DYNAMIC ARRAYS&nbsp;
+								
+							
+							
+								
+									□ SEPARATE COMPILATION AND NAMESPACES&nbsp;
+								
+								
+									□ STREAMS AND FILE I/O&nbsp;
+								
+								
+									□ RECURSION&nbsp;
+								
+								
+									□ INHERITANCE&nbsp;
+								
+								
+									□ POLYMORPHISM AND VIRTUAL FUNCTIONS&nbsp;
+								
+								
+									□ TEMPLATES&nbsp;
+								
+								
+									□ linkED DATA STRUCTURES&nbsp;
+								
+								
+									□ EXCEPTION HANDLING&nbsp;
+								
+								
+									□ STANDARD TEMPLATE LIBRARY&nbsp;
+								
+								
+									□ PATTERNS AND UML
+								
+							
+						
+					
+				
+				
+					
+				
+			
+		
+		
+			
+				
+					Description:
+				
+				
+					Given an arbitrary integer INPUT ( INPUT )&#44; follow the requirements below to&nbsp;
+				
+				
+					output it:
+				
+				
+					&nbsp;
+				
+				
+					&nbsp;
+				
+				
+					If the number of characters in INPUT (including the negative sign) is less&nbsp;
+				
+				
+					than 10 digits&#44; fill in the space at the beginning&#44; so that the number of&nbsp;
+				
+				
+					spaces plus the number of characters in INPUT just meets 10 digits.
+				
+				
+					&nbsp;
+				
+				
+					Input:
+				
+				
+					Each line represents an INPUT&#44; the program continues to request input&#44; and ends if EOF is read.
+				
+				
+					&nbsp;
+				
+				
+					Output:
+				
+				
+					&nbsp;
+				
+				
+					Each line is output according to the requirements of the problem.
+				
+				
+					&nbsp;
+				
+				
+					&nbsp;
+				
+				
+					Sample Input / Output：
+				
+				
+					
+						
+							
+								
+									Sample Input
+								
+							
+							
+								
+									Sample Output
+								
+							
+						
+						
+							
+								
+									5
+								
+								
+									2147483647
+								
+								
+									12345678901234567890
+								
+							
+							
+								
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5
+								
+								
+									2147483647
+								
+								
+									12345678901234567890
+								
+							
+						
+					
+				
+				
+					
+				
+			
+		
+		
+			
+				
+					■&nbsp;Eazy&#44;Only basic programming syntax and structure are required.
+				
+				
+					□&nbsp;Medium&#44;Multiple programming grammars and structures are required.
+				
+				
+					□&nbsp;Hard&#44;Need to use multiple program structures or complex data types.
+				
+			
+		
+		
+			
+				
+					Expected solving time:
+				
+				
+					10 minutes
+				
+			
+		
+		
+			
+				
+					Other notes:
+				
+				
+					&nbsp;
+				
+			
+		
+	
+
+
+	&nbsp;
+
+
+Input: 
+5
+2147483647
+
+12345678901234567890
+
+Output: 
+5
+2147483647
+
+12345678901234567890
+
+Sample Input: 
+
+
+Sample Output: 
+
+

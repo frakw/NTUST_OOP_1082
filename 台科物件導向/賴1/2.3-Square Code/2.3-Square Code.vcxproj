@@ -139,9 +139,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="2.3-Square Code.txt" />
     <None Include="2.3-Square_Code.docx" />
   </ItemGroup>

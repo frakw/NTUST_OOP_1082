@@ -7,206 +7,206 @@ Description:
 		
 			
 				
-					Main testing concept: String 
+					Main testing concept: String
+				
+				
 					
 						
 							
 								
-									
-										Basics 
-									
-								
-								
-									
-										Functions 
-									
+									Basics
 								
 							
 							
 								
-									
-										■ C++ BASICS  
-									
-									
-										□ FLOW OF CONTROL  
-									
-									
-										□ FUNCTION BASICS  
-									
-									
-										□ PARAMETERS AND OVERLOADING  
-									
-									
-										□ ARRAYS  
-									
-									
-										□ STRUCTURES AND CLASSES  
-									
-									
-										□ CONSTRUCTORS AND OTHER TOOLS  
-									
-									
-										□ OPERATOR OVERLOADING&#44; FRIENDS&#44;AND REFERENCES  
-									
-									
-										■ STRINGS  
-									
-									
-										□ POINTERS AND DYNAMIC ARRAYS  
-									
+									Functions
+								
+							
+						
+						
+							
+								
+									■ C++ BASICS 
 								
 								
-									
-										□ SEPARATE COMPILATION AND NAMESPACES  
-									
-									
-										□ STREAMS AND FILE I/O  
-									
-									
-										□ RECURSION  
-									
-									
-										□ INHERITANCE  
-									
-									
-										□ POLYMORPHISM AND VIRTUAL FUNCTIONS  
-									
-									
-										□ TEMPLATES  
-									
-									
-										□ linkED DATA STRUCTURES  
-									
-									
-										□ EXCEPTION HANDLING  
-									
-									
-										□ STANDARD TEMPLATE LIBRARY  
-									
-									
-										□ PATTERNS AND UML 
-									
+									□ FLOW OF CONTROL 
+								
+								
+									□ FUNCTION BASICS 
+								
+								
+									□ PARAMETERS AND OVERLOADING 
+								
+								
+									□ ARRAYS 
+								
+								
+									□ STRUCTURES AND CLASSES 
+								
+								
+									□ CONSTRUCTORS AND OTHER TOOLS 
+								
+								
+									□ OPERATOR OVERLOADING&#44; FRIENDS&#44;AND REFERENCES 
+								
+								
+									■ STRINGS 
+								
+								
+									□ POINTERS AND DYNAMIC ARRAYS 
+								
+							
+							
+								
+									□ SEPARATE COMPILATION AND NAMESPACES 
+								
+								
+									□ STREAMS AND FILE I/O 
+								
+								
+									□ RECURSION 
+								
+								
+									□ INHERITANCE 
+								
+								
+									□ POLYMORPHISM AND VIRTUAL FUNCTIONS 
+								
+								
+									□ TEMPLATES 
+								
+								
+									□ linkED DATA STRUCTURES 
+								
+								
+									□ EXCEPTION HANDLING 
+								
+								
+									□ STANDARD TEMPLATE LIBRARY 
+								
+								
+									□ PATTERNS AND UML
 								
 							
 						
 					
 				
 				
-					 
+					
 				
 			
 		
 		
 			
 				
-					Description: 
+					Description:
 				
 				
 					The spaces are
   removed from the English text and the characters are written into a square
-  (or rectangle). 
+  (or rectangle).
 				
 				
-					 
+					
 				
 				
-					Input: 
+					Input:
 				
 				
 					Input a string
-  without whitespace. 
+  without whitespace.
 				
 				
-					 
+					
 				
 				
-					Output: 
+					Output:
 				
 				
 					The coded message is obtained by reading
-  down the columns going left to right. 
+  down the columns going left to right.
 				
 				
-					 
+					
 				
 				
-					Sample Input / Output： 
+					Sample Input / Output：
+				
+				
 					
 						
 							
 								
-									
-										Sample Input 
-									
-								
-								
-									
-										Sample Output 
-									
+									Sample Input
 								
 							
 							
 								
-									
-										HaveANiceDay 
-									
-									
-										Idontknowwhoyouare&#44;butiwillfoundyou 
-									
-									
-										helloworld 
-									
+									Sample Output
+								
+							
+						
+						
+							
+								
+									HaveANiceDay
 								
 								
-									
-										HAe 
-									
-									
-										aND 
-									
-									
-										via 
-									
-									
-										ecy 
-									
-									
-										iny&#44;in 
-									
-									
-										doobld 
-									
-									
-										owuuly 
-									
-									
-										nwatfo 
-									
-									
-										thriou 
-									
-									
-										koewu 
-									
-									
-										hol 
-									
-									
-										ewd 
-									
-									
-										lo 
-									
-									
-										lr 
-									
+									Idontknowwhoyouare&#44;butiwillfoundyou
+								
+								
+									helloworld
+								
+							
+							
+								
+									HAe
+								
+								
+									aND
+								
+								
+									via
+								
+								
+									ecy
+								
+								
+									iny&#44;in
+								
+								
+									doobld
+								
+								
+									owuuly
+								
+								
+									nwatfo
+								
+								
+									thriou
+								
+								
+									koewu
+								
+								
+									hol
+								
+								
+									ewd
+								
+								
+									lo
+								
+								
+									lr
 								
 							
 						
 					
 				
 				
-					 
+					
 				
 			
 		
@@ -214,32 +214,32 @@ Description:
 			
 				
 					■ Eazy&#44;Only basic programming syntax and structure
-  are required. 
+  are required.
 				
 				
 					□ Medium&#44;Multiple programming grammars and structures
-  are required. 
+  are required.
 				
 				
 					□ Hard&#44;Need to use multiple program structures or
-  more complex data types. 
+  more complex data types.
 				
 			
 		
 		
 			
 				
-					Expected solving time: 
+					Expected solving time:
 				
 				
-					5 minutes 
+					5 minutes
 				
 			
 		
 		
 			
 				
-					Other notes: 
+					Other notes:
 				
 			
 		

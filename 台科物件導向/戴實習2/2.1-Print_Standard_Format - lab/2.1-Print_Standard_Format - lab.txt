@@ -1,0 +1,309 @@
+Title: 2.1-Print_Standard_Format - lab
+
+Description: 
+
+
+	CPP Problem Design 
+ 
+	
+		
+			
+				
+					
+						Subject: Print Standard Format 
+					
+				
+			
+			
+				
+					
+						Contributor:&nbsp;謝宜杭&#44;&nbsp;林承達&#44;&nbsp;廖宣瑋 
+					
+				
+			
+			
+				
+					
+						Main testing concept: Basic Output Format 
+						
+							
+								
+									
+										
+											Basics 
+										
+									
+									
+										
+											Functions 
+										
+									
+								
+								
+									
+										
+											■ C++ BASICS&nbsp; 
+										
+										
+											□ FLOW OF CONTROL&nbsp; 
+										
+										
+											□ FUNCTION BASICS&nbsp; 
+										
+										
+											□ PARAMETERS AND OVERLOADING&nbsp; 
+										
+										
+											□ ARRAYS&nbsp; 
+										
+										
+											□ STRUCTURES AND CLASSES&nbsp; 
+										
+										
+											□ CONSTRUCTORS AND OTHER TOOLS&nbsp; 
+										
+										
+											□ OPERATOR OVERLOADING&#44; FRIENDS&#44;AND REFERENCES&nbsp; 
+										
+										
+											□ STRINGS&nbsp; 
+										
+										
+											□ POINTERS AND DYNAMIC ARRAYS&nbsp; 
+										
+									
+									
+										
+											□ SEPARATE COMPILATION AND NAMESPACES&nbsp; 
+										
+										
+											□ STREAMS AND FILE I/O&nbsp; 
+										
+										
+											□ RECURSION&nbsp; 
+										
+										
+											□ INHERITANCE&nbsp; 
+										
+										
+											□ POLYMORPHISM AND VIRTUAL FUNCTIONS&nbsp; 
+										
+										
+											□ TEMPLATES&nbsp; 
+										
+										
+											□ linkED DATA STRUCTURES&nbsp; 
+										
+										
+											□ EXCEPTION HANDLING&nbsp; 
+										
+										
+											□ STANDARD TEMPLATE LIBRARY&nbsp; 
+										
+										
+											□ PATTERNS AND UML 
+										
+									
+								
+							
+						
+					
+					
+						 
+					
+				
+			
+			
+				
+					
+						Description: 
+					
+					
+						You are a IT employee in a company&#44; your manager request you to print out N employee’s information&nbsp;and&nbsp;make sure the result remains clean.&nbsp;Each&nbsp;employee has&nbsp;three attributes:&nbsp;Name&#44; Salary and Bonus.&nbsp; 
+					
+					
+						&nbsp; 
+					
+					
+						Input: 
+					
+					
+						Input N&nbsp;integer numbers (10^6 &gt;= N &gt; 0) at the start of the line&#44; it represents the number of employees. And in the next N lines is the information of each employee containing three attributes: Name&#44; Salary (Between 10^9 ~ 0) and Award (Between 10^9 ~ 0). Each attribute will be separated by&nbsp;one&nbsp;space. 
+					
+					
+						&nbsp; 
+					
+					
+						*The name attribute would not contain spaces. 
+					
+					
+						&nbsp; 
+					
+					
+						The program should ends after reading of EOF. 
+					
+					
+						&nbsp; 
+					
+					
+						Output: 
+					
+					
+						For each set of input data (from the previous N to the next N)&#44; please make sure the width of each column is the same as the attribute with the longest width in each column. Besides&#44; please use the symbol "|" to separate each column and align the content to the right. Please note that for numeric attributes (Salary&#44; bonus)&#44; the content should be indented by two additional spaces. 
+					
+					
+						&nbsp; 
+					
+					
+						Sample Input / Output： 
+						
+							
+								
+									
+										
+											Sample Input 
+										
+									
+									
+										
+											Sample Output 
+										
+									
+								
+								
+									
+										
+											3 
+										
+										
+											Alexandrescu 20000000 99999 
+										
+										
+											Frank 100000 50 
+										
+										
+											Andy 1 1 
+										
+										
+											4 
+										
+										
+											Andy 100 200 
+										
+										
+											Anna 400 9999 
+										
+										
+											Lipp 200 200 
+										
+										
+											Stan 500 200 
+										
+									
+									
+										
+											Alexandrescu|&nbsp;&nbsp;20000000|&nbsp;&nbsp;99999 
+										
+										
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Frank|&nbsp;&nbsp;&nbsp;&nbsp;100000|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50 
+										
+										
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Andy|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 
+										
+										
+											Andy|&nbsp;&nbsp;100|&nbsp;&nbsp;&nbsp;200 
+										
+										
+											Anna|&nbsp;&nbsp;400|&nbsp;&nbsp;9999 
+										
+										
+											Lipp|&nbsp;&nbsp;200|&nbsp;&nbsp;&nbsp;200 
+										
+										
+											Stan|&nbsp;&nbsp;500|&nbsp;&nbsp;&nbsp;200 
+										
+										
+											&nbsp; 
+										
+										
+											&nbsp; 
+										
+										
+											&nbsp; 
+										
+									
+								
+							
+						
+					
+					
+						 
+					
+				
+			
+			
+				
+					
+						■&nbsp;Eazy&#44;Only basic programming syntax and structure are required. 
+					
+					
+						□&nbsp;Medium&#44;Multiple programming grammars and structures are required. 
+					
+					
+						□&nbsp;Hard&#44;Need to use multiple program structures or more complex data types. 
+					
+				
+			
+			
+				
+					
+						Expected solving time: 
+					
+					
+						10 minutes 
+					
+				
+			
+			
+				
+					
+						Other notes: 
+					
+				
+			
+		
+	
+ 
+
+
+	
+
+
+Input: 
+3 
+Alexandrescu 20000000 99999 
+Frank 100000 50 
+Andy 1 1 
+4 
+Andy 100 200 
+Anna 400 9999 
+Lipp 200 200 
+Stan 500 200
+
+Output: 
+Alexandrescu|&nbsp;&nbsp;20000000|&nbsp;&nbsp;99999 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Frank|&nbsp;&nbsp;&nbsp;&nbsp;100000|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Andy|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 
+Andy|&nbsp;&nbsp;100|&nbsp;&nbsp;&nbsp;200 
+Anna|&nbsp;&nbsp;400|&nbsp;&nbsp;9999 
+Lipp|&nbsp;&nbsp;200|&nbsp;&nbsp;&nbsp;200 
+Stan|&nbsp;&nbsp;500|&nbsp;&nbsp;&nbsp;200 
+ 
+&nbsp;
+
+Sample Input: 
+
+
+Sample Output: 
+
+

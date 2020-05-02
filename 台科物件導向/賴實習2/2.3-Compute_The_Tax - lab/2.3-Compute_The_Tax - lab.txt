@@ -1,0 +1,285 @@
+Title: 2.3-Compute_The_Tax - lab
+
+Description: 
+
+
+	CPP Problem Design
+
+
+	
+		
+			
+				
+					Subject: Compute The Tax
+				
+			
+		
+		
+			
+				
+					Contributor:&nbsp;張子樂，鄭鈺哲，林岳儒
+				
+			
+		
+		
+			
+				
+					Main testing concept: if else statement
+				
+				
+					&nbsp;
+				
+				
+					
+						
+							
+								
+									Basics
+								
+							
+							
+								
+									Functions
+								
+							
+						
+						
+							
+								
+									■ C++ BASICS&nbsp;
+								
+								
+									■ FLOW OF CONTROL&nbsp;
+								
+								
+									□ FUNCTION BASICS&nbsp;
+								
+								
+									□ PARAMETERS AND OVERLOADING&nbsp;
+								
+								
+									□ ARRAYS&nbsp;
+								
+								
+									□ STRUCTURES AND CLASSES&nbsp;
+								
+								
+									□ CONSTRUCTORS AND OTHER TOOLS&nbsp;
+								
+								
+									□ OPERATOR OVERLOADING&#44; FRIENDS&#44;AND REFERENCES&nbsp;
+								
+								
+									■ STRINGS&nbsp;
+								
+								
+									□ POINTERS AND DYNAMIC ARRAYS&nbsp;
+								
+							
+							
+								
+									□ SEPARATE COMPILATION AND NAMESPACES&nbsp;
+								
+								
+									□ STREAMS AND FILE I/O&nbsp;
+								
+								
+									□ RECURSION&nbsp;
+								
+								
+									□ INHERITANCE&nbsp;
+								
+								
+									□ POLYMORPHISM AND VIRTUAL FUNCTIONS&nbsp;
+								
+								
+									□ TEMPLATES&nbsp;
+								
+								
+									□ linkED DATA STRUCTURES&nbsp;
+								
+								
+									□ EXCEPTION HANDLING&nbsp;
+								
+								
+									□ STANDARD TEMPLATE LIBRARY&nbsp;
+								
+								
+									□ PATTERNS AND UML
+								
+							
+						
+					
+				
+				
+					
+				
+			
+		
+		
+			
+				
+					Description:
+				
+				
+					In one state. single residents are subject to the following income tax:
+				
+				
+					&nbsp;
+				
+				
+					&nbsp;&nbsp;Income&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount of tax
+				
+				
+					&nbsp;
+				
+				
+					&nbsp;&nbsp;Not over $750&nbsp;&nbsp;&nbsp;l% of income
+				
+				
+					&nbsp;
+				
+				
+					&nbsp;&nbsp;$750—$2&#44;250&nbsp;&nbsp;&nbsp;&nbsp;$7.50 plus 2% of amount over $750
+				
+				
+					&nbsp;
+				
+				
+					&nbsp;&nbsp;$2&#44;250—$3&#44;750&nbsp;&nbsp;$37.50 plus 3% of amount over $2&#44;250
+				
+				
+					&nbsp;
+				
+				
+					&nbsp;&nbsp;$3&#44;750-$5&#44;250&nbsp;&nbsp;&nbsp;$82.50 plus 4% of amount over $3&#44;750
+				
+				
+					&nbsp;
+				
+				
+					&nbsp;&nbsp;$5&#44;250—$7&#44;000&nbsp;&nbsp;$142.50 plus 5% of amount over $5&#44;250
+				
+				
+					&nbsp;
+				
+				
+					&nbsp;&nbsp;Over $7&#44;000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$230.00 plus 6% of amount over $7&#44;000
+				
+				
+					&nbsp;
+				
+				
+					Input:
+				
+				
+					Float larger than 0.
+				
+				
+					&nbsp;
+				
+				
+					Output:
+				
+				
+					Output the tax.
+				
+				
+					Sample Input / Output：
+				
+				
+					
+						
+							
+								
+									Sample Input
+								
+							
+							
+								
+									Sample Output
+								
+							
+						
+						
+							
+								
+									750
+								
+								
+									2250
+								
+								
+									4000
+								
+							
+							
+								
+									7.50
+								
+								
+									37.50
+								
+								
+									92.50
+								
+							
+						
+					
+				
+				
+					
+				
+			
+		
+		
+			
+				
+					■&nbsp;Eazy&#44;Only basic programming syntax and structure are required.
+				
+				
+					□&nbsp;Medium&#44;Multiple programming grammars and structures are required.
+				
+				
+					□&nbsp;Hard&#44;Need to use multiple program structures or complex data types.
+				
+			
+		
+		
+			
+				
+					Expected solving time:
+				
+				
+					10 minutes
+				
+			
+		
+		
+			
+				
+					Other notes:
+				
+				
+					&nbsp;
+				
+			
+		
+	
+
+
+	
+
+
+Input: 
+
+
+Output: 
+
+
+Sample Input: 
+
+
+Sample Output: 
+
+

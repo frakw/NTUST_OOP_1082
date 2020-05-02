@@ -107,7 +107,8 @@ Description:
 				
 					Consider a text file named scores.txt that contains player
   scores for a game. A possible sample is shown next where Ronaldo’s best score
-  is 10400&#44; Didier’s best score is 9800&#44; etc.&nbsp;
+  is 10400&#44; Didier’s best score is 9800&#44; etc. Put at least five names and
+  scores in the file. 
 				
 				
 					 
@@ -162,7 +163,8 @@ Description:
 					Input: 
 				
 				
-					Players'&nbsp;name and players' scores for a game. 
+					Given an input
+  file “scores.txt” which contains player’s scores for a game. 
 				
 				
 					Output: 
@@ -300,10 +302,6 @@ Description:
 	
 
 
-
-	
-	
-
 Input: 
 scores.txt
 
@@ -312,7 +310,8 @@ Pele
 12300
 Ronaldo
 10400
-Didier 
+Didier
+
 9800
 
 Sample Input: 

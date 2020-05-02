@@ -1,0 +1,257 @@
+Title: 1.1-Pattern_Output-lab
+
+Description: 
+
+
+	CPP Problem Design Example 
+	
+		
+			
+				
+					
+						Subject:&nbsp;Pattern Output 
+					
+				
+			
+			
+				
+					
+						Contributor:&nbsp;王聖文&#44;鄭博安&#44;&nbsp;林岳儒&nbsp; 
+					
+				
+			
+			
+				
+					
+						Main testing concept:&nbsp;基本文字輸出 
+					
+					
+						&nbsp; 
+						
+							
+								
+									
+										
+											Basics 
+										
+									
+									
+										
+											Functions 
+										
+									
+								
+								
+									
+										
+											■ C++ BASICS&nbsp; 
+										
+										
+											□ FLOW OF CONTROL&nbsp; 
+										
+										
+											□ FUNCTION BASICS&nbsp; 
+										
+										
+											□ PARAMETERS AND OVERLOADING&nbsp; 
+										
+										
+											□ ARRAYS&nbsp; 
+										
+										
+											□ STRUCTURES AND CLASSES&nbsp; 
+										
+										
+											□ CONSTRUCTORS AND OTHER TOOLS&nbsp; 
+										
+										
+											□ OPERATOR OVERLOADING&#44; FRIENDS&#44;AND REFERENCES&nbsp; 
+										
+										
+											□ STRINGS&nbsp; 
+										
+										
+											□ POINTERS AND DYNAMIC ARRAYS&nbsp; 
+										
+									
+									
+										
+											□ SEPARATE COMPILATION AND NAMESPACES&nbsp; 
+										
+										
+											□ STREAMS AND FILE I/O&nbsp; 
+										
+										
+											□ RECURSION&nbsp; 
+										
+										
+											□ INHERITANCE&nbsp; 
+										
+										
+											□ POLYMORPHISM AND VIRTUAL FUNCTIONS&nbsp; 
+										
+										
+											□ TEMPLATES&nbsp; 
+										
+										
+											□ linkED DATA STRUCTURES&nbsp; 
+										
+										
+											□ EXCEPTION HANDLING&nbsp; 
+										
+										
+											□ STANDARD TEMPLATE LIBRARY&nbsp; 
+										
+										
+											□ PATTERNS AND UML 
+										
+									
+								
+							
+						
+					
+					
+						 
+					
+				
+			
+			
+				
+					
+						Description: 
+					
+					
+						Write a program to display the following “*” pattern on the screen. 
+					
+					
+						&nbsp; 
+					
+					
+						Input: 
+					
+					
+						None. 
+					
+					
+						&nbsp; 
+					
+					
+						Output: 
+					
+					
+						Display the following “*” pattern on the screen. 
+					
+					
+						&nbsp; 
+					
+					
+						Sample Input / Output： 
+						
+							
+								
+									
+										
+											Sample Input 
+										
+									
+									
+										
+											Sample Output 
+										
+									
+								
+								
+									
+										 
+										
+											&nbsp; 
+										
+									
+									
+										
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 
+										
+										
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 
+										
+										
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 
+										
+										
+											*&nbsp;&nbsp;&nbsp;* 
+										
+										
+											&nbsp;* * 
+										
+										
+											&nbsp;&nbsp;* 
+										
+									
+								
+							
+						
+					
+					
+						 
+					
+				
+			
+			
+				
+					
+						■&nbsp;Eazy&#44;Only basic programming syntax and structure are required. 
+					
+					
+						□&nbsp;Medium&#44;Multiple programming grammars and structures are required. 
+					
+					
+						□&nbsp;Hard&#44;Need to use multiple program structures or complex data types. 
+					
+				
+			
+			
+				
+					
+						Expected solving time: 
+					
+					
+						5 minutes 
+					
+				
+			
+			
+				
+					
+						Other notes: 
+					
+					
+						cout 
+					
+					
+						&nbsp; 
+					
+				
+			
+		
+	
+
+
+	
+
+Input: 
+
+
+Output: 
+&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;* 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 
+*&nbsp;&nbsp;&nbsp;* 
+&nbsp;* * 
+&nbsp;&nbsp;*
+
+Sample Input: 
+
+
+Sample Output: 
+
+
