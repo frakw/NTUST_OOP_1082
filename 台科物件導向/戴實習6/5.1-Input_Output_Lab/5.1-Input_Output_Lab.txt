@@ -1,0 +1,209 @@
+Title: 5.1-Input_Output_Lab
+
+Description: 
+
+
+	
+		
+			
+				
+					 Subject:     
+				
+			
+		
+		
+			
+				
+					 Contributor:   
+				
+			
+		
+		
+			
+				
+					 Main testing concept:   
+					
+						
+							
+								
+									
+										 Basics   
+									
+								
+								
+									
+										 Functions   
+									
+								
+							
+							
+								
+									
+										■ C++ BASICS  
+									
+									
+										□ FLOW OF CONTROL  
+									
+									
+										□ FUNCTION BASICS  
+									
+									
+										□ PARAMETERS AND OVERLOADING  
+									
+									
+										□ ARRAYS  
+									
+									
+										□ STRUCTURES AND CLASSES  
+									
+									
+										□ CONSTRUCTORS AND OTHER TOOLS  
+									
+									
+										□ OPERATOR OVERLOADING&#44; FRIENDS&#44;AND REFERENCES  
+									
+									
+										□ STRINGS  
+									
+									
+										□ POINTERS AND DYNAMIC ARRAYS  
+									
+								
+								
+									
+										□ SEPARATE COMPILATION AND NAMESPACES  
+									
+									
+										□ STREAMS AND FILE I/O  
+									
+									
+										□ RECURSION  
+									
+									
+										□ INHERITANCE  
+									
+									
+										□ POLYMORPHISM AND VIRTUAL FUNCTIONS  
+									
+									
+										□ TEMPLATES  
+									
+									
+										□ linkED DATA STRUCTURES  
+									
+									
+										□ EXCEPTION HANDLING  
+									
+									
+										□ STANDARD TEMPLATE LIBRARY  
+									
+									
+										□ PATTERNS AND UML  
+									
+								
+							
+						
+					
+
+				
+			
+		
+		
+			
+				
+					 Description:
+  
+				
+				
+					 Input:
+  
+				
+				
+					 Output:
+  
+				
+				
+					 Sample Input / Output    ：   
+					
+						
+							
+								
+									
+										Sample Input  
+									
+								
+								
+									
+										Sample Output  
+									
+								
+							
+							
+								
+									
+										請從這裡開始輸入Input..  
+									
+								
+								
+									
+										請從這裡開始輸入Output..  
+									
+								
+							
+						
+					
+				
+				
+					  
+				
+			
+		
+		
+			
+				
+					 ■    Eazy&#44;Only basic programming syntax and structure are required.   
+				
+				
+					 □    Medium&#44;Multiple programming grammars and structures are required.   
+				
+				
+					 □    Hard&#44;Need to use multiple program structures or complex data types.   
+				
+			
+		
+		
+			
+				
+					 Expected solving time:   
+				
+				
+					? minutes  
+				
+			
+		
+		
+			
+				
+					 Other notes:
+
+  
+				
+			
+		
+	
+
+
+
+
+Input: 
+
+
+Output: 
+
+
+Sample Input: 
+
+
+Sample Output: 
+
+

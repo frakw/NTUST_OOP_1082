@@ -1,0 +1,323 @@
+Title: 2.2-Leaderboard
+
+Description: 
+
+
+	
+		
+			
+				
+					Main testing concept: sort 
+				
+				
+					 
+					
+						
+							
+								
+									
+										Basics 
+									
+								
+								
+									
+										Functions 
+									
+								
+							
+							
+								
+									
+										■ C++ BASICS  
+									
+									
+										□ FLOW OF CONTROL  
+									
+									
+										■ FUNCTION BASICS  
+									
+									
+										□ PARAMETERS AND OVERLOADING  
+									
+									
+										■ ARRAYS  
+									
+									
+										□ STRUCTURES AND CLASSES  
+									
+									
+										□ CONSTRUCTORS AND OTHER TOOLS  
+									
+									
+										□ OPERATOR OVERLOADING&#44; FRIENDS&#44;AND REFERENCES  
+									
+									
+										■ STRINGS  
+									
+									
+										□ POINTERS AND DYNAMIC ARRAYS  
+									
+								
+								
+									
+										□ SEPARATE COMPILATION AND NAMESPACES  
+									
+									
+										■ STREAMS AND FILE I/O  
+									
+									
+										□ RECURSION  
+									
+									
+										□ INHERITANCE  
+									
+									
+										□ POLYMORPHISM AND VIRTUAL FUNCTIONS  
+									
+									
+										□ TEMPLATES  
+									
+									
+										□ linkED DATA STRUCTURES  
+									
+									
+										□ EXCEPTION HANDLING  
+									
+									
+										□ STANDARD TEMPLATE LIBRARY  
+									
+									
+										□ PATTERNS AND UML 
+									
+								
+							
+						
+					
+				
+				
+					 
+				
+			
+		
+		
+			
+				
+					Description: 
+				
+				
+					Consider a text file named scores.txt that contains player
+  scores for a game. A possible sample is shown next where Ronaldo’s best score
+  is 10400&#44; Didier’s best score is 9800&#44; etc.&nbsp;
+				
+				
+					 
+				
+				
+					Ronaldo 
+				
+				
+					10400 
+				
+				
+					Didier 
+				
+				
+					9800 
+				
+				
+					Pele 
+				
+				
+					12300 
+				
+				
+					Kaka 
+				
+				
+					8400 
+				
+				
+					Cristiano 
+				
+				
+					8000 
+				
+				
+					 
+				
+				
+					Write a function named getHighScores that takes two array
+  parameters&#44; an array of strings and an array of integers. The function should
+  scan through the file and set the string array entry at index 0 to the name
+  of the player with the highest score and set the integer array entry at index
+  0 to the score of the player with the highest score. The string array entry
+  at index 1 should be set to the name of the player with the second highest
+  score and the integer array entry at index 1 should be set to the score of
+  the player with the second highest score. Do the same for the entries at
+  index 2. Together&#44; these two arrays give you the names and scores of the top
+  three players. In your main function&#44; test the getHighScores function by
+  calling it and outputting the top three players and scores. 
+				
+				
+					Input: 
+				
+				
+					Players'&nbsp;name and players' scores for a game. 
+				
+				
+					Output: 
+				
+				
+					Output the names
+  and scores of top three players. 
+				
+				
+					Sample Input / Output： 
+					
+						
+							
+								
+									
+										Sample Input 
+									
+								
+								
+									
+										Sample Output 
+									
+								
+							
+							
+								
+									
+										scores.txt 
+									
+								
+								
+									
+										Pele 
+									
+									
+										12300 
+									
+									
+										Ronaldo 
+									
+									
+										10400 
+									
+									
+										Didier 
+									
+									
+										9800 
+									
+								
+							
+						
+					
+				
+				
+					 
+				
+			
+		
+		
+			
+				
+					■ Eazy&#44;Only basic programming syntax and structure
+  are required. 
+				
+				
+					□ Medium&#44;Multiple programming grammars and structures
+  are required. 
+				
+				
+					□ Hard&#44;Need to use multiple program structures or
+  more complex data types. 
+				
+			
+		
+		
+			
+				
+					Expected solving time: 
+				
+				
+					20minutes 
+				
+			
+		
+		
+			
+				
+					Other notes: 
+				
+				
+					(1)&nbsp;&nbsp;&nbsp; scores.txt的檔案內容如下: 
+				
+				
+					Ronaldo 
+				
+				
+					10400 
+				
+				
+					Didier 
+				
+				
+					9800 
+				
+				
+					Pele 
+				
+				
+					12300 
+				
+				
+					Kaka 
+				
+				
+					8400 
+				
+				
+					Cristiano 
+				
+				
+					8000 
+				
+				
+					 
+				
+				
+					(2)&nbsp;&nbsp;&nbsp; 此題需要定義一個getHighScores的function&#44; 然後有兩個參數分別是array of strings 和 an array of integers。此方法需要讀取檔案內的所有資料並找出分數高的前三名的名字和分數&#44; 並在main裡呼叫getHighScores然後輸出分數高的前三名的名字和分數 
+				
+				
+					(3)&nbsp;&nbsp;&nbsp; 此題不用考慮同分的情況 
+				
+			
+		
+	
+
+
+
+	
+	
+
+Input: 
+scores.txt
+
+Output: 
+Pele
+12300
+Ronaldo
+10400
+Didier 
+9800
+
+Sample Input: 
+
+
+Sample Output: 
+
+

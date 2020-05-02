@@ -1,0 +1,144 @@
+Title: 1.2-ComputeHMS
+
+Description: 
+
+	
+		
+			
+				
+					Description:
+				
+				
+					Given
+  a integer A as a time in seconds. 
+				
+				
+					Convert
+  the format of A from (seconds) to (hours: minutes: seconds).
+				
+				
+					Input:
+				
+				
+					For each test
+  case&#44; input a integer A(0 &lt;= A &lt;= 2^64-1). Stop until read an EOF.
+				
+				
+					
+				
+				
+					Output:
+				
+				
+					For each test
+  case&#44; print “x hours&#44; y minutes&#44; z seconds”&#44; the value of x&#44; y&#44; z is described
+  above.
+				
+				
+					
+				
+				
+					Sample Input / Output：
+				
+				
+					
+						
+							
+								
+									Sample Input
+								
+							
+							
+								
+									Sample Output
+								
+							
+						
+						
+							
+								
+									50391
+								
+								
+									489123456786
+								
+								
+									569035139015
+								
+							
+							
+								
+									13 hours 59 minutes and 51 seconds 
+								
+								
+									135867626 hours 53 minutes and 6 seconds 
+								
+								
+									158065316 hours 23 minutes and 35 seconds
+								
+							
+						
+					
+				
+				
+					
+				
+			
+		
+		
+			
+				
+					■ Eazy&#44;Only basic programming
+  syntax and structure are required.
+				
+				
+					□ Medium&#44;Multiple programming
+  grammars and structures are required.
+				
+				
+					□ Hard&#44;Need to use multiple
+  program structures or complex data types.
+				
+			
+		
+		
+			
+				
+					Expected
+  solving time:
+				
+				
+					5 minutes
+				
+			
+		
+		
+			
+				
+					Other
+  notes:
+				
+				
+					
+				
+			
+		
+	
+
+
+
+	
+	
+
+Input: 
+50391
+
+Output: 
+13 hours 59 minutes and 51 seconds
+
+Sample Input: 
+
+
+Sample Output: 
+
+

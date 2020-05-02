@@ -1,0 +1,294 @@
+Title: 3.1-Occurrenc Counting
+
+Description: 
+
+
+	
+		
+			
+				
+					Subject: Occurrenc Counting
+				
+			
+		
+		
+			
+				
+					Contributor: 陳俊儒&#44; 林承達&#44; 廖宣瑋
+				
+			
+		
+		
+			
+				
+					Main testing concept:File I/O
+				
+				
+					
+				
+				
+					
+						
+							
+								
+									Basics
+								
+							
+							
+								
+									Functions
+								
+							
+						
+						
+							
+								
+									■ C++ BASICS 
+								
+								
+									□ FLOW OF CONTROL 
+								
+								
+									■ FUNCTION BASICS 
+								
+								
+									□ PARAMETERS AND OVERLOADING 
+								
+								
+									■ ARRAYS 
+								
+								
+									□ STRUCTURES AND CLASSES 
+								
+								
+									□ CONSTRUCTORS AND OTHER TOOLS 
+								
+								
+									□ OPERATOR OVERLOADING&#44; FRIENDS&#44;AND REFERENCES 
+								
+								
+									■ STRINGS 
+								
+								
+									□ POINTERS AND DYNAMIC ARRAYS 
+								
+							
+							
+								
+									□ SEPARATE COMPILATION AND NAMESPACES 
+								
+								
+									■ STREAMS AND FILE I/O 
+								
+								
+									□ RECURSION 
+								
+								
+									□ INHERITANCE 
+								
+								
+									□ POLYMORPHISM AND VIRTUAL FUNCTIONS 
+								
+								
+									□ TEMPLATES 
+								
+								
+									□ linkED DATA STRUCTURES 
+								
+								
+									□ EXCEPTION HANDLING 
+								
+								
+									□ STANDARD TEMPLATE LIBRARY 
+								
+								
+									□ PATTERNS AND UML
+								
+							
+						
+					
+				
+				
+					
+				
+			
+		
+		
+			
+				
+					Description:
+				
+				
+					Write a program
+  that reads in an array of type int from a file&#44; the file named
+				
+				
+					“intArray.txt”. Please note that the number of entries is
+  not limited. Your 
+				
+				
+					program determines how many entries are used. The output is
+  to be a two-column 
+				
+				
+					list. The first column is a list of the distinct array
+  elements; the second 
+				
+				
+					column is the count of the number of occurrences of each
+  element. The list 
+				
+				
+					should be sorted on entries in the first column&#44; largest to
+  smallest.
+				
+				
+					Input:
+				
+				
+					For the array
+  values: –12 3 –12 4 1 1 –12 1 –1 1 2 3 4 2 3 –12
+				
+				
+					Output:
+				
+				
+					N Count
+				
+				
+					4 2
+				
+				
+					3 3
+				
+				
+					2 2
+				
+				
+					1 4
+				
+				
+					–1 1
+				
+				
+					–12 4
+				
+				
+					The two integers
+  are divided by one tab(\t).
+				
+				
+					Sample Input / Output：
+				
+				
+					
+						
+							
+								
+									Sample Input
+								
+							
+							
+								
+									Sample Output
+								
+							
+						
+						
+							
+								
+									13 8 -4 0 8 -8
+    8 -1 12 0
+								
+							
+							
+								
+									N count
+								
+								
+									13 1
+								
+								
+									12 1
+								
+								
+									8 3
+								
+								
+									0 2
+								
+								
+									-1 1
+								
+								
+									-4 1
+								
+								
+									-8 1
+								
+							
+						
+					
+				
+				
+					
+				
+			
+		
+		
+			
+				
+					■ Eazy&#44;Only basic programming syntax and structure
+  are required.
+				
+				
+					□ Medium&#44;Multiple programming grammars and structures
+  are required.
+				
+				
+					□ Hard&#44;Need to use multiple program structures or
+  more complex data types.
+				
+			
+		
+		
+			
+				
+					Expected solving time:
+				
+				
+					15minutes
+				
+			
+		
+		
+			
+				
+					Other notes:
+				
+			
+		
+	
+
+
+
+Input: 
+13 8 -4 0 8 -8 8 -1 12 0
+
+Output: 
+N count
+13 1
+12 1
+8 3
+0 2
+-1 1
+-4 1
+
+-8 1
+
+Sample Input: 
+
+
+Sample Output: 
+
+

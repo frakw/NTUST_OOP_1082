@@ -1,0 +1,262 @@
+Title: 2.1-Computes the average and standard deviation
+
+Description: 
+
+	
+		
+			
+				
+					主要測試觀念： 算式計算 
+					
+						
+							
+								
+									
+										Basics 
+									
+								
+								
+									
+										Functions 
+									
+								
+							
+							
+								
+									
+										n&nbsp; C++ BASICS 1 
+									
+									
+										□&nbsp;&nbsp;&nbsp; FLOW OF CONTROL  
+									
+									
+										n&nbsp; FUNCTION BASICS  
+									
+									
+										□&nbsp;&nbsp;&nbsp; PARAMETERS AND OVERLOADING  
+									
+									
+										□&nbsp;&nbsp;&nbsp; ARRAYS  
+									
+									
+										□&nbsp;&nbsp;&nbsp; STRUCTURES AND CLASSES  
+									
+									
+										□&nbsp;&nbsp;&nbsp; CONSTRUCTORS AND OTHER TOOLS  
+									
+									
+										□&nbsp;&nbsp;&nbsp; OPERATOR OVERLOADING&#44; FRIENDS&#44;AND REFERENCES  
+									
+									
+										□&nbsp;&nbsp;&nbsp; STRINGS  
+									
+									
+										n&nbsp; POINTERS AND DYNAMIC ARRAYS  
+									
+								
+								
+									
+										□&nbsp;&nbsp;&nbsp; SEPARATE COMPILATION AND NAMESPACES  
+									
+									
+										□&nbsp;&nbsp;&nbsp; STREAMS AND FILE I/O  
+									
+									
+										□&nbsp;&nbsp;&nbsp; RECURSION  
+									
+									
+										□&nbsp;&nbsp;&nbsp; INHERITANCE  
+									
+									
+										□&nbsp;&nbsp;&nbsp; POLYMORPHISM AND VIRTUAL FUNCTIONS  
+									
+									
+										□&nbsp;&nbsp;&nbsp; TEMPLATES  
+									
+									
+										□&nbsp;&nbsp;&nbsp; linkED DATA STRUCTURES  
+									
+									
+										□&nbsp;&nbsp;&nbsp; EXCEPTION HANDLING  
+									
+									
+										□&nbsp;&nbsp;&nbsp; STANDARD TEMPLATE LIBRARY  
+									
+									
+										□ &nbsp;&nbsp;&nbsp;PATTERNS AND UML 
+									
+								
+							
+						
+					
+				
+				
+					 
+				
+			
+		
+		
+			
+				
+					題目說明： Write a function that computes the average and standard deviation of
+  input scores. The standard deviation is defined to be the square
+  root of the average of the input values: 
+(si&nbsp;- m)2&#44; where m is the average of the input scores&nbsp;si&#44; i= 1&#44; …&#44; n. 
+				
+				
+					Note that the number of input
+  scores should be dynamic. 
+				
+				
+					輸入說明：The first input is n&#44; others are si&#44; where i = 1 to n. 
+				
+				
+					輸出說明：Output the Average and Standard deviation&#44; separated by a tab. 
+				
+				
+					IO範例 :  
+				
+				
+					
+						
+							
+								
+									
+										 
+									
+								
+								
+									
+										Sample Input 
+									
+								
+								
+									
+										Sample Output 
+									
+								
+							
+							
+								
+									
+										第一組測資與輸出 
+									
+								
+								
+									
+										5 1 2 3 4 5 
+									
+								
+								
+									
+										Average:3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Standard deviation:1.41421 
+									
+								
+							
+							
+								
+									
+										第二組 
+									
+								
+								
+									
+										6 1 2 3 4 5 6 
+									
+								
+								
+									
+										Average:3.5&nbsp;&nbsp;&nbsp;&nbsp; Standard deviation:1.70783 
+									
+								
+							
+							
+								
+									
+										第三組 
+									
+								
+								
+									
+										7 7 7 7 7 7 7 7 
+									
+								
+								
+									
+										Average:7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Standard deviation:0 
+									
+								
+							
+							
+								
+									
+										… 
+									
+								
+								
+									
+										 
+									
+								
+								
+									
+										 
+									
+								
+							
+						
+					
+				
+				
+					&nbsp; 
+				
+			
+		
+		
+			
+				
+					附屬資料︰ 
+				
+				
+					þ解答程式： ComputeStandardDeviation.cpp(檔名) 
+				
+				
+					þ測試資料：input.txt&#44; output.txt 
+				
+			
+		
+		
+			
+				
+					n 易，僅需用到基礎程式設計語法與結構  
+				
+				
+					□ 中，需用到多項程式設計語法與結構 
+				
+				
+					□ 難，需用到多項程式結構或較為複雜之資料型態或結構 
+				
+			
+		
+		
+			
+				
+					解題時間：15分鐘。 
+				
+			
+		
+	
+
+
+Input: 
+5 1 2 3 4 5
+
+Output: 
+Average:3 Standard deviation:1.41421
+
+Sample Input: 
+
+
+Sample Output: 
+
+

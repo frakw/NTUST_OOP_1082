@@ -1,0 +1,446 @@
+Title: 5.2-Design_Month_Class
+
+Description: 
+
+
+	CPP Problem Design 
+	
+		
+			
+				
+					
+						Subject:&nbsp;Design Month Class 
+					
+				
+			
+			
+				
+					
+						Contributor:&nbsp;陳俊儒&#44;&nbsp;林承達&#44;&nbsp;廖宣瑋 
+					
+				
+			
+			
+				
+					
+						Main testing concept: 
+					
+					
+						&nbsp; 
+						
+							
+								
+									
+										
+											Basics 
+										
+									
+									
+										
+											Functions 
+										
+									
+								
+								
+									
+										
+											■ C++ BASICS&nbsp; 
+										
+										
+											□ FLOW OF CONTROL&nbsp; 
+										
+										
+											■ FUNCTION BASICS&nbsp; 
+										
+										
+											□ PARAMETERS AND OVERLOADING&nbsp; 
+										
+										
+											□ ARRAYS&nbsp; 
+										
+										
+											■ STRUCTURES AND CLASSES&nbsp; 
+										
+										
+											■ CONSTRUCTORS AND OTHER TOOLS&nbsp; 
+										
+										
+											□ OPERATOR OVERLOADING&#44; FRIENDS&#44;AND REFERENCES&nbsp; 
+										
+										
+											□&nbsp;&nbsp;STRINGS&nbsp; 
+										
+										
+											□ POINTERS AND DYNAMIC ARRAYS&nbsp; 
+										
+									
+									
+										
+											□ SEPARATE COMPILATION AND NAMESPACES&nbsp; 
+										
+										
+											□ STREAMS AND FILE I/O&nbsp; 
+										
+										
+											□ RECURSION&nbsp; 
+										
+										
+											□ INHERITANCE&nbsp; 
+										
+										
+											□ POLYMORPHISM AND VIRTUAL FUNCTIONS&nbsp; 
+										
+										
+											□ TEMPLATES&nbsp; 
+										
+										
+											□ linkED DATA STRUCTURES&nbsp; 
+										
+										
+											□ EXCEPTION HANDLING&nbsp; 
+										
+										
+											□ STANDARD TEMPLATE LIBRARY&nbsp; 
+										
+										
+											□ PATTERNS AND UML 
+										
+									
+								
+							
+						
+					
+					
+						 
+					
+				
+			
+			
+				
+					
+						Description: 
+					
+					
+						Please define a class named&nbsp;Month&nbsp;to display the formatted month.&nbsp; 
+					
+					
+						&nbsp; 
+					
+					
+						l&nbsp;&nbsp;The&nbsp;abbreviation&nbsp;of a month in this exercise is the first three letters of the name with initial capitalization. 
+					
+					
+						&nbsp; 
+					
+					
+						l&nbsp;&nbsp;This class has only one variable&nbsp;month(int)&nbsp;for use as&nbsp;storing the current month. 
+					
+					
+						&nbsp; 
+					
+					
+						l&nbsp;&nbsp;This class has three constructors: 
+					
+					
+						Ø&nbsp;&nbsp;Month():&nbsp;Construct&nbsp;a&nbsp;Month class that defaults to January. 
+					
+					
+						Ø&nbsp;&nbsp;Month(char first&#44; char second&#44; char third):&nbsp;Use the&nbsp;given&nbsp;abbreviation&nbsp;to&nbsp;constructthe Month class&#44;&nbsp;the parameters&nbsp;represent&nbsp;each letter of the abbreviation. 
+					
+					
+						Ø&nbsp;&nbsp;Month(int&nbsp;monthInt):&nbsp;Construct a&nbsp;Month class with the value of&nbsp;&nbsp;“monthInt”. 
+					
+					
+						**Note that if the given value is invalid&#44; please set the month to January. 
+					
+					
+						&nbsp; 
+					
+					
+						l&nbsp;&nbsp;You&nbsp;are&nbsp;required to implement&nbsp;the following member functions: 
+					
+					
+						Ø&nbsp;&nbsp;void inputInt():&nbsp; 
+					
+					
+						Read an int&nbsp;x&#44; and modify the current month to&nbsp;x. If&nbsp;x&nbsp;is invalid (x&nbsp;&lt; 1 or&nbsp;x&nbsp;&gt; 12)&#44; please set the month value to 1. 
+					
+					
+						Ø&nbsp;&nbsp;void inputStr():&nbsp; 
+					
+					
+						Read three letters a&#44; b and c. These letters&nbsp;represent each letter of the abbreviationof a month. Modify the letters to the corresponding month value. If the input is invalid&#44; set the month value to 1. 
+					
+					
+						Ø&nbsp;&nbsp;void outputInt(): Print the month value. 
+					
+					
+						Ø&nbsp;&nbsp;void outputStr(): Print the abbreviation of the month. 
+					
+					
+						&nbsp; 
+					
+					
+						Input: 
+					
+					
+						The&nbsp;main()&nbsp;function in your submission will be replaced when&nbsp;judging. 
+					
+					
+						You can use the&nbsp;main()&nbsp;function in&nbsp;“Other Notes”&nbsp;to test your program. 
+					
+					
+						The input is a series of integers or strings corresponding to the main method. 
+					
+					
+						&nbsp; 
+					
+					
+						Output: 
+					
+					
+						The output will print some variable values corresponding to the main method. 
+					
+					
+						&nbsp; 
+					
+					
+						Sample Input / Output： 
+						
+							
+								
+									
+										
+											Sample Input 
+										
+									
+									
+										
+											Sample Output 
+										
+									
+								
+								
+									
+										
+											5 
+										
+										
+											J 
+										
+										
+											u 
+										
+										
+											n 
+										
+									
+									
+										
+											Month1 = 1 Jan 
+										
+										
+											Month2 = 2 Feb 
+										
+										
+											Month3 = 3 Mar 
+										
+										
+											Month4 = 4 Apr 
+										
+										
+											Month5 = 5 May 
+										
+										
+											Month6 = 6 Jun 
+										
+									
+								
+							
+						
+					
+					
+						 
+					
+				
+			
+			
+				
+					
+						■&nbsp;Eazy&#44;Only basic programming syntax and structure are required. 
+					
+					
+						□&nbsp;Medium&#44;Multiple programming grammars and structures are required. 
+					
+					
+						□&nbsp;Hard&#44;Need to use multiple program structures or more complex data types. 
+					
+				
+			
+			
+				
+					
+						Expected solving time: 
+					
+					
+						30 minutes 
+					
+				
+			
+			
+				
+					
+						Other notes: 
+					
+					
+						int main(void) 
+					
+					
+						{ 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Month month1&#44; month2(2)&#44; month3('M'&#44;'a'&#44;'r')&#44; month4&#44; month5&#44; month6; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month4 = month3.nextMonth(); 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month5.inputInt(); 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month6.inputStr(); 
+					
+					
+						&nbsp; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Month1 = "; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month1.outputInt(); 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; ' '; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month1.outputStr(); 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; endl; 
+					
+					
+						&nbsp; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Month2 = "; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month2.outputInt(); 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; ' '; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month2.outputStr(); 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; endl; 
+					
+					
+						&nbsp; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Month3 = "; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month3.outputInt(); 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; ' '; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month3.outputStr(); 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; endl; 
+					
+					
+						&nbsp; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Month4 = "; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month4.outputInt(); 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; ' '; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month4.outputStr(); 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; endl; 
+					
+					
+						&nbsp; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Month5 = "; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month5.outputInt(); 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; ' '; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month5.outputStr(); 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; endl; 
+					
+					
+						&nbsp; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Month6 = "; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month6.outputInt(); 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; ' '; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month6.outputStr(); 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; endl; 
+					
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0; 
+					
+					
+						} 
+					
+				
+			
+		
+	
+
+
+	&nbsp; 
+
+Input: 
+
+
+Output: 
+
+
+Sample Input: 
+
+
+Sample Output: 
+
+

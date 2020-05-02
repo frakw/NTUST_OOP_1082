@@ -1,0 +1,287 @@
+Title: 4.2-Fraction
+
+Description: 
+
+
+	CPP Problem
+Design
+
+
+	
+		
+			
+				
+					Subject: Fraction
+				
+			
+		
+		
+			
+				
+					Contributor: 林承達&#44; 陳俊儒&#44; 廖宣瑋
+				
+			
+		
+		
+			
+				
+					Main testing concept: Class
+				
+				
+					
+				
+				
+					
+						
+							
+								
+									Basics
+								
+							
+							
+								
+									Functions
+								
+							
+						
+						
+							
+								
+									■ C++ BASICS 
+								
+								
+									□ FLOW OF CONTROL 
+								
+								
+									■ FUNCTION BASICS 
+								
+								
+									□ PARAMETERS AND OVERLOADING 
+								
+								
+									□ ARRAYS 
+								
+								
+									■ STRUCTURES AND CLASSES 
+								
+								
+									□ CONSTRUCTORS AND OTHER TOOLS 
+								
+								
+									□ OPERATOR OVERLOADING&#44; FRIENDS&#44;AND REFERENCES 
+								
+								
+									□ STRINGS 
+								
+								
+									□ POINTERS AND DYNAMIC ARRAYS 
+								
+							
+							
+								
+									□ SEPARATE COMPILATION AND NAMESPACES 
+								
+								
+									□ STREAMS AND FILE I/O 
+								
+								
+									□ RECURSION 
+								
+								
+									□ INHERITANCE 
+								
+								
+									□ POLYMORPHISM AND VIRTUAL FUNCTIONS 
+								
+								
+									□ TEMPLATES 
+								
+								
+									□ linkED DATA STRUCTURES 
+								
+								
+									□ EXCEPTION HANDLING 
+								
+								
+									□ STANDARD TEMPLATE LIBRARY 
+								
+								
+									□ PATTERNS AND UML
+								
+							
+						
+					
+				
+				
+					
+				
+			
+		
+		
+			
+				
+					Description:
+				
+				
+					Define a class for a type called Fraction. This class is
+  used to represent a ratio of two integers. Include mutator functions that
+  allow the user to set the numerator and the denominator. Also include a
+  member function that returns the value of the numerator divided by the
+  denominator as a double&#44; but if the
+  value can only represent by an integer&#44; then it should be represented integer.
+  Include an additional member function that outputs the value of the fraction
+  reduced to lowest terms. For example&#44; instead of outputting 20/60 the
+  function should output 1/3. This will require finding the greatest common
+  divisor for the numerator and denominator&#44; and then dividing both by that
+  number. embed your class in a test program.
+				
+				
+					Input:
+				
+				
+					No input.
+				
+				
+					Output:
+				
+				
+					As following sample.
+				
+				
+					Sample Input / Output：
+				
+				
+					
+						
+							
+								
+									Sample Input
+								
+							
+							
+								
+									Sample Output
+								
+							
+						
+						
+							
+								
+									int main()
+								
+								
+									{
+								
+								
+									&nbsp;&nbsp;&nbsp; Fraction f1&#44; f2;
+								
+								
+									&nbsp;&nbsp;&nbsp; f1.setNumerator(4);
+								
+								
+									&nbsp;&nbsp;&nbsp; f1.setDenominator(2);
+								
+								
+									&nbsp;&nbsp;&nbsp; f1.getDouble();
+								
+								
+									&nbsp;&nbsp;&nbsp; f1.outputReducedFraction(); 
+								
+								
+									
+								
+								
+									&nbsp;&nbsp;&nbsp; f2.setNumerator(20);
+								
+								
+									&nbsp;&nbsp;&nbsp; f2.setDenominator(60);
+								
+								
+									&nbsp;&nbsp;&nbsp; f2.getDouble();
+								
+								
+									&nbsp;&nbsp;&nbsp; f2.outputReducedFraction();
+								
+								
+									&nbsp;&nbsp;&nbsp; return 0;
+								
+								
+									}
+								
+							
+							
+								
+									2
+								
+								
+									2
+								
+								
+									0.333333
+								
+								
+									1/3
+								
+								
+									
+								
+							
+						
+					
+				
+				
+					
+				
+			
+		
+		
+			
+				
+					■ Eazy&#44;Only basic programming syntax and structure
+  are required.
+				
+				
+					□ Medium&#44;Multiple programming grammars and structures
+  are required.
+				
+				
+					□ Hard&#44;Need to use multiple program structures or
+  more complex data types.
+				
+			
+		
+		
+			
+				
+					Expected solving time:
+				
+				
+					15 minutes
+				
+			
+		
+		
+			
+				
+					Other notes:
+				
+			
+		
+	
+
+
+	
+
+
+Input: 
+
+
+Output: 
+
+
+Sample Input: 
+
+
+Sample Output: 
+
+

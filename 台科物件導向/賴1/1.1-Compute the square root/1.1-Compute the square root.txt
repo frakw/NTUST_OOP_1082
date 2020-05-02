@@ -1,0 +1,293 @@
+Title: 1.1-Compute the square root
+
+Description: 
+
+	
+		
+			
+				
+					主要測試觀念： 算式計算
+				
+				
+					
+				
+				
+					
+						
+							
+								
+									Basics
+								
+							
+							
+								
+									Functions
+								
+							
+						
+						
+							
+								
+									n&nbsp; C++ BASICS 1
+								
+								
+									□&nbsp;&nbsp;&nbsp; FLOW OF CONTROL 
+								
+								
+									□&nbsp;&nbsp;&nbsp; FUNCTION BASICS 
+								
+								
+									□&nbsp;&nbsp;&nbsp; PARAMETERS AND OVERLOADING 
+								
+								
+									□&nbsp;&nbsp;&nbsp; ARRAYS 
+								
+								
+									□&nbsp;&nbsp;&nbsp; STRUCTURES AND CLASSES 
+								
+								
+									□&nbsp;&nbsp;&nbsp; CONSTRUCTORS AND OTHER TOOLS 
+								
+								
+									□&nbsp;&nbsp;&nbsp; OPERATOR OVERLOADING&#44; FRIENDS&#44;AND REFERENCES 
+								
+								
+									□&nbsp;&nbsp;&nbsp; STRINGS 
+								
+								
+									□&nbsp;&nbsp;&nbsp; POINTERS AND DYNAMIC ARRAYS 
+								
+							
+							
+								
+									□&nbsp;&nbsp;&nbsp; SEPARATE COMPILATION AND NAMESPACES 
+								
+								
+									□&nbsp;&nbsp;&nbsp; STREAMS AND FILE I/O 
+								
+								
+									□&nbsp;&nbsp;&nbsp; RECURSION 
+								
+								
+									□&nbsp;&nbsp;&nbsp; INHERITANCE 
+								
+								
+									□&nbsp;&nbsp;&nbsp; POLYMORPHISM AND VIRTUAL FUNCTIONS 
+								
+								
+									□&nbsp;&nbsp;&nbsp; TEMPLATES 
+								
+								
+									□&nbsp;&nbsp;&nbsp; linkED DATA STRUCTURES 
+								
+								
+									□&nbsp;&nbsp;&nbsp; EXCEPTION HANDLING 
+								
+								
+									□&nbsp;&nbsp;&nbsp; STANDARD TEMPLATE LIBRARY 
+								
+								
+									□ PATTERNS AND UML
+								
+							
+						
+					
+				
+				
+					
+				
+			
+		
+		
+			
+				
+					題目說明： The Babylonian algorithm to compute the square root of a positive
+  number n is as follows:
+				
+				
+					1. Make a guess at the answer (you
+  can pick n/2 as your initial guess).
+				
+				
+					2. Compute r = n / guess .
+				
+				
+					3. Set guess= (guess + r) / 2.
+				
+				
+					4. Go back to step 2 for as many
+  iterations as necessary. The more steps 2 and 3 are repeated&#44; the closer
+  guess will become to the square root of n.
+				
+				
+					
+				
+				
+					&nbsp;&nbsp; Write a program that inputs a double for n&#44; iterates through the
+  Babylonian algorithm until the guess subtract the previous guess smaller than
+  0.01&#44; and outputs the answer as a double to two decimal places. Your answer
+  should be accurate even for large values of n.
+				
+				
+					輸入說明：391.00
+				
+				
+					輸出說明：19.77
+				
+				
+					
+				
+				
+					IO範例 : 
+				
+				
+					
+						
+							
+								
+									
+										
+									
+								
+								
+									
+										Sample Input
+									
+								
+								
+									
+										Sample Output
+									
+								
+							
+							
+								
+									
+										第一組測資與輸出
+									
+								
+								
+									
+										400.5
+									
+								
+								
+									
+										20.01
+									
+								
+							
+							
+								
+									
+										第二組
+									
+								
+								
+									
+										65189451651.5192165
+									
+								
+								
+									
+										255322.25
+									
+								
+							
+							
+								
+									
+										第三組
+									
+								
+								
+									
+										1894651654984.11318
+									
+								
+								
+									
+										1376463.46
+									
+								
+							
+							
+								
+									
+										…
+									
+								
+								
+									
+										
+									
+								
+								
+									
+										
+									
+								
+							
+						
+					
+				
+				
+					&nbsp;
+				
+			
+		
+		
+			
+				
+					附屬資料︰
+				
+				
+					þ解答程式： ComputeSQRT.cpp(檔名)
+				
+				
+					þ測試資料：input.txt&#44; output.txt
+				
+			
+		
+		
+			
+				
+					n 易，僅需用到基礎程式設計語法與結構 
+				
+				
+					□ 中，需用到多項程式設計語法與結構
+				
+				
+					□ 難，需用到多項程式結構或較為複雜之資料型態或結構
+				
+			
+		
+		
+			
+				
+					解題時間：15分鐘。
+				
+			
+		
+		
+			
+				
+					其他註記：
+				
+			
+		
+	
+
+
+Input: 
+400.5
+
+Output: 
+
+
+Sample Input: 
+
+
+Sample Output: 
+
+
