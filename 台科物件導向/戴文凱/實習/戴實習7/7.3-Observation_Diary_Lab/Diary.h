@@ -11,11 +11,11 @@ typedef struct {
 	string content;
 }event;
 
-typedef struct{
+typedef struct {
 	string name;
 	vector<event> event_list;
 }day_log;
-class Diary{
+class Diary {
 public:
 	static void NewDay(string input);
 	static void NewEvent(string creature_name, string input);

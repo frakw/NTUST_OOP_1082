@@ -35,7 +35,7 @@ void PrintCombination(int* arr, const int& combination_num, const int& dlement_n
 		if (arr[i] > (i + max_num - max_index)) {
 			if (dlement_num == 0) {//err handle
 				return;//³Ì²×
-			}
+			}	
 			PrintCombination(arr, arr[dlement_num - 1] + 1, dlement_num - 1);
 			return;
 		}

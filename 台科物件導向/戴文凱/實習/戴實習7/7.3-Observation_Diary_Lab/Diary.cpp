@@ -6,7 +6,7 @@ void Diary::NewDay(string input) {
 	day.push_back(new_day);
 }
 
-void Diary::NewEvent(string creature_name, string input){
+void Diary::NewEvent(string creature_name, string input) {
 	event new_event;
 	new_event.name = creature_name;
 	new_event.content = input;
