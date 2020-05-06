@@ -29,13 +29,13 @@ int main() {
 			bool not_num=false;
 			cin >> a.integer;
 			cin >> b.integer;
-			for (int j = 0;j < a.integer.length();j++) {
+			for (int j = 0;j < a.integer.length();j++) {//絋粄Τ礚獶计じ
 				if (!isdigit(a.integer[j])) {
 					not_num = true;
 					break;
 				}
 			}
-			for (int j = 0;j < b.integer.length();j++) {
+			for (int j = 0;j < b.integer.length();j++) {//絋粄Τ礚獶计じ
 				if (!isdigit(b.integer[j])) {
 					not_num = true;
 					break;
@@ -56,13 +56,13 @@ big_number add(big_number a, big_number b) {
 	int carry=0;
 	big_number result;
 	if (a.integer.length() < b.integer.length()) {
-		swap(a, b);
+		swap(a, b);//a祏b
 	}
-	int len= (a.integer.length() - b.integer.length());
-	for (int i = 0;i < len;i++) {
+	int len= (a.integer.length() - b.integer.length());//a-b干箂计秖
+	for (int i = 0;i < len;i++) {//干箂
 		b.integer = "0" + b.integer;
 	}
-	for (int i = a.integer.length() - 1;i >=0;i--) {
+	for (int i = a.integer.length() - 1;i >=0;i--) {//眖计秨﹍
 		int add = (a.integer[i] - '0') + (b.integer[i] - '0') + carry;
 		if (add > 9) {
 			carry = 1;
@@ -70,10 +70,10 @@ big_number add(big_number a, big_number b) {
 		else {
 			carry = 0;
 		}
-		result.integer = (char)(add % 10 + '0') +result.integer;
+		result.integer = (char)(add % 10 + '0') +result.integer;//癘眔璶锣char籔﹃
 	}
-	if (carry) {
-		result.integer = (char)'1' + result.integer;
+	if (carry) {//矪瞶程秈
+		result.integer = (char)'1' + result.integer;//癘眔璶锣char籔﹃
 	}
 	return result;
 }

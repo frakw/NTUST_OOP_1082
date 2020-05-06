@@ -7,7 +7,6 @@ public:
     string name;
     string salary;
     string bonus;
-    int space[3] = { 0,0,0 };
 };
 int main() {
     int case_num;

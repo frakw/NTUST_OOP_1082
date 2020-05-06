@@ -4,7 +4,7 @@
 #include <math.h>
 #include <cstdio>
 using namespace std;
-inline char nc();
+//肈ヘ弧:块︽﹃钡ㄓΤ碭计程计盢﹃パτパオτ逼row羆计程计钡ㄓ–计赣row计﹃フ┏絬块
 int main() {
     string input;
     vector<int> number;
@@ -24,8 +24,8 @@ int main() {
                 input[i] = '_';
             }
         }
-        int col = ceil((double)input.length() / (double)len);
-        for (int i = 0;i < number.size();i++) {
+        int col = ceil((double)input.length() / (double)len);//ノrow羆计(len)璸衡col羆计よ獽ぇfor癹伴ㄏノ
+        for (int i = 0;i < number.size();i++) {//–计┮﹃块
             for (int j = 0;j < col;j++) {
                 if ((j * len + number[i]) < input.length()) {
                     cout << input[j * len + number[i]];
@@ -37,10 +37,7 @@ int main() {
     }
     return 0;
 }
-inline char nc() {
-    static char buf[100000], * p1 = buf, * p2 = buf;
-    return p1 == p2 && (p2 = (p1 = buf) + fread(buf, 1, 100000, stdin), p1 == p2) ? EOF : *p1++;
-}
+
 /*
 Row Transposition
 3 0 6 1 2 5 4

@@ -14,19 +14,19 @@ int main() {
     while (getline(cin, message)) {
         getline(cin, key);
         char matrix[5][5] = { 0 };
-        bool alpha_showed[26] = { 0 };
+        bool alpha_showed[26] = { 0 };//存字母是否出現
         int matrix_count = 0;
-        for (int i = 0;i < key.length();i++) {
+        for (int i = 0;i < key.length();i++) {//j取代為i
             if (key[i] == 'j') { key[i] = 'i'; }
         }
-        for (int i = 0;i < key.length();i++) {
+        for (int i = 0;i < key.length();i++) {//字串填入5*5方格
             if (!alpha_showed[key[i]-'a']) {
                 alpha_showed[key[i]-'a'] = true;
                 matrix[matrix_count / 5][matrix_count % 5] = key[i];
                 matrix_count++;
             }
         }
-        for (int i = 0;i < 26;i++) {
+        for (int i = 0;i < 26;i++) {//剩餘方格補未出現字母，從a~z
             if (i == 9) {// j時不做
                 continue;
             }

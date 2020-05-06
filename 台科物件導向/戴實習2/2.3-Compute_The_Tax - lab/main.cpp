@@ -10,10 +10,10 @@ int main() {
             tax = income * 0.01;
         }
         else if (income < 2250) {
-            tax = (income - 750) * 0.02 + 7.50;
+            tax = (income - 750) * 0.02 + 7.50;//7.50為上一個條件750*0.01結果，以下同理
         }
         else if (income < 3750) {
-            tax = (income - 2250) * 0.03 + 37.50;
+            tax = (income - 2250) * 0.03 + 37.50;//37.50為上一個條件2250*0.02 + 750*0.01結果，以下同理
         }
         else if (income < 5250) {
             tax = (income - 3750) * 0.04 + 82.50;
