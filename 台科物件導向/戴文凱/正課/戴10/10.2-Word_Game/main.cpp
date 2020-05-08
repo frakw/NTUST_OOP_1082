@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-// ¯f¬r¤J«I¤¤ zzzzzzz
 using namespace std;
 typedef struct _coord {
 	int x, y;
@@ -62,10 +61,10 @@ bool check_word(Table table, string word, coord pos) {
 	if (pos.x < 0 || pos.y < 0 || pos.x>3 || pos.y>3 || table.position(pos).has_been) return false;
 	if (!word.length())return true;
 	if (word[0] == table.position(pos).alpha) {
-		coord direction[8] = { {pos.x + 1,pos.y},{pos.x - 1,pos.y},{pos.x,pos.y + 1},{pos.x,pos.y - 1},{pos.x - 1,pos.y - 1},{pos.x + 1,pos.y - 1},{pos.x - 1,pos.y + 1}, {pos.x + 1,pos.y + 1} };		word.erase(word.begin() + 0);
+		coord direction[8] = { {pos.x + 1,pos.y},{pos.x - 1,pos.y},{pos.x,pos.y + 1},{pos.x,pos.y - 1},{pos.x - 1,pos.y - 1},{pos.x + 1,pos.y - 1},{pos.x - 1,pos.y + 1}, {pos.x + 1,pos.y + 1} };
 		table.position(pos).has_been = true;
 		for (int i = 0; i < 8;i++) {
-			if (check_word(table, word, direction[i])) {
+			if (check_word(table, word.substr(1), direction[i])) {
 				return true;
 			}
 		}
