@@ -12,7 +12,7 @@ public:
         }
         delete[] content;
     }
-    Matrix(Matrix& copy){//一定要時坐這個，不然函式回傳Matrix會出問題
+    Matrix(Matrix& copy){//一定要實作這個，不然函式回傳Matrix會出問題
         this->~Matrix();
         row = copy.row;
         col = copy.col;
