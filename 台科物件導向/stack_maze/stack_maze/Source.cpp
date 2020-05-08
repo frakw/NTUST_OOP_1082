@@ -11,6 +11,7 @@ using namespace std;
 #define road_width 2
 void gotoxy(int xpos, int ypos);
 void SetColor(int color = 7);
+//test xy : 117 60
 class Maze {
 public:
 	Maze() {
@@ -43,7 +44,7 @@ int main() {
 	cout << "Maze x * y :";
 	cin >> col >> row;
 	Maze maze(col,row);
-	maze.create(true,0);
+	maze.create(true,5);
 	if (!(col % 2)) col++;
 	if (!(row % 2)) row++;
 	fstream output;
