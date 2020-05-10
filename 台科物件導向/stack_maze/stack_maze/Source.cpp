@@ -12,6 +12,7 @@ using namespace std;
 void gotoxy(int xpos, int ypos);
 void SetColor(int color = 7);
 //test xy : 117 60
+//sdjaisdjasoidjasoidjaod
 class Maze {
 public:
 	Maze() {
