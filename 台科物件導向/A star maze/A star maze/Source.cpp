@@ -88,6 +88,7 @@
 #include <stack>
 #include <ctime>
 #include<windows.h>
+#include<conio.h>
 using namespace std;
 #define the_road "  "
 #define the_wall "¢i"
@@ -377,7 +378,7 @@ pair<COORD, COORD> choose_dot(){
 	MOUSE_EVENT_RECORD mouse;
 	SetColor();
 	COORD A = { -1,-1 }, B = {-1,-1};//source , dest
-	while (A.X==-1 || A.Y==-1 || B.X==-1 || B.Y == -1) {
+	while(1){
 		ReadConsoleInput(h, &irec, 1, &cc);
 		if (irec.EventType == MOUSE_EVENT)
 		{
@@ -431,18 +432,19 @@ pair<COORD, COORD> choose_dot(){
 			case DOUBLE_CLICK:
 				//std::cout << "mouse DOUBLE_CLICK" << std::endl;
 				if (A.X == (mouse.dwMousePosition.X / road_x_width) && A.Y == (mouse.dwMousePosition.Y)) {
-					A.X = -1;
-					A.Y = -1;
+
 					gotoxy(A.X * road_x_width, A.Y);
 					SetColor(road_color);
 					cout << the_road;
+					A.X = -1;
+					A.Y = -1;
 				}
 				else if (B.X == (mouse.dwMousePosition.X / road_x_width) && B.Y == (mouse.dwMousePosition.Y)) {
-					B.X = -1;
-					B.Y = -1;
 					gotoxy(B.X * road_x_width, B.Y);
 					SetColor(road_color);
 					cout << the_road;
+					B.X = -1;
+					B.Y = -1;
 				}
 				break;
 			//case MOUSE_WHEELED:
@@ -451,6 +453,13 @@ pair<COORD, COORD> choose_dot(){
 			default:
 				break;
 			}
+			//if (GetAsyncKeyState('a')) {
+			//	if (A.X == -1 || A.Y == -1 || B.X == -1 || B.Y == -1) {
+			//		continue;
+			//	}
+			//	break;
+			//}
+			Sleep(30);
 		}
 	}
 	return make_pair(A,B);

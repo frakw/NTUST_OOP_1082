@@ -11,7 +11,7 @@ using namespace std;
 #define road_width 2
 void gotoxy(int xpos, int ypos);
 void SetColor(int color = 7);
-//test xy : 117 60
+//test xy : 117 60, 75 35
 class Maze {
 public:
 	Maze() {
