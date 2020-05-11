@@ -1,3 +1,4 @@
+ï»¿
 //#include <iostream>
 //#include <Windows.h>
 //
@@ -91,7 +92,7 @@
 #include<conio.h>
 using namespace std;
 #define the_road "  "
-#define the_wall "¢i"
+#define the_wall "Â¢i"
 #define road_color 55
 #define dot_color 160
 #define road_x_width 2
@@ -99,7 +100,7 @@ using namespace std;
 #define dest_dot_color 75
 void gotoxy(int xpos, int ypos);
 void SetColor(int color = 7);
-pair<COORD,COORD> choose_dot();
+pair<COORD, COORD> choose_dot();
 //test xy : 117 60
 class Maze {
 public:
@@ -137,7 +138,7 @@ public:
 	}
 private:
 	string road = the_road;
-	string wall = the_wall;//¢i
+	string wall = the_wall;//Â¢i
 	bool new_memory(int, int);
 	int row = 10;
 	int col = 10;
@@ -206,7 +207,7 @@ void Maze::create(bool animate_on = false, time_t delay = 50) {
 	if (visited != nullptr || map != nullptr) {
 		this->~Maze();
 	}
-	if (!new_memory(col, row)){
+	if (!new_memory(col, row)) {
 		return;
 	}
 	if (animate_on) {
@@ -369,7 +370,7 @@ void SetColor(int color)
 }
 
 
-pair<COORD, COORD> choose_dot(){
+pair<COORD, COORD> choose_dot() {
 	HANDLE h = GetStdHandle(STD_INPUT_HANDLE);
 	SetConsoleMode(h, ENABLE_EXTENDED_FLAGS | ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT);
 	DWORD cc;
@@ -377,8 +378,8 @@ pair<COORD, COORD> choose_dot(){
 	KEY_EVENT_RECORD key;
 	MOUSE_EVENT_RECORD mouse;
 	SetColor();
-	COORD A = { -1,-1 }, B = {-1,-1};//source , dest
-	while(1){
+	COORD A = { -1,-1 }, B = { -1,-1 };//source , dest
+	while (1) {
 		ReadConsoleInput(h, &irec, 1, &cc);
 		if (irec.EventType == MOUSE_EVENT)
 		{
@@ -391,12 +392,12 @@ pair<COORD, COORD> choose_dot(){
 				if (A.X == -1 || A.Y == -1) {
 					A.X = mouse.dwMousePosition.X / road_x_width;
 					A.Y = mouse.dwMousePosition.Y;
-					if (A.X == B.X && A.Y==B.Y) {
+					if (A.X == B.X && A.Y == B.Y) {
 						A.X = -1;
 						A.Y = -1;
 					}
 					else {
-						gotoxy(A.X * road_x_width,A.Y);
+						gotoxy(A.X * road_x_width, A.Y);
 						SetColor(source_dot_color);
 						cout << the_road;
 					}
@@ -415,14 +416,14 @@ pair<COORD, COORD> choose_dot(){
 					}
 				}
 				break;
-			//case RIGHTMOST_BUTTON_PRESSED:
-			//	std::cout << "mouse right click" << std::endl;
-			//	std::cout << "   mouse pos:" << mouse.dwMousePosition.X << " " << mouse.dwMousePosition.Y << std::endl;
-			//	break;
-			//case FROM_LEFT_2ND_BUTTON_PRESSED:
-			//	std::cout << "mouse middle click" << std::endl;
-			//	std::cout << "   mouse pos:" << mouse.dwMousePosition.X << " " << mouse.dwMousePosition.Y << std::endl;
-			//	break;
+				//case RIGHTMOST_BUTTON_PRESSED:
+				//	std::cout << "mouse right click" << std::endl;
+				//	std::cout << "   mouse pos:" << mouse.dwMousePosition.X << " " << mouse.dwMousePosition.Y << std::endl;
+				//	break;
+				//case FROM_LEFT_2ND_BUTTON_PRESSED:
+				//	std::cout << "mouse middle click" << std::endl;
+				//	std::cout << "   mouse pos:" << mouse.dwMousePosition.X << " " << mouse.dwMousePosition.Y << std::endl;
+				//	break;
 			default:
 				break;
 			}
@@ -447,9 +448,9 @@ pair<COORD, COORD> choose_dot(){
 					B.Y = -1;
 				}
 				break;
-			//case MOUSE_WHEELED:
-			//	std::cout << "mouse MOUSE_WHEELED:" << HIWORD(mouse.dwButtonState) << std::endl;
-			//	break;
+				//case MOUSE_WHEELED:
+				//	std::cout << "mouse MOUSE_WHEELED:" << HIWORD(mouse.dwButtonState) << std::endl;
+				//	break;
 			default:
 				break;
 			}
@@ -462,5 +463,5 @@ pair<COORD, COORD> choose_dot(){
 			Sleep(30);
 		}
 	}
-	return make_pair(A,B);
+	return make_pair(A, B);
 }
