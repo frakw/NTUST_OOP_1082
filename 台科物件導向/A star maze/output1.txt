@@ -1,0 +1,281 @@
+請輸入出場角色數量:
+         
+         
+         
+         
+         
+         
+    3    
+ 111e111 
+ 1111111 
+ 111*111 
+ 11___11 
+         
+         
+         
+         
+         
+         
+         
+    3    
+ 111e111 
+ 1111111 
+ 111*111 
+ 11A__11 
+         
+         
+         
+         
+         
+         
+         
+    3    
+ 111e111 
+ 1111111 
+ 1111111 
+ 11A1B11 
+         
+round 1:
+A 05 0 3
+B 20 2 3
+guard 30 move sd attack -1 
+A's turn: card 0 3
+         
+         
+         
+         
+         
+         
+    3    
+ 111e111 
+ 111A111 
+ 1111111 
+ 1111B11 
+         
+A attack e 4 damage, e shield 0, e remain -1 hp
+e is killed!!
+         
+         
+         
+         
+         
+         
+    3    
+ 1111111 
+ 111A111 
+ 1111111 
+ 1111B11 
+         
+B's turn: card 2 3
+         
+         
+         
+         
+         
+         
+    3    
+ 111B111 
+ 111A111 
+ 1111111 
+ 1111111 
+         
+B heal 1, now hp is 14
+B shield 1 this turn
+round 2:
+hand: 1, 2, 4, 5; discard: 0, 3
+hand: 4, 5, 6, 7; discard: 2, 3
+A 14 1 5
+B 99 -1
+A's turn: card 1 5
+A shield 2 this turn
+error move!!!
+         
+         
+         
+         
+         
+         
+    A    
+ 111B111 
+ 1111111 
+ 1111111 
+ 1111111 
+         
+B's turn: card -1
+B heal 2, now hp is 14
+remove card: 2
+         
+   1b1   
+   111   
+   111   
+   111   
+   111   
+    A    
+ 111B111 
+ 1111111 
+ 1111111 
+ 1111111 
+         
+round 3:
+hand: 2, 4; discard: 0, 1, 3, 5
+hand: 3, 4, 5, 6, 7; discard: 
+A 37 4 2
+archer 68 attack 1 range 1 
+B 88 7 6
+A's turn: card 4 2
+         
+   1b1   
+   111   
+   111   
+   111   
+   1A1   
+    1    
+ 111B111 
+ 1111111 
+ 1111111 
+ 1111111 
+         
+A shield 1 this turn
+b lock A in distance 4
+b attack A 3 damage, A shield 1, A remain 12 hp
+B's turn: card 7 6
+A-hp: 12, shield: 1
+B-hp: 14, shield: 0
+b-hp: 4, shield: 0
+         
+   1b1   
+   111   
+   111   
+   111   
+   1AB   
+    1    
+ 1111111 
+ 1111111 
+ 1111111 
+ 1111111 
+         
+round 4:
+hand: discard: 0, 1, 2, 3, 4, 5
+hand: 3, 4, 5; discard: 6, 7
+archer 16 move sa attack -1 range 0 
+B 28 3 5
+A 99 -1
+         
+   111   
+   b11   
+   111   
+   111   
+   1AB   
+    1    
+ 1111111 
+ 1111111 
+ 1111111 
+ 1111111 
+         
+no one lock
+B's turn: card 3 5
+error move!!!
+         
+   111   
+   b11   
+   1B1   
+   111   
+   1A1   
+    1    
+ 1111111 
+ 1111111 
+ 1111111 
+ 1111111 
+         
+B shield 2 this turn
+A's turn: card -1
+A heal 2, now hp is 14
+remove card: 3
+round 5:
+hand: 0, 1, 2, 4, 5; discard: 
+hand: 4; discard: 3, 5, 6, 7
+A 14 1 4
+archer 44 move ww attack 1 range 0 heal 2 
+B 99 -1
+A's turn: card 1 4
+         
+   111   
+   b11   
+   1B1   
+   1A1   
+   111   
+    1    
+ 1111111 
+ 1111111 
+ 1111111 
+ 1111111 
+         
+A shield 1 this turn
+error target!!!
+A attack b 3 damage, b shield 0, b remain 1 hp
+         
+   b11   
+   111   
+   1B1   
+   1A1   
+   111   
+    1    
+ 1111111 
+ 1111111 
+ 1111111 
+ 1111111 
+         
+b lock B in distance 3
+b attack B 3 damage, B shield 0, B remain 11 hp
+b heal 2, now hp is 3
+B's turn: card -1
+B heal 2, now hp is 13
+remove card: 7
+round 6:
+hand: 0, 2, 5; discard: 1, 4
+hand: 3, 4, 5, 6; discard: 
+A 05 0 2
+B 37 4 6
+archer 68 attack 1 range 1 
+A's turn: card 0 2
+         
+   b11   
+   A11   
+   1B1   
+   111   
+   111   
+    1    
+ 1111111 
+ 1111111 
+ 1111111 
+ 1111111 
+         
+A heal 1, now hp is 14
+A attack b 4 damage, b shield 0, b remain -1 hp
+b is killed!!
+         
+   111   
+   A11   
+   1B1   
+   111   
+   111   
+    1    
+ 1111111 
+ 1111111 
+ 1111111 
+ 1111111 
+         
+B's turn: card 4 6
+         
+   111   
+   A11   
+   1B1   
+   111   
+   111   
+    1    
+ 1111111 
+ 1111111 
+ 1111111 
+ 1111111 
+         
+character win~

@@ -1,0 +1,15 @@
+2
+guard 3 2 0 6 3 0
+guard 0 30 move sd attack -1 d
+guard 1 55 move wa attack 0 d
+guard 2 15 shield 2 r
+guard 3 35 move wd attack 0 d
+guard 4 50 move sa attack 0 d
+guard 5 15 shield 1 attack 0 d
+archer 2 2 3 4 2 3
+archer 0 68 attack 1 range 1 d
+archer 1 16 move sa attack -1 range 0 d
+archer 2 44 move ww attack 1 range 0 heal 2 r
+archer 3 31 move sd attack 0 range 0 r
+archer 4 29 move aa attack -1 range 1 d
+archer 5 32 move dd attack 1 range -1 d
