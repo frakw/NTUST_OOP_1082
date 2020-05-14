@@ -30,16 +30,13 @@
     <ClCompile Include="Map.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
-    <ClCompile Include="Skill.cpp">
+    <ClCompile Include="basic.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
-    <ClCompile Include="Data.cpp">
+    <ClCompile Include="log.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
-    <ClCompile Include="Action.cpp">
-      <Filter>資源檔</Filter>
-    </ClCompile>
-    <ClCompile Include="Card.cpp">
+    <ClCompile Include="read_file.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,16 +53,13 @@
     <ClInclude Include="Map.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Skill.h">
+    <ClInclude Include="basic.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Data.h">
+    <ClInclude Include="log.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Action.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
-    <ClInclude Include="Card.h">
+    <ClInclude Include="read_file.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>

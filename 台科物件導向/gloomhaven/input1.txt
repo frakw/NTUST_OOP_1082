@@ -17,7 +17,7 @@ A 1 5
 A check
 B check
 B -1
-5u
+5u	
 wwd
 ww
 2
