@@ -7,7 +7,7 @@ brute 14 6
 3 28 attack 2 shield 1 - move 3
 4 37 attack 2 attack 2 - move 1 shield 1
 5 49 shield 2 - attack 3 range 2
-6 56 heal 3 - move 3	
+6 56 heal 3 - move 3
 7 88 attack 3 - move 3
 scoundrel 8 5
 6
