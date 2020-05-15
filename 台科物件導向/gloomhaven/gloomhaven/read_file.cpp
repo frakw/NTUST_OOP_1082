@@ -1,4 +1,7 @@
-#include "read_file.h"
+
+#include <string>
+#include <iostream>
+#include <fstream>
 #include <tuple>
 #include <iostream>
 #include <fstream>
@@ -6,6 +9,12 @@
 #include <sstream>
 #include <cstdio>
 #include <cstdlib>
+#include "basic.h"
+#include "Character.h"
+#include "Monster.h"
+#include "map.h"
+#include "read_file.h"
+
 using namespace std;
 
 int skill_input(string input,Skill** card);
@@ -214,6 +223,7 @@ Map* TXT::read_map() {//call this func after above two func
 				case 2:monput[i].switch_status(two);break;
 				case 3:monput[i].switch_status(three);break;
 				case 4:monput[i].switch_status(four);break;
+				default:break;
 				}
 			}
 		}

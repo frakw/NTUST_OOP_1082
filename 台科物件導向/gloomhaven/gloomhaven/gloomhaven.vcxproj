@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="basic.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="Coord.h" />
     <ClInclude Include="Gloom_Haven.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="Map.h" />

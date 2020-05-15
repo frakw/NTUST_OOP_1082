@@ -1,12 +1,11 @@
 #pragma once
-#include <string>
-#include <iostream>
-#include "Character.h"
-#include "Monster.h"
-#include "Map.h"
-#include <vector>
-#include <string>
-#include "basic.h"
+#include<string>
+#include<tuple>
+class Skill;
+class Character;
+class Monster;
+class Map;
+class Card;
 using namespace std;
 
 

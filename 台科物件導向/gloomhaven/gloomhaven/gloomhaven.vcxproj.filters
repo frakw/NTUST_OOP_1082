@@ -62,5 +62,8 @@
     <ClInclude Include="read_file.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="Coord.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
