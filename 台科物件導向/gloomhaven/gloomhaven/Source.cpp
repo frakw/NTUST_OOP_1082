@@ -4,8 +4,7 @@ using namespace std;
 int main(int argc, char** argv) {
 	//Gloom_Haven game;
 	//game.start();
-	TXT file("character1.txt");
-	file.read_character();
-	file.return_tuple();
+	TXT file("map1.txt");
+	file.read_map();
 	return 0;
 }

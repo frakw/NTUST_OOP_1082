@@ -12,6 +12,7 @@ public:
 		this->card_total = input.card_total;
 		this->code = input.code;
 		this->card = new Card[card_amount];
+		this->position = input.position;
 		for (int i = 0;i < card_amount;i++) {
 			this->card[i] = input.card[i];
 		}

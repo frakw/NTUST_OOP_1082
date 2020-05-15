@@ -36,6 +36,7 @@ private:
 	Character* character = nullptr;//database
 	int total_chr;
 	Monster* monster = nullptr;//database
+	Monster* monput = nullptr;//monster output
 	int total_mon;
 	string filename;
 	int database_total=0;

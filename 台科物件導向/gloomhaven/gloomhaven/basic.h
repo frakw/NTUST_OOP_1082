@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
+#include "Map.h"
 using namespace std;
-
 class Skill {
 public:
 	Skill():type(-1), value(-1){}
@@ -82,6 +82,7 @@ public:
 		rewash_mark = input.rewash_mark;
 		return *this;
 	}
+	bool available=true;//此卡是否還可被使用
 	bool discard = false;//是(true)否(false)在棄牌堆
 	Skill* skill_up = nullptr;
 	int skill_up_amount = 0;
@@ -98,7 +99,6 @@ public:
 	Creature() {}
 	Creature(string in_name, int val, int in_card_amount) :name(in_name), life_value(val), card_amount(in_card_amount) {
 	
-		// = new Card[card_amount];
 	}
 	~Creature() {
 		if (card != nullptr) delete[] card;
@@ -108,8 +108,8 @@ public:
 	int life_value=0;
 	int card_amount=0;//可選卡牌數量
 	int card_total =0;//總卡牌數量
-	char code;//代號
-
+	char code=0;//代號
+	Coord position = {-1,-1};
 
 };
 

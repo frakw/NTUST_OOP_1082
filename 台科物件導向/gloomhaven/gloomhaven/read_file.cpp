@@ -4,6 +4,8 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <cstdio>
+#include <cstdlib>
 using namespace std;
 
 int skill_input(string input,Skill** card);
@@ -88,7 +90,7 @@ void TXT::read_character() {
 	}
 }
 
-int skill_input(string input,Skill** skill) {
+int skill_input(string input,Skill** skill) {//for character only
 	stringstream ss(input);
 	string type;
 	int val;
@@ -118,10 +120,104 @@ int skill_input(string input,Skill** skill) {
 }
 
 void TXT::read_monster() {
-
+	fstream file;
+	file.open(filename, ios::in);
+	file >> total_mon;
+	monster = new Monster[total_mon];
+	for (int i = 0;i < total_mon;i++) {
+		file >> monster[i].name
+			 >> monster[i].life_value
+			 >> monster[i].damage
+			 >> monster[i].range
+			 >> monster[i].elite_life_value
+			 >> monster[i].elite_damage
+			 >> monster[i].elite_range;
+		monster[i].card = new Card[6];
+		string trash;
+		for (int j = 0;j < 6;j++) {
+			file >> trash
+				 >> monster[i].card[j].number
+				 >> monster[i].card[j].agility;
+			string process="";
+			string type="";
+			string value;
+			file >> type;
+			while (type != "r" && type != "d") {
+				process = process + " " + type;
+				file >> type;
+			}
+			monster[i].card[j].rewash_mark = (type == "r");
+			stringstream ss(process);
+			int count = 0,x = 0;
+			while (!ss.eof()) {
+				ss >> type >> value;
+				if (type != "range") {
+					count++;
+				}
+			}
+			monster[i].card[j].skill_up = new Skill[count];
+			monster[i].card[j].skill_up_amount = count;
+			ss.clear();
+			ss.str("");
+			ss << process;
+			while(!ss.eof()){
+				ss >> type >> value;
+				if (type != "range") {
+					if (type != "move") {
+						monster[i].card[j].skill_up[x].set(type, atoi(value.c_str()));
+					}
+					else {
+						monster[i].card[j].skill_up[x].set(type, value.length());
+						monster[i].card[j].skill_up[x].move_step = value;
+					}
+					x++;
+				}
+				else {
+					monster[i].card[j].skill_up[x - 1].range = atoi(value.c_str());
+				}
+			}
+		}
+	}
 }
 
 
-Map* TXT::read_map() {
-	return nullptr;
+Map* TXT::read_map() {//call this func after above two func 
+	fstream file;
+	file.open(filename, ios::in);
+
+	int row, col;
+	file >>row >> col;
+	Map* map = new Map(row,col);
+	file.ignore();
+	string tmp,out="";
+	for (int i = 0;i < row;i++) {
+		file >> tmp;
+		out += tmp;
+	}
+	map->set(out);
+	for (int i = 0;i < 4;i++) {
+		file >> map->start_pos[i].x >> map->start_pos[i].y;
+	}
+	int Monster_amount;
+	string Monster_name;
+	file >> Monster_amount;
+	monput = new Monster[Monster_amount];
+	for (int i = 0;i < Monster_amount;i++) {
+		for (int j = 0;j < total_mon;j++) {
+			if (Monster_name == monster[j].name) {
+				int two, three,four;
+				monput[i] = monster[j];
+				file >> monput[i].position.x >> monput[i].position.y;
+				file >> two >> three >> four;
+				switch (total_chr)
+				{
+				case 2:monput[i].switch_status(two);break;
+				case 3:monput[i].switch_status(three);break;
+				case 4:monput[i].switch_status(four);break;
+				}
+			}
+		}
+	}
+	return map;
 }
+
