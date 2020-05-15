@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>資源檔</Filter>
-    </ClCompile>
     <ClCompile Include="Gloom_Haven.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
@@ -37,6 +34,9 @@
       <Filter>資源檔</Filter>
     </ClCompile>
     <ClCompile Include="read_file.cpp">
+      <Filter>資源檔</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
   </ItemGroup>
@@ -63,9 +63,6 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="Coord.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
-    <ClInclude Include="all.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>

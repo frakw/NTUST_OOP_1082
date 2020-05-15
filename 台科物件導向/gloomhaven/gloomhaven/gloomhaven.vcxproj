@@ -145,10 +145,9 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="read_file.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="all.h" />
     <ClInclude Include="basic.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Coord.h" />

@@ -1,0 +1,1 @@
+C:\Users\t4w32\source\repos\ntust1082\台科物件導向\gloomhaven\Debug\gloomhaven.exe C:\Users\t4w32\source\repos\ntust1082\台科物件導向\gloomhaven\character1.txt C:\Users\t4w32\source\repos\ntust1082\台科物件導向\gloomhaven\monster1.txt 1

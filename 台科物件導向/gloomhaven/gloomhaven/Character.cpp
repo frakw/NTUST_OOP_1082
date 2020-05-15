@@ -6,6 +6,7 @@ Character::Character(string in_name, int val, int in_card_amount) :Creature(in_n
 Character& Character::operator=(const Character& input) {
 	this->name = input.name;
 	this->life_value = input.life_value;
+	max_life_value = input.max_life_value;
 	this->card_amount = input.card_amount;
 	this->card_total = input.card_total;
 	this->code = input.code;

@@ -7,6 +7,7 @@ Monster::Monster(string in_name, int val, int in_damage, int in_range, bool in_e
 Monster& Monster::operator=(const Monster& input) {
 	name = input.name;
 	life_value = input.life_value;
+	max_life_value = input.max_life_value;
 	card_amount = input.card_amount;
 	card_total = input.card_total;
 	code = input.code;

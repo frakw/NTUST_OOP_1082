@@ -1,6 +1,4 @@
-#include "Coord.h"
-#include <string>
-#include "basic.h"
+#include "Gloom_Haven.h"
 Skill::Skill():type(-1), value(-1) {
 	
 }
@@ -86,5 +84,36 @@ Creature::Creature(string in_name, int val, int in_card_amount) :name(in_name), 
 
 }
 Creature::~Creature() {
-	if (card != nullptr) delete[] card;
+	if (card != nullptr) {
+		delete[] card;
+		card = nullptr;
+	} 
+}
+
+int Creature::card_available_amount() {//持有卡牌數(棄牌堆+手牌)
+	int count = 0;
+	for (int i = 0;i < card_amount;i++) {
+		if (card[i].available) {
+			count++;
+		}
+	}
+	return count;
+}
+int Creature::card_hand_amount() {//可用卡牌數
+	int count = 0;
+	for (int i = 0;i < card_amount;i++) {
+		if (!card[i].discard) {
+			count++;
+		}
+	}
+	return count;
+}
+int Creature::card_throw_amount() {//棄牌堆數
+	int count = 0;
+	for (int i = 0;i < card_amount;i++) {
+		if (card[i].discard) {
+			count++;
+		}
+	}
+	return count;
 }

@@ -4,58 +4,25 @@ using namespace std;
 
 int skill_input(string input,Skill** card);
 
-tuple<Character*, Monster*, Map*> TXT::return_tuple() {
-	if (character == nullptr) {
-		this->read_character();
-	}
-	Character* tmpC;
-	int Character_amount;
-	string Character_name;
-	int number;
-	cin >> Character_amount;
-	tmpC = new Character[Character_amount];
-	for (int i = 0;i < Character_amount;i++) {
-		cin >> Character_name;
-		for (int j = 0;j < total_chr;j++) {
-			if (character[j].name == Character_name) {
-				tmpC[i] = character[j];
-				for (int k = 0;k < character[j].card_amount;k++) {
-					cin >> number;
-					for (int m = 0; m < character[j].card_total;m++) {
-						if (number == character[j].card[m].number) {
-							tmpC[i].card[k] = character[j].card[m];
-							break;
-						}
-					}
-					
-				}
-			}
-		}
-	}
 
 
-	//for (int i = 0;i < Character_amount;i++) {
-	//	std::cout << tmpC[i].name << ' ' << tmpC[i].life_value << ' ' << tmpC[i].card_amount << ' ' << tmpC[i].card_total<<endl;
-	//	for (int j = 0;j < tmpC[i].card_amount;j++) {
-	//		for (int k = 0;k < tmpC[i].card[j].skill_up_amount;k++) {
-	//			std::cout << tmpC[i].card[j].skill_up[k].type << endl;
-	//		}
-	//	}
-	//}
-	return make_tuple(tmpC, monster, this->read_map());
+
+tuple<Character*,int, Monster*,int, Map*> TXT::return_tuple() {
+	return make_tuple(chrput,Character_amount, monput,Monster_amount, map);
 }
 
 
-void TXT::read_character() {
+void TXT::read_character(string filename) {
 	fstream file;
 	file.open(filename, ios::in);
 	file >> total_chr;
 	character = new Character[total_chr];
 	for (int i = 0;i < total_chr;i++) {
 		file>> character[i].name
-			>> character[i].life_value
+			>> character[i].max_life_value
 			>> character[i].card_amount
 			>> character[i].card_total;
+		character[i].life_value = character[i].max_life_value;
 		file.ignore();
 		character[i].card = new Card[character[i].card_total];
 		for (int j = 0;j < character[i].card_total;j++) {
@@ -82,6 +49,7 @@ void TXT::read_character() {
 			character[i].card[j].skill_down_amount = skill_input(process, &character[i].card[j].skill_down);
 		}
 	}
+	file.close();
 }
 
 int skill_input(string input,Skill** skill) {//for character only
@@ -113,19 +81,20 @@ int skill_input(string input,Skill** skill) {//for character only
 	return count;//skill_amount;
 }
 
-void TXT::read_monster() {
+void TXT::read_monster(string filename) {
 	fstream file;
 	file.open(filename, ios::in);
 	file >> total_mon;
 	monster = new Monster[total_mon];
 	for (int i = 0;i < total_mon;i++) {
 		file >> monster[i].name
-			 >> monster[i].life_value
+			 >> monster[i].max_life_value
 			 >> monster[i].damage
 			 >> monster[i].range
 			 >> monster[i].elite_life_value
 			 >> monster[i].elite_damage
 			 >> monster[i].elite_range;
+		monster[i].life_value = monster[i].max_life_value;
 		monster[i].card = new Card[6];
 		string trash;
 		for (int j = 0;j < 6;j++) {
@@ -172,17 +141,48 @@ void TXT::read_monster() {
 			}
 		}
 	}
+	file.close();
+}
+
+void TXT::input_character_data() {
+	cout << "請輸入出場角色數量:"<<endl;
+	string Character_name;
+	int number;
+	cin >> Character_amount;
+	char code = 'A';
+	chrput = new Character[Character_amount];
+	for (int i = 0;i < Character_amount;i++) {
+		cin >> Character_name;
+		for (int j = 0;j < total_chr;j++) {
+			if (character[j].name == Character_name) {
+				chrput[i] = character[j];
+				chrput[i].code = code;
+				code++;
+				for (int k = 0;k < character[j].card_amount;k++) {
+					cin >> number;
+					for (int m = 0; m < character[j].card_total;m++) {
+						if (number == character[j].card[m].number) {
+							chrput[i].card[k] = character[j].card[m];
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 
-Map* TXT::read_map() {//call this func after above two func 
+void TXT::read_map(string filename) {//call this func after above two func 
 	fstream file;
 	file.open(filename, ios::in);
-
+	if (map != nullptr) {
+		delete map;
+		map = nullptr;
+	}
 	int row, col;
 	file >>row >> col;
-	Map* map = new Map(row,col);
-	file.ignore();
+	map = new Map(row,col);
 	string tmp,out="";
 	for (int i = 0;i < row;i++) {
 		file >> tmp;
@@ -192,15 +192,19 @@ Map* TXT::read_map() {//call this func after above two func
 	for (int i = 0;i < 4;i++) {
 		file >> map->start_pos[i].x >> map->start_pos[i].y;
 	}
-	int Monster_amount;
+	map->fill_start = map->start_pos[0];
+	char code = 'a';
 	string Monster_name;
 	file >> Monster_amount;
 	monput = new Monster[Monster_amount];
 	for (int i = 0;i < Monster_amount;i++) {
+		file >> Monster_name;//忘記加
 		for (int j = 0;j < total_mon;j++) {
 			if (Monster_name == monster[j].name) {
 				int two, three,four;
 				monput[i] = monster[j];
+				monput[i].code = code;
+				code++;
 				file >> monput[i].position.x >> monput[i].position.y;
 				file >> two >> three >> four;
 				switch (total_chr)
@@ -213,6 +217,6 @@ Map* TXT::read_map() {//call this func after above two func
 			}
 		}
 	}
-	return map;
+	file.close();
 }
 
