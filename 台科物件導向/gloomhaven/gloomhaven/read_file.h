@@ -1,6 +1,4 @@
 #pragma once
-#include<string>
-#include<tuple>
 class Skill;
 class Character;
 class Monster;

@@ -1,4 +1,4 @@
-#include "Map.h"
+#include "Gloom_Haven.h"
 
 Map::Map() {}
 Map::Map(int in_row, int in_col) :row(in_row), col(in_col) {

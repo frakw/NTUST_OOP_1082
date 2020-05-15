@@ -1,5 +1,4 @@
-#include "basic.h"
-#include "Character.h"
+#include "Gloom_Haven.h"
 
 Character::Character() :Creature() {}
 Character::Character(string in_name, int val, int in_card_amount) :Creature(in_name, val, in_card_amount) {

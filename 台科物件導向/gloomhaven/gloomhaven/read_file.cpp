@@ -1,19 +1,4 @@
-
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <tuple>
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
-#include <cstdio>
-#include <cstdlib>
-#include "basic.h"
-#include "Character.h"
-#include "Monster.h"
-#include "map.h"
-#include "read_file.h"
+#include "Gloom_Haven.h"
 
 using namespace std;
 

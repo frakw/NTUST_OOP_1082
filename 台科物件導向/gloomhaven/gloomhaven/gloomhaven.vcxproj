@@ -148,6 +148,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="all.h" />
     <ClInclude Include="basic.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Coord.h" />

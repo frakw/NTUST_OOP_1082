@@ -1,6 +1,4 @@
 #pragma once
-#include<string>
-#include "Coord.h"
 using namespace std;
 class Skill {
 public:

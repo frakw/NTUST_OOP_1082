@@ -1,7 +1,4 @@
 #pragma once
-#include "Coord.h"
-#include <utility>
-#include <string>
 class Character;//不可include 標頭檔，會出現遺漏類型規範-假設為int
 class Monster;//不可include 標頭檔，會出現遺漏類型規範-假設為int
 using namespace std;

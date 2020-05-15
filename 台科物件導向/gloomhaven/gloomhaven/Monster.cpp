@@ -1,5 +1,4 @@
-#include "basic.h"//先後順序要對
-#include "Monster.h"//先後順序要對
+#include "Gloom_Haven.h"
 Monster::Monster() :Creature() {
 
 }
