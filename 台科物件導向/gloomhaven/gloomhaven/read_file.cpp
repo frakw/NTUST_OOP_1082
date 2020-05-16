@@ -91,7 +91,7 @@ void TXT::read_monster(string filename) {
 			 >> monster[i].max_life_value
 			 >> monster[i].damage
 			 >> monster[i].range
-			 >> monster[i].elite_life_value
+			 >> monster[i].elite_max_life_value
 			 >> monster[i].elite_damage
 			 >> monster[i].elite_range;
 		monster[i].life_value = monster[i].max_life_value;
