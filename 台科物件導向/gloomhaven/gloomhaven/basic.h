@@ -38,7 +38,7 @@ class Creature {
 public:
 	Creature();
 	Creature(string in_name, int val, int in_card_amount);
-	virtual ~Creature();
+	~Creature();//暫時不用virtual
 	Card* card = nullptr;//選擇卡牌
 	string name="";
 	Card& find_card(int);//int 傳入編號number，回傳該Card reference
@@ -50,14 +50,15 @@ public:
 	int card_available_amount();//持有卡牌數(棄牌堆+手牌)
 	int card_hand_amount();//可用卡牌數
 	int card_throw_amount();//棄牌堆數
-	virtual void move();
-	virtual void attack();
+	virtual void print() {}//排序後的列印
+	virtual void action() {}//行動
+	Card use_card[2];//若為怪物則只有一張卡
 	int life_value=0;//目前血量
 	int max_life_value = 0;//最大血量
 	int card_amount=0;//可選卡牌數量
 	int card_total =0;//總卡牌數量
 	char code=0;//代號
-	int TmpAgility=0;//該輪敏捷值
+	//int TmpAgility=0;//該輪敏捷值，已被上方的選擇卡牌取代
 	//int TmpShield = 0;//該輪護甲值
 	Coord position = {-1,-1};
 	int team_num = 0;//隊伍編號，角色為0，怪物為1

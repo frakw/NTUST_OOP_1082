@@ -9,12 +9,13 @@ public:
 	Monster& operator=(const Monster& input);
 	void switch_status(int num);
 	void choose_card(bool);//bool為debug mode
-	void move();
-	void attack();
+	void print();//排序後的列印
+	void action();//行動
 	int damage=0;
 	int range=0;//0為近戰怪
 	bool show = true;//是(true)否(false)出現在場上
-	Card use_card;//該回合使用的卡
+	bool show_in_room = false;//是否在房間裡
+	//Card use_card;//該回合使用的卡，已轉移至basic
 	int debug_mode_card_number=0;//debug_mode，紀錄卡片編號，從0開始出
 	//elite系列------------------------------------
 	bool elite = false; //是(true)否(false)為菁英

@@ -72,18 +72,34 @@ void Gloom_Haven::start() {
 		for (int i = 0;i < monster_amount;i++) {//怪物選牌
 			monster[i].choose_card(DEBUG_MODE);
 		}
-		sort(all, all + character_amount + monster_amount, [](Creature* const& a, Creature* const& b) -> bool
-			{ return a->TmpAgility < b->TmpAgility; });
+		sort(all, all + character_amount + monster_amount,
+			[](Creature* const& a, Creature* const& b) -> bool{
+				if (a->use_card[0].agility == b->use_card[0].agility) {
+					if (a->team_num == b->team_num) {//隊伍與敏捷相同
+						if (a->team_num==0) {//角色與角色敏捷相同
+							if (a->use_card[1].agility == b->use_card[1].agility) {
+								return a->code < b->code;
+							}
+							return a->use_card[1].agility < b->use_card[1].agility;
+						}
+						else if (a->team_num == 1) {//怪物與怪物敏捷相同
+							return a->code < b->code;
+						}
+					}
+					else {//角色與怪物敏捷相同
+						return a->team_num == 0;
+					}
+				}
+				return a->use_card[0].agility < b->use_card[0].agility;
+			});
 		for (int i = 0;i < character_amount + monster_amount;i++) {
-			all[i]->move();
-			all[i]->attack();
-			if (this->map->now_monster_amount() == 0 && this->map->now_door_amount() == 0) {
-				this->map->check_room();
-				this->map->show_room();
-				break;
-			}
+			all[i]->print();
 		}
-
+		//if (this->map->now_monster_amount() == 0 && this->map->now_door_amount() == 0) {
+		//	this->map->check_room();
+		//	this->map->show_room();
+		//	break;
+		//}
 		round_count++;
 	}
 	if (!character_remain()) {

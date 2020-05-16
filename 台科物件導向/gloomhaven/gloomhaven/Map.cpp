@@ -38,6 +38,13 @@ void Map::check_room() {
 		}
 	}
 	this->fill_room(fill_start);
+	for (int i = 0;i < monster_amount;i++) {
+		if (monster[i].show) {
+			if (show[monster[i].position.y][monster[i].position.x]) {
+				monster[i].show_in_room = true;
+			}
+		}
+	}
 }
 
 void Map::fill_room(Coord pos) {

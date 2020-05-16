@@ -25,6 +25,7 @@ using namespace std;
 
 //筆記: 怪物每輪出一張牌，角色每輪出二張牌，選第一張當敏捷值
 //攻擊可穿過障礙物
+//待解決:敏捷值排序
 class Gloom_Haven {
 public:
 	Gloom_Haven();

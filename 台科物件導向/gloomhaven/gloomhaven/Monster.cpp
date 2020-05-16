@@ -14,9 +14,9 @@ Monster& Monster::operator=(const Monster& input) {
 	this->code = input.code;
 	this->position = input.position;
 	//this->TmpShield = input.TmpShield;
-	this->TmpAgility = input.TmpAgility;
+	//this->TmpAgility = input.TmpAgility;
 	this->team_num = input.team_num;
-
+	this->show_in_room = input.show_in_room;
 
 	//elite¨t¦C---------------------------------
 	this->elite = input.elite;
@@ -48,19 +48,43 @@ void Monster::switch_status(int num) {
 
 void Monster::choose_card(bool debug_mode) {
 	if (debug_mode) {
-		use_card = card[debug_mode_card_number];
+		use_card[0] = card[debug_mode_card_number];
 		debug_mode_card_number++;
 	}
 	else {
-		use_card = card[rand() % card_amount];
+		use_card[0] = card[rand() % card_amount];
 	}
-	TmpAgility = use_card.agility;
 }
 
-
-void Monster::move() {
-	cout << "monster move" << endl;
+void Monster::print(){
+	if(life_value  <= 0 || !show_in_room){
+		return;
+	}
+	cout << name << ' ' << card[0].agility;
+	for (int i = 0;i < card[0].skill_up_amount;i++) {
+		switch (card[0].skill_up[i].type)
+		{
+		case 0: {
+			cout << " move " << card[0].skill_up[i].move_step;
+		}break;
+		case 1: {
+			cout << " attack " << card[0].skill_up[i].value;
+			if (card[0].skill_up[i].range != -1) {
+				cout << " range " << card[0].skill_up[i].range;
+			}
+		}break;
+		case 2: {
+			cout << " heal " << card[0].skill_up[i].value;
+		}break;
+		case 3: {
+			cout << " shield " << card[0].skill_up[i].move_step;
+		}break;
+		default:
+			break;
+		}
+	}
+	cout << endl;
 }
-void Monster::attack() {
-	cout << "monster attack" << endl;
+void Monster::action() {
+	cout << "monster action"<<endl;
 }

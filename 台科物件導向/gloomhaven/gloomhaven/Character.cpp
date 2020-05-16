@@ -15,7 +15,7 @@ Character& Character::operator=(const Character& input) {
 	this->use_card[0] = input.use_card[0];
 	this->use_card[1] = input.use_card[1];
 	this->sleep = input.sleep;
-	this->TmpAgility = input.TmpAgility;
+	//this->TmpAgility = input.TmpAgility;
 	//this->TmpShield = input.TmpShield;
 	this->team_num = input.team_num;
 
@@ -57,14 +57,17 @@ bool Character::choose_card() {
 		use_card[0] = find_card(atoi(card_number1.c_str()));
 		use_card[1] = find_card(card_number2);
 		//err handle 若輸入在棄牌堆或以移除牌 not finished
-		TmpAgility = use_card[0].agility;//第一張牌作為敏捷值
+		//TmpAgility = use_card[0].agility;//第一張牌作為敏捷值
 	}
 	return true;
 }
 
-void Character::move() {
-	cout << "character move" << endl;
+void Character::print() {
+	if (life_value > 0) {
+		cout << code << ' ' << use_card[0].agility << ' ' << use_card[0].number << ' ' << use_card[1].number << endl;
+	}
 }
-void Character::attack() {
-	cout << "character attack" << endl;
+
+void Character::action() {
+	cout << "Character action" << endl;
 }

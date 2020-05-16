@@ -186,10 +186,3 @@ void Creature::check_card() {//印出卡牌編號(手牌與棄牌)，編號由小到大
 	}
 	cout << endl;
 }
-
-void Creature::move() {
-	cout << "creature move" << endl;
-}
-void Creature::attack() {
-	cout << "creature attack" << endl;
-}
