@@ -16,6 +16,9 @@ public:
 	void show_room();//呼叫前記得先check找出可視範圍
 	void update_all_creature();//更新生物位置，或死亡刪除
 	Coord& find_pos(Coord*, int max, Coord pos);
+	int now_monster_amount();//目前場上怪物數(活著)
+	int door_amount();//門的數量
+	int now_door_amount();//目前門的數量
 	int row=0, col=0;
 	char** body = nullptr;
 	bool** show = nullptr;
@@ -26,4 +29,5 @@ public:
 	int character_amount = 0;
 	Monster* monster = nullptr;
 	int monster_amount = 0;
+
 };

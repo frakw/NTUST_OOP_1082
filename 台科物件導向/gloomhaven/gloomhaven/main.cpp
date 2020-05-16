@@ -3,6 +3,7 @@ using namespace std;
 #include <iostream>
 //#define command_line
 int main(int argc, char** argv) {
+	srand(time(NULL));
 	TXT preprocess;
 	string map_filename;
 	string play;

@@ -172,7 +172,7 @@ void Map::choose_pos(int index, string step) {
 
 void Map::update_all_creature() {
 	for (int i = 0;i < monster_amount;i++) {
-		if (!monster[i].show || monster[i].position.y != -1 || monster[i].position.x != -1) continue;
+		if (!monster[i].show || monster[i].position.y == -1 || monster[i].position.x == -1) continue;
 		if (monster[i].life_value > 0) {
 			body[monster[i].position.y][monster[i].position.x] = monster[i].code;
 		}
@@ -189,4 +189,42 @@ void Map::update_all_creature() {
 			body[character[i].position.y][character[i].position.x] = '1';
 		}
 	}
+}
+
+int Map::now_monster_amount() {
+	int count = 0;
+	for (int i = 0;i < monster_amount;i++) {
+		if (monster[i].life_value > 0) {
+			if (show[monster[i].position.y][monster[i].position.x]) {
+				count++;
+			}
+		}
+	}
+	return count;
+}
+
+int Map::door_amount() {
+	int count = 0;
+	for (int i = 0;i < row;i++) {
+		for (int j = 0;j < col;j++) {
+			if (body[i][j] == '3') {
+				count++;
+			}
+		}
+	}
+	return count;
+}
+
+int Map::now_door_amount() {
+	int count = 0;
+	for (int i = 0;i < row;i++) {
+		for (int j = 0;j < col;j++) {
+			if (show[i][j]) {
+				if (body[i][j] == '3') {
+					count++;
+				}
+			}
+		}
+	}
+	return count;
 }

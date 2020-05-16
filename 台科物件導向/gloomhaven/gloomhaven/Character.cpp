@@ -1,6 +1,7 @@
 #include "Gloom_Haven.h"
 
-Character::Character() :Creature() {}
+Character::Character() :Creature() {
+}
 Character::Character(string in_name, int val, int in_card_amount) :Creature(in_name, val, in_card_amount) {
 }
 Character& Character::operator=(const Character& input) {
@@ -15,6 +16,9 @@ Character& Character::operator=(const Character& input) {
 	this->use_card[1] = input.use_card[1];
 	this->sleep = input.sleep;
 	this->TmpAgility = input.TmpAgility;
+	//this->TmpShield = input.TmpShield;
+	this->team_num = input.team_num;
+
 
 	this->card = new Card[card_amount];
 	for (int i = 0;i < card_amount;i++) {
@@ -56,4 +60,11 @@ bool Character::choose_card() {
 		TmpAgility = use_card[0].agility;//第一張牌作為敏捷值
 	}
 	return true;
+}
+
+void Character::move() {
+	cout << "character move" << endl;
+}
+void Character::attack() {
+	cout << "character attack" << endl;
 }

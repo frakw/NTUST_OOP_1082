@@ -5,10 +5,12 @@
 #include <string>
 #include <tuple>
 #include <cstdio>
+#include <ctime>
 #include <cstdlib>
 #include <sstream>
 #include <utility>
 #include <memory.h>
+#include <algorithm>
 #include "Coord.h"//先後順序要對
 #include "basic.h"//先後順序要對
 #include "Character.h"//先後順序要對
@@ -35,7 +37,7 @@ public:
 	int character_remain();//角色剩餘數
 	int monster_remain();//怪物剩餘數
 private:
-	Creature** all;//所有角色與怪物存放區(方便敏捷值排序用)，先角色再怪物
+	Creature** all = nullptr;//所有角色與怪物存放區(方便敏捷值排序用)，先角色再怪物
 
 	bool DEBUG_MODE = false;
 	Map* map = nullptr;

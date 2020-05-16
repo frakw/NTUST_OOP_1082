@@ -35,7 +35,7 @@ void Gloom_Haven::seiting(tuple<Character*, int, Monster*, int, Map*> input, boo
 void Gloom_Haven::start() {
 	cout << "game start"<< endl;
 
-	this->map->change_char();
+	this->map->change_char();//選擇位置時專用
 	this->map->check_room();
 	this->map->show_room();
 	for (int i = 0;i < character_amount;i++) {
@@ -46,7 +46,7 @@ void Gloom_Haven::start() {
 	}
 	int round_count = 1;
 	char code;
-	while (character_remain() != 0 && monster_remain() != 0) {
+	while (character_remain() != 0 && monster_remain() != 0 && this->map->door_amount()!=0) {
 		int card_number1, card_number2;
 		cout << "round " << round_count << endl;
 		for (int i = 0;i < character_amount;i++) {
@@ -54,15 +54,34 @@ void Gloom_Haven::start() {
 				character[i].life_value = 0;
 				this->map->show_room();
 			}
+			else {
+				
+			}
 		}
 		for (int i = 0;i < character_amount;i++) {//角色選牌
 			cin >> code;
-			if (character[i].code == code) {
-				while (!character[i].choose_card());
+			for (int j = 0;j < character_amount;j++) {
+				if (character[j].code == code) {
+					if (!character[j].choose_card()) {
+						i--;
+					}
+					break;
+				}
 			}
 		}
 		for (int i = 0;i < monster_amount;i++) {//怪物選牌
 			monster[i].choose_card(DEBUG_MODE);
+		}
+		sort(all, all + character_amount + monster_amount, [](Creature* const& a, Creature* const& b) -> bool
+			{ return a->TmpAgility < b->TmpAgility; });
+		for (int i = 0;i < character_amount + monster_amount;i++) {
+			all[i]->move();
+			all[i]->attack();
+			if (this->map->now_monster_amount() == 0 && this->map->now_door_amount() == 0) {
+				this->map->check_room();
+				this->map->show_room();
+				break;
+			}
 		}
 
 		round_count++;

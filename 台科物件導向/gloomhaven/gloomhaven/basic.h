@@ -1,5 +1,7 @@
 #pragma once
 using namespace std;
+class Creature;
+class Monster;
 class Skill {
 public:
 	Skill();
@@ -36,23 +38,29 @@ class Creature {
 public:
 	Creature();
 	Creature(string in_name, int val, int in_card_amount);
-	~Creature();
+	virtual ~Creature();
 	Card* card = nullptr;//選擇卡牌
 	string name="";
 	Card& find_card(int);//int 傳入編號number，回傳該Card reference
+	//virtual void move() = 0;
+	//virtual void attack() = 0;
 	void heal(int);//增加血量(不超過最大)
 	void discard_to_hand();//棄牌堆所有牌移回手牌，但不包含已被移除的牌(availible == false)
 	void check_card();//印出卡牌編號(手牌與棄牌)，編號由小到大
 	int card_available_amount();//持有卡牌數(棄牌堆+手牌)
 	int card_hand_amount();//可用卡牌數
 	int card_throw_amount();//棄牌堆數
+	virtual void move();
+	virtual void attack();
 	int life_value=0;//目前血量
 	int max_life_value = 0;//最大血量
 	int card_amount=0;//可選卡牌數量
 	int card_total =0;//總卡牌數量
 	char code=0;//代號
-	int TmpAgility=0;//該輪敏捷值 
+	int TmpAgility=0;//該輪敏捷值
+	//int TmpShield = 0;//該輪護甲值
 	Coord position = {-1,-1};
+	int team_num = 0;//隊伍編號，角色為0，怪物為1
 
 };
 

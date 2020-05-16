@@ -23,6 +23,7 @@ void TXT::read_character(string filename) {
 			>> character[i].card_amount
 			>> character[i].card_total;
 		character[i].life_value = character[i].max_life_value;
+		character[i].team_num = 0;//角色為0
 		file.ignore();
 		character[i].card = new Card[character[i].card_total];
 		for (int j = 0;j < character[i].card_total;j++) {
@@ -95,6 +96,8 @@ void TXT::read_monster(string filename) {
 			 >> monster[i].elite_damage
 			 >> monster[i].elite_range;
 		monster[i].life_value = monster[i].max_life_value;
+		monster[i].card_amount = 6;//記得要加
+		monster[i].team_num = 1;//怪物為1
 		monster[i].card = new Card[6];
 		string trash;
 		for (int j = 0;j < 6;j++) {

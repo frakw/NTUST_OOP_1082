@@ -1,6 +1,5 @@
 #include "Gloom_Haven.h"
 Monster::Monster() :Creature() {
-
 }
 Monster::Monster(string in_name, int val, int in_damage, int in_range, bool in_elite) : Creature(in_name, val, 6), damage(in_damage), range(in_range), elite(in_elite) {
 }
@@ -14,6 +13,11 @@ Monster& Monster::operator=(const Monster& input) {
 	this->card_total = input.card_total;
 	this->code = input.code;
 	this->position = input.position;
+	//this->TmpShield = input.TmpShield;
+	this->TmpAgility = input.TmpAgility;
+	this->team_num = input.team_num;
+
+
 	//elite¨t¦C---------------------------------
 	this->elite = input.elite;
 	this->elite_max_life_value = input.elite_max_life_value;
@@ -51,4 +55,12 @@ void Monster::choose_card(bool debug_mode) {
 		use_card = card[rand() % card_amount];
 	}
 	TmpAgility = use_card.agility;
+}
+
+
+void Monster::move() {
+	cout << "monster move" << endl;
+}
+void Monster::attack() {
+	cout << "monster attack" << endl;
 }

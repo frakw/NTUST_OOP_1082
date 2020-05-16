@@ -160,26 +160,36 @@ void Creature::check_card() {//礟絪腹(も礟籔斌礟)絪腹パ
 	}
 	int count = 0;
 	cout << "hand:";
-	for (int i = min_number;i < max_number;i++) {//眖0秨﹍禲程
+	for (int i = min_number;i <= max_number;i++) {//眖0秨﹍禲程
 		for (int j = 0;j < card_amount;j++) {
 			if (card[j].number == i) {
-				if (card[i].available && !card[i].discard) {
+				if (card[j].available && !card[j].discard) {
 					cout << (count != 0?", ":" ")<< card[j].number;
+					count++;
+					break;
 				}
-				count++;
 			}
 		}
 	}
 	count = 0;
-	cout << "; discard: ";
-	for (int i = min_number;i < max_number;i++) {//眖0秨﹍禲程
+	cout << "; discard:";
+	for (int i = min_number;i <= max_number;i++) {//眖0秨﹍禲程
 		for (int j = 0;j < card_amount;j++) {
 			if (card[j].number == i) {
-				if (card[i].available && card[i].discard) {
-					cout << (count != 0 ? ", " : " ") << card[j].number << ", ";
+				if (card[j].available && card[j].discard) {
+					cout << (count != 0 ? ", " : " ") << card[j].number;
+					count++;
+					break;
 				}
 			}
 		}
 	}
 	cout << endl;
+}
+
+void Creature::move() {
+	cout << "creature move" << endl;
+}
+void Creature::attack() {
+	cout << "creature attack" << endl;
 }

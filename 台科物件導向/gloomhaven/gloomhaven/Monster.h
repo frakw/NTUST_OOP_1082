@@ -9,7 +9,8 @@ public:
 	Monster& operator=(const Monster& input);
 	void switch_status(int num);
 	void choose_card(bool);//bool為debug mode
-
+	void move();
+	void attack();
 	int damage=0;
 	int range=0;//0為近戰怪
 	bool show = true;//是(true)否(false)出現在場上
