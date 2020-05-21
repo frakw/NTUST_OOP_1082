@@ -134,6 +134,7 @@ void Creature::heal(int add) {
 		if (life_value > max_life_value) {
 			life_value = max_life_value;
 		}
+		cout << code << " heal " << add << ", now hp is " << life_value << endl;
 	}
 }
 
@@ -185,4 +186,57 @@ void Creature::check_card() {//印出卡牌編號(手牌與棄牌)，編號由小到大
 		}
 	}
 	cout << endl;
+}
+
+
+void Creature::shield(int add) {
+	if (life_value > 0) {
+		cout << code << " shield " << add << "this turn"<<endl;
+		TmpShield += add;
+	}
+}
+
+bool Creature::be_attack(int attack_val) {
+	cout << code << " shield " << TmpShield << ", "<<code << " remain ";
+	if (TmpShield < attack_val) {
+		life_value -= (attack_val - TmpShield);
+	}
+	cout << life_value << " hp" <<endl;
+	if (life_value <= 0) {
+		cout << code << " is killed!!" << endl;
+		return true;
+	}
+	return false;
+}
+
+void Creature::move(string step) {
+	cout << "someone move:" << step << endl;
+	Coord latest_allow = position;
+	Coord now = position;
+	for (int i = 0;i < step.length();i++) {
+		Coord direction[4] = { {now.x,now.y - 1},{now.x - 1,now.y},{now.x,now.y + 1},{now.x + 1,now.y} };
+		int dir_index;
+		switch (step[i])
+		{
+		case'w':dir_index = 0;break;
+		case'a':dir_index = 1;break;
+		case's':dir_index = 2;break;
+		case'd':dir_index = 3;break;
+		default:break;
+		}
+		char now_char = map->coord_in_body(direction[dir_index]);
+		Creature* now_life = nullptr;
+		if (now_char == '1' || (team_num != 1 && now_char == '3')) {
+			latest_allow = direction[dir_index];
+			now = direction[dir_index];
+		}
+		else if ((now_life = map->creature_in(direction[dir_index])) != nullptr) {
+			if (now_life->team_num == team_num) {
+				now = direction[dir_index];
+			}
+		}
+
+	}
+	position = latest_allow;
+	map->show_room();
 }

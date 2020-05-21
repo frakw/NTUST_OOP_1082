@@ -3,9 +3,9 @@
 using namespace std;
 
 Gloom_Haven::Gloom_Haven(tuple<Character*, int, Monster*, int, Map*>input, bool mode) :DEBUG_MODE(mode) {
-	this->seiting(input, mode);
+	this->set(input, mode);
 }
-void Gloom_Haven::seiting(tuple<Character*, int, Monster*, int, Map*> input, bool mode) {
+void Gloom_Haven::set(tuple<Character*, int, Monster*, int, Map*> input, bool mode) {
 	DEBUG_MODE = mode;
 	map = get<4>(input);
 
@@ -35,18 +35,19 @@ void Gloom_Haven::seiting(tuple<Character*, int, Monster*, int, Map*> input, boo
 void Gloom_Haven::start() {
 	cout << "game start"<< endl;
 
-	this->map->change_char();//選擇位置時專用
 	this->map->check_room();
-	this->map->show_room();
+	this->map->set_choosing_environment();//選擇位置時專用
+	this->map->show_choosing_room();
 	for (int i = 0;i < character_amount;i++) {
 		string step;
 		cin >> step;
 		this->map->choose_pos(i,step);
-		this->map->show_room();
+		this->map->show_choosing_room();
 	}
 	int round_count = 1;
 	char code;
-	while (character_remain() != 0 && monster_remain() != 0 && this->map->door_amount()!=0) {
+	while ((character_remain() != 0 && monster_remain() != 0) || this->map->door_amount()!=0) {
+
 		int card_number1, card_number2;
 		cout << "round " << round_count << endl;
 		for (int i = 0;i < character_amount;i++) {
@@ -95,11 +96,10 @@ void Gloom_Haven::start() {
 		for (int i = 0;i < character_amount + monster_amount;i++) {
 			all[i]->print();
 		}
-		//if (this->map->now_monster_amount() == 0 && this->map->now_door_amount() == 0) {
-		//	this->map->check_room();
-		//	this->map->show_room();
-		//	break;
-		//}
+		cout << "action time" << endl;
+		for (int i = 0;i < character_amount + monster_amount;i++) {
+			all[i]->action();
+		}
 		round_count++;
 	}
 	if (!character_remain()) {

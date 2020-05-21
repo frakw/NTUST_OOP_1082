@@ -22,11 +22,27 @@ Map::~Map() {
 		}
 		delete[] show;
 	}
+	if (door_pos != nullptr) {
+		delete[] door_pos;
+	}
 }
 void Map::set(string input) {
 	for (int i = 0;i < row;i++) {
 		for (int j = 0;j < col;j++) {
 			body[i][j] = input[i * col + j];
+			if (body[i][j] == '3') {
+				door_total_amount++;
+			}
+		}
+	}
+	door_pos = new Coord[door_total_amount];
+	int index = 0;
+	for (int i = 0;i < row;i++) {
+		for (int j = 0;j < col;j++) {
+			if (body[i][j] == '3') {
+				door_pos[index] = { j,i };
+				index++;
+			}
 		}
 	}
 }
@@ -85,7 +101,42 @@ void Map::show_room() {
 	}
 }
 
-void Map::change_char() {
+void Map::show_choosing_room() {
+	for (int i = 0;i < monster_amount;i++) {//copy from update
+		if (!monster[i].show || monster[i].position.y == -1 || monster[i].position.x == -1) continue;
+		if (monster[i].life_value > 0) {
+			body[monster[i].position.y][monster[i].position.x] = monster[i].code;
+		}
+		else {
+			body[monster[i].position.y][monster[i].position.x] = '1';
+		}
+	}
+	for (int i = 0;i < character_amount;i++) {
+		if (character[i].position.y == -1 || character[i].position.x == -1) continue;
+		if (character[i].life_value > 0) {
+			body[character[i].position.y][character[i].position.x] = character[i].code;
+		}
+		else {
+			body[character[i].position.y][character[i].position.x] = '1';
+		}
+	}
+	for (int i = 0;i < row;i++) {//copy from show
+		for (int j = 0;j < col;j++) {
+			if (show[i][j]) {
+				switch (body[i][j]) {
+				case'0':cout << ' ';break;
+				default:cout << body[i][j];break;
+				}
+			}
+			else {
+				cout << ' ';
+			}
+		}
+		cout << endl;
+	}
+}
+
+void Map::set_choosing_environment() {
 	int min = row + col;
 	int start_index = 0;
 	for (int i = 0;i < 4;i++) {
@@ -125,7 +176,7 @@ Coord& Map::find_pos(Coord* check,int max,Coord pos) {
 }
 
 void Map::choose_pos(int index, string step) {
-	this->change_char();//設置底線與選擇星星位置
+	this->set_choosing_environment();//設置底線與選擇星星位置
 	Coord now = star_pos;
 	body[now.y][now.x] = '_';//暫時設為底線，方便wasd
 	for (int i = 0;i < step.length();i++) {
@@ -173,27 +224,35 @@ void Map::choose_pos(int index, string step) {
 		}
 	}
 	else {
-		this->change_char();//設置底線與選擇星星位置
+		this->set_choosing_environment();//設置底線與選擇星星位置
 	}
 }
 
 void Map::update_all_creature() {
+	for (int i = 0;i < row;i++) {
+		for (int j = 0;j < col;j++) {
+			if (show[i][j]) {
+				if (body[i][j] != '0' && body[i][j] != '1' && body[i][j] != '2' && body[i][j] != '3') {
+					body[i][j] = '1';//先把所有生物位置設為地板
+				}
+			}
+		}
+	}
+	for (int i = 0;i < door_total_amount;i++) {//門
+		if (door_pos[i].x != -1 && door_pos[i].y != -1) {
+			body[door_pos[i].y][door_pos[i].x] = '3';
+		}
+	}
 	for (int i = 0;i < monster_amount;i++) {
 		if (!monster[i].show || monster[i].position.y == -1 || monster[i].position.x == -1) continue;
 		if (monster[i].life_value > 0) {
 			body[monster[i].position.y][monster[i].position.x] = monster[i].code;
-		}
-		else {
-			body[monster[i].position.y][monster[i].position.x] = '1';
 		}
 	}
 	for (int i = 0;i < character_amount;i++) {
 		if (character[i].position.y == -1 || character[i].position.x == -1) continue;
 		if (character[i].life_value > 0) {
 			body[character[i].position.y][character[i].position.x] = character[i].code;
-		}
-		else {
-			body[character[i].position.y][character[i].position.x] = '1';
 		}
 	}
 }
@@ -212,11 +271,9 @@ int Map::now_monster_amount() {
 
 int Map::door_amount() {
 	int count = 0;
-	for (int i = 0;i < row;i++) {
-		for (int j = 0;j < col;j++) {
-			if (body[i][j] == '3') {
-				count++;
-			}
+	for (int i = 0;i < door_total_amount;i++) {
+		if (door_pos[i].x != -1 && door_pos[i].y != -1) {
+			count++;
 		}
 	}
 	return count;
@@ -234,4 +291,22 @@ int Map::now_door_amount() {
 		}
 	}
 	return count;
+}
+
+Creature* Map::creature_in(Coord pos) {
+	for (int i = 0;i < character_amount;i++) {
+		if (character[i].position.x == pos.x && character[i].position.y == pos.y) {
+			return character + i;
+		}
+	}
+	for (int i = 0;i < monster_amount;i++) {
+		if (monster[i].position.x == pos.x && monster[i].position.y == pos.y) {
+			return monster + i;
+		}
+	}
+	return nullptr;
+}
+
+char& Map::coord_in_body(Coord pos) {
+	return body[pos.y][pos.x];
 }

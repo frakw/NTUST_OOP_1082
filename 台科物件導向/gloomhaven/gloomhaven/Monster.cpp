@@ -13,11 +13,11 @@ Monster& Monster::operator=(const Monster& input) {
 	this->card_total = input.card_total;
 	this->code = input.code;
 	this->position = input.position;
-	//this->TmpShield = input.TmpShield;
+	this->TmpShield = input.TmpShield;
 	//this->TmpAgility = input.TmpAgility;
 	this->team_num = input.team_num;
 	this->show_in_room = input.show_in_room;
-
+	this->map = input.map;
 	//elite¨t¦C---------------------------------
 	this->elite = input.elite;
 	this->elite_max_life_value = input.elite_max_life_value;
@@ -60,24 +60,24 @@ void Monster::print(){
 	if(life_value  <= 0 || !show_in_room){
 		return;
 	}
-	cout << name << ' ' << card[0].agility;
-	for (int i = 0;i < card[0].skill_up_amount;i++) {
-		switch (card[0].skill_up[i].type)
+	cout << name << ' ' << use_card[0].agility;
+	for (int i = 0;i < use_card[0].skill_up_amount;i++) {
+		switch (use_card[0].skill_up[i].type)
 		{
 		case 0: {
-			cout << " move " << card[0].skill_up[i].move_step;
+			cout << " move " << use_card[0].skill_up[i].move_step;
 		}break;
 		case 1: {
-			cout << " attack " << card[0].skill_up[i].value;
-			if (card[0].skill_up[i].range != -1) {
-				cout << " range " << card[0].skill_up[i].range;
+			cout << " attack " << use_card[0].skill_up[i].value;
+			if (use_card[0].skill_up[i].range != -1) {
+				cout << " range " << use_card[0].skill_up[i].range;
 			}
 		}break;
 		case 2: {
-			cout << " heal " << card[0].skill_up[i].value;
+			cout << " heal " << use_card[0].skill_up[i].value;
 		}break;
 		case 3: {
-			cout << " shield " << card[0].skill_up[i].move_step;
+			cout << " shield " << use_card[0].skill_up[i].move_step;
 		}break;
 		default:
 			break;
@@ -86,5 +86,28 @@ void Monster::print(){
 	cout << endl;
 }
 void Monster::action() {
-	cout << "monster action"<<endl;
+	if (life_value <= 0 || !show_in_room) {
+		return;
+	}
+	for (int i = 0;i < use_card[0].skill_up_amount;i++) {
+		switch(use_card[0].skill_up[i].type) {
+		case 0: {//move
+			this->move(use_card[0].skill_up[i].move_step);
+		}break;
+		case 1: {//attack
+			this->attack();
+		}break;
+		case 2: {//heal
+			this->heal(use_card[0].skill_up[i].value);
+		}break;
+		case 3: {//shield
+			this->shield(use_card[0].skill_up[i].value);
+		}break;
+		default:break;
+		}
+	}
+}
+
+void Monster::attack() {
+	cout << "monster attack" << endl;
 }

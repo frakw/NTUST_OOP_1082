@@ -1,5 +1,13 @@
 #pragma once
-
+//class Gloom_Haven;
+//class Creature;
+//class Monster;
+//class Character;
+//class Map;
+//class TXT;
+//class Coord;
+//class Card;
+//class Skill;
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -32,7 +40,7 @@ public:
 	Gloom_Haven(bool mode);
 	Gloom_Haven(tuple<Character*,int, Monster*,int, Map*> input, bool mode);
 	~Gloom_Haven();
-	void seiting(tuple<Character*, int, Monster*, int, Map*> input, bool mode);
+	void set(tuple<Character*, int, Monster*, int, Map*> input, bool mode);
 	void start();//main process
 	void stop();
 	int character_remain();//¨¤¦â³Ñ¾l¼Æ

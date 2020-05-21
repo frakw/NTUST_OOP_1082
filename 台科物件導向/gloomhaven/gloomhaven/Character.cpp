@@ -7,7 +7,7 @@ Character::Character(string in_name, int val, int in_card_amount) :Creature(in_n
 Character& Character::operator=(const Character& input) {
 	this->name = input.name;
 	this->life_value = input.life_value;
-	max_life_value = input.max_life_value;
+	this->max_life_value = input.max_life_value;
 	this->card_amount = input.card_amount;
 	this->card_total = input.card_total;
 	this->code = input.code;
@@ -16,9 +16,9 @@ Character& Character::operator=(const Character& input) {
 	this->use_card[1] = input.use_card[1];
 	this->sleep = input.sleep;
 	//this->TmpAgility = input.TmpAgility;
-	//this->TmpShield = input.TmpShield;
+	this->TmpShield = input.TmpShield;
 	this->team_num = input.team_num;
-
+	this->map = input.map;
 
 	this->card = new Card[card_amount];
 	for (int i = 0;i < card_amount;i++) {
@@ -42,14 +42,16 @@ bool Character::choose_card() {
 	else if (card_number1 == "-1") {
 		//長休
 		sleep = true;
+		use_card[0].agility = 99;
+		use_card[1].agility = 99;
 //#ifdef prompt_input
 //		cout << "請輸入要移除卡牌:" << endl;
 //#endif
-		//cin >> card_number2;
-		//find_card(card_number2).available = false;
-		//this->heal(2);
-		//TmpAgility = 99;
-		//this->discard_to_hand();//棄牌堆所有牌移回手牌
+		//cin >> card_number2;//    行動階段再做
+		//find_card(card_number2).available = false;//    行動階段再做
+		//this->heal(2);//    行動階段再做
+		//TmpAgility = 99;//    行動階段再做
+		//this->discard_to_hand();//棄牌堆所有牌移回手牌 //    行動階段再做
 	}
 	else {
 		cin >> card_number2;
@@ -62,12 +64,71 @@ bool Character::choose_card() {
 	return true;
 }
 
-void Character::print() {
-	if (life_value > 0) {
+void Character::print(){
+	if (life_value > 0) {//角色不判斷是否出現
 		cout << code << ' ' << use_card[0].agility << ' ' << use_card[0].number << ' ' << use_card[1].number << endl;
 	}
 }
 
 void Character::action() {
-	cout << "Character action" << endl;
+	if (life_value <= 0) {
+		return;
+	}
+	if (sleep) {//長休
+#ifdef prompt_input
+		cout << "請輸入要移除卡牌:" << endl;
+#endif
+		int remove_card_number;
+		cin >> remove_card_number;
+		find_card(remove_card_number).available = false;
+		this->heal(2);
+		this->discard_to_hand();//棄牌堆所有牌移回手牌
+		return;
+	}
+	cout << code << "'s turn: card " << use_card[0].number << ' ' << use_card[1].number << endl;
+	bool card_first_index;
+	string number_up_down;
+	cin >> number_up_down;
+	card_first_index = use_card[0].number == (number_up_down[0] - '0')?false:true;
+	if (number_up_down[1] == 'u') {//上半部
+		for (int i = 0;i < card[card_first_index].skill_up_amount;i++) {//第一張
+			run_skill(card[card_first_index].skill_up[i]);
+		}
+		for (int i = 0;i < card[!card_first_index].skill_down_amount;i++) {//第二張
+			run_skill(card[!card_first_index].skill_down[i]);
+		}
+	}
+	else {//下半部
+		for (int i = 0;i < card[card_first_index].skill_down_amount;i++) {//第一張
+			run_skill(card[card_first_index].skill_down[i]);
+		}
+		for (int i = 0;i < card[!card_first_index].skill_up_amount;i++) {//第二張
+			run_skill(card[!card_first_index].skill_up[i]);
+		}
+	}
+}
+
+void Character::run_skill(Skill skill) {
+	switch (skill.type) {
+	case 0: {//move
+		string step;
+		cin >> step;
+		this->move(step);
+	}break;
+	case 1: {//attack
+		this->attack();
+	}break;
+	case 2: {//heal
+		this->heal(skill.value);
+	}break;
+	case 3: {//shield
+		this->shield(skill.value);
+	}break;
+	}
+}
+
+void Character::attack() {
+	char code;
+	cin >> code;
+	cout << "creature attack" << endl;
 }

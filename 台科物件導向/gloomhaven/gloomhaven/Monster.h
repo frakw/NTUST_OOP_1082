@@ -9,8 +9,9 @@ public:
 	Monster& operator=(const Monster& input);
 	void switch_status(int num);
 	void choose_card(bool);//bool為debug mode
-	void print();//排序後的列印
-	void action();//行動
+	void print()override;//排序後的列印
+	void action()override;//行動
+	void attack();//角色與怪物的attck各自分開
 	int damage=0;
 	int range=0;//0為近戰怪
 	bool show = true;//是(true)否(false)出現在場上
