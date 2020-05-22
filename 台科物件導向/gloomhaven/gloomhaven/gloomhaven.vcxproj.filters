@@ -39,6 +39,9 @@
     <ClCompile Include="main.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
+    <ClCompile Include="a_star_path.cpp">
+      <Filter>資源檔</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -63,6 +66,9 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="Coord.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="a_star_path.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>

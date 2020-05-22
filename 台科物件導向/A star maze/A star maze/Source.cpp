@@ -616,7 +616,7 @@ void A_star_path(Maze maze, pair< COORD, COORD > coord) {
 		}
 	} while ((current->self.X != coord.second.X) || (current->self.Y != coord.second.Y));
 	current = current->father;
-	while (current->father){
+	while (current->father!=nullptr){
 		gotoxy(current->self.X * road_x_width, current->self.Y);
 		SetColor();
 		cout << the_road;

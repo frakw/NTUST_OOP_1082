@@ -1,4 +1,5 @@
 #pragma once
+class Creature;
 class Character;//不可include 標頭檔，會出現遺漏類型規範-假設為int
 class Monster;//不可include 標頭檔，會出現遺漏類型規範-假設為int
 using namespace std;
@@ -23,8 +24,12 @@ public:
 	Creature* creature_in(Coord);
 	char& coord_in_body(Coord);
 
+
+	int a_star_path_step(Creature*, Creature*);//A星演算法找尋最短步數
+
+
 	//in_range用完記得重設recursive_dedicated全部為false
-	bool in_range(Creature*,Coord,Coord,int);//遞迴計算2座標是否在range之內，int為range
+	//bool in_range(Creature*,Coord,Coord,int);//遞迴計算2座標是否在range之內，int為range
 	void reset_in_range();//recursive_dedicated重設全部為false
 	bool in_vision(Coord, Coord);//線性差值法
 

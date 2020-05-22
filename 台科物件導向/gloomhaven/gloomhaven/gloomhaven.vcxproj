@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="a_star_path.cpp" />
     <ClCompile Include="basic.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Gloom_Haven.cpp" />
@@ -148,6 +149,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="a_star_path.h" />
     <ClInclude Include="basic.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Coord.h" />

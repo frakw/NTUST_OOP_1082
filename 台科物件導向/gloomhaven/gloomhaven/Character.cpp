@@ -130,7 +130,7 @@ void Character::run_skill(Skill skill) {
 
 void Character::attack(Skill skill) {
 	char code;
-	int index;
+	int index =-1;
 	cin >> code;
 	if (code == '0') {
 		return;
@@ -141,13 +141,19 @@ void Character::attack(Skill skill) {
 			break;
 		}
 	}
-	if (map->in_range(this,position, map->monster[index].position,skill.range)//檢查射程
+	if (index == -1) {//bad index
+		cout << "error target!!!" << endl;
+		this->attack(skill);
+		return;
+	}
+	if (map->a_star_path_step(this,map->monster + index) <= skill.value//檢查射程
 		&& map->in_vision(position, map->monster[index].position)){//檢查視野
 		map->monster[index].be_attack(skill.value);
 	}
 	else {
 		cout << "error target!!!" << endl;
 		this->attack(skill);
+		return;
 	}
 	map->reset_in_range();
 }

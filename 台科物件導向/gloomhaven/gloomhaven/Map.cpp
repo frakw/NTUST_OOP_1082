@@ -1,5 +1,5 @@
 #include "Gloom_Haven.h"
-
+#include "a_star_path.h"
 Map::Map() {}
 Map::Map(int in_row, int in_col) :row(in_row), col(in_col) {
 	body = new char* [row] {};
@@ -320,30 +320,32 @@ char& Map::coord_in_body(Coord pos) {
 }
 
 
-bool Map::in_range(Creature* main,Coord a, Coord b, int count) {//計算2座標間的步數
-	if (a.x >= col || a.x < 0 || a.y >= row || a.y < 0 || count<0) {
-		return false;
-	}
-	if (body[a.y][a.x] == '0' || creature_in(a)->team_num!=main->team_num) {
-		return false;
-	}
-	if (a.x == b.x && a.y == b.y) {
-		return true;
-	}
-	if (!recursive_dedicated[a.y][a.x]) {
-		recursive_dedicated[a.y][a.x] = true;
-	}
-	else {
-		return false;
-	}
-	Coord direction[4] = { {a.x,a.y-1},{a.x,a.y+1},{a.x-1,a.y},{a.x+1,a.y} };
-	for (int i = 0;i < 4;i++) {
-		if (in_range(main,direction[i], b, count - 1)) {
-			return true;
-		}
-	}
-	return false;
-}
+//bool Map::in_range(Creature* main,Coord a, Coord b, int count) {//計算2座標間的步數
+//	A_star_path_step(this,make_pair(a,b));
+//	return false;
+//	if (a.x >= col || a.x < 0 || a.y >= row || a.y < 0 || count<0) {
+//		return false;
+//	}
+//	if (body[a.y][a.x] == '0' || creature_in(a)->team_num!=main->team_num) {
+//		return false;
+//	}
+//	if (a.x == b.x && a.y == b.y) {
+//		return true;
+//	}
+//	if (!recursive_dedicated[a.y][a.x]) {
+//		recursive_dedicated[a.y][a.x] = true;
+//	}
+//	else {
+//		return false;
+//	}
+//	Coord direction[4] = { {a.x,a.y-1},{a.x,a.y+1},{a.x-1,a.y},{a.x+1,a.y} };
+//	for (int i = 0;i < 4;i++) {
+//		if (in_range(main,direction[i], b, count - 1)) {
+//			return true;
+//		}
+//	}
+//	return false;
+//}
 
 void Map::copy_to(bool** a, bool** b) {
 	for (int i = 0;i < row;i++) {
