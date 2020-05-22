@@ -85,14 +85,14 @@ void Monster::print(){
 	}
 	cout << endl;
 }
-void Monster::action() {
+void Monster::action(bool debug_mode) {
 	if (life_value <= 0 || !show_in_room) {
 		return;
 	}
 	for (int i = 0;i < use_card[0].skill_up_amount;i++) {
 		switch(use_card[0].skill_up[i].type) {
 		case 0: {//move
-			this->move(use_card[0].skill_up[i].move_step);
+			this->move(use_card[0].skill_up[i].move_step,0);//0可任意更改(不影響)
 		}break;
 		case 1: {//attack
 			this->attack();
@@ -106,8 +106,18 @@ void Monster::action() {
 		default:break;
 		}
 	}
+	if (debug_mode) {
+		_getch();
+	}
+	this->round_end();
 }
 
 void Monster::attack() {
-	cout << "monster attack" << endl;
+	//cout << "monster attack" << endl;
+	int max = -1;
+
+}
+
+void Monster::round_end() {//該回合結束後的重整(重設數值)
+	//重洗標記
 }

@@ -98,7 +98,7 @@ void Gloom_Haven::start() {
 		}
 		cout << "action time" << endl;
 		for (int i = 0;i < character_amount + monster_amount;i++) {
-			all[i]->action();
+			all[i]->action(DEBUG_MODE);
 		}
 		round_count++;
 	}

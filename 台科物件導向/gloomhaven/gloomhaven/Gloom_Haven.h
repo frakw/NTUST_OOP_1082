@@ -14,11 +14,13 @@
 #include <tuple>
 #include <cstdio>
 #include <ctime>
+#include <cmath>
 #include <cstdlib>
 #include <sstream>
 #include <utility>
 #include <memory.h>
 #include <algorithm>
+#include <conio.h>
 #include "Coord.h"//先後順序要對
 #include "basic.h"//先後順序要對
 #include "Character.h"//先後順序要對
@@ -34,6 +36,7 @@ using namespace std;
 //筆記: 怪物每輪出一張牌，角色每輪出二張牌，選第一張當敏捷值
 //攻擊可穿過障礙物
 //待解決:敏捷值排序
+//待做: discard改hand
 class Gloom_Haven {
 public:
 	Gloom_Haven();

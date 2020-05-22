@@ -70,7 +70,7 @@ void Character::print(){
 	}
 }
 
-void Character::action() {
+void Character::action(bool) {
 	if (life_value <= 0) {
 		return;
 	}
@@ -106,6 +106,7 @@ void Character::action() {
 			run_skill(card[!card_first_index].skill_up[i]);
 		}
 	}
+	this->round_end();
 }
 
 void Character::run_skill(Skill skill) {
@@ -113,10 +114,10 @@ void Character::run_skill(Skill skill) {
 	case 0: {//move
 		string step;
 		cin >> step;
-		this->move(step);
+		this->move(step, skill.value);
 	}break;
 	case 1: {//attack
-		this->attack();
+		this->attack(skill);
 	}break;
 	case 2: {//heal
 		this->heal(skill.value);
@@ -127,8 +128,33 @@ void Character::run_skill(Skill skill) {
 	}
 }
 
-void Character::attack() {
+void Character::attack(Skill skill) {
 	char code;
+	int index;
 	cin >> code;
-	cout << "creature attack" << endl;
+	if (code == '0') {
+		return;
+	}
+	for (int i = 0;i < map->monster_amount;i++) {
+		if (map->monster[i].code == code) {
+			index = i;
+			break;
+		}
+	}
+	if (map->in_range(this,position, map->monster[index].position,skill.range)//檢查射程
+		&& map->in_vision(position, map->monster[index].position)){//檢查視野
+		map->monster[index].be_attack(skill.value);
+	}
+	else {
+		cout << "error target!!!" << endl;
+		this->attack(skill);
+	}
+	map->reset_in_range();
+}
+
+void Character::round_end() {//該回合結束後的重整(重設數值)
+	sleep = false;
+	TmpShield = 0;
+	find_card(use_card[0].number).discard = true;
+	find_card(use_card[1].number).discard = true;
 }

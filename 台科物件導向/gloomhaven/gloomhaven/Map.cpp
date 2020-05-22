@@ -4,9 +4,11 @@ Map::Map() {}
 Map::Map(int in_row, int in_col) :row(in_row), col(in_col) {
 	body = new char* [row] {};
 	show = new bool* [row] {};
+	recursive_dedicated = new bool* [row] {};
 	for (int i = 0;i < row;i++) {
 		body[i] = new char[col] {};
 		show[i] = new bool[col] {};
+		recursive_dedicated[i] = new bool[col] {};
 	}
 }
 Map::~Map() {
@@ -24,6 +26,12 @@ Map::~Map() {
 	}
 	if (door_pos != nullptr) {
 		delete[] door_pos;
+	}
+	if (recursive_dedicated != nullptr) {
+		for (int i = 0;i < row;i++) {
+			delete[] recursive_dedicated[i];
+		}
+		delete[] recursive_dedicated;
 	}
 }
 void Map::set(string input) {
@@ -309,4 +317,77 @@ Creature* Map::creature_in(Coord pos) {
 
 char& Map::coord_in_body(Coord pos) {
 	return body[pos.y][pos.x];
+}
+
+
+bool Map::in_range(Creature* main,Coord a, Coord b, int count) {//計算2座標間的步數
+	if (a.x >= col || a.x < 0 || a.y >= row || a.y < 0 || count<0) {
+		return false;
+	}
+	if (body[a.y][a.x] == '0' || creature_in(a)->team_num!=main->team_num) {
+		return false;
+	}
+	if (a.x == b.x && a.y == b.y) {
+		return true;
+	}
+	if (!recursive_dedicated[a.y][a.x]) {
+		recursive_dedicated[a.y][a.x] = true;
+	}
+	else {
+		return false;
+	}
+	Coord direction[4] = { {a.x,a.y-1},{a.x,a.y+1},{a.x-1,a.y},{a.x+1,a.y} };
+	for (int i = 0;i < 4;i++) {
+		if (in_range(main,direction[i], b, count - 1)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+void Map::copy_to(bool** a, bool** b) {
+	for (int i = 0;i < row;i++) {
+		for (int j = 0;j < col;j++) {
+			a[i][j] = b[i][j];
+		}
+	}
+}
+
+bool Map::in_vision(Coord a, Coord b) {//線性差值法
+	Coord check;
+	if (b.x < a.x) {
+		swap(a, b);//小的x在a，大的x在b
+	}
+	else if (b.x == a.x) {//垂直斜率無限大，用y做
+		if (b.y < a.y) {
+			swap(a, b);
+		}
+		check.x = a.x;
+		for (int i = a.y;i < b.y;i++) {
+			check.y = i;
+			if (coord_in_body(check) == '0') {
+				return false;
+			}
+		}
+		return true;
+	}
+	//用x做
+	double slope = ((double)b.y- (double)a.y) / ((double)b.x- (double)a.x);//m斜率
+	double bb = (double)a.y - slope * (double)a.x;//y=mx+b
+	for (int i = a.x;i < b.x;i++) {
+		check.x = i;
+		check.y = ceil((double)i* slope + bb);
+		if (coord_in_body(check) == '0') {
+			return false;
+		}
+	}
+	return true;
+}
+
+void Map::reset_in_range() {//in_range重設全部為false
+	for (int i = 0;i < row;i++) {
+		for (int j = 0;j < row;j++) {
+			recursive_dedicated[i][j] = false;
+		}
+	}
 }

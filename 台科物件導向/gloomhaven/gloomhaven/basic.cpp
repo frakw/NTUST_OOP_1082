@@ -31,6 +31,9 @@ void Skill::set(string name, int val) {
 	else {
 		this->type = -1;//skill type error!
 	}
+	if (val < 1) {//range 為 0 時改設為1
+		val = 1;
+	}
 	this->value = val;
 }
 
@@ -191,12 +194,12 @@ void Creature::check_card() {//印出卡牌編號(手牌與棄牌)，編號由小到大
 
 void Creature::shield(int add) {
 	if (life_value > 0) {
-		cout << code << " shield " << add << "this turn"<<endl;
+		cout << code << " shield " << add << " this turn"<<endl;
 		TmpShield += add;
 	}
 }
 
-bool Creature::be_attack(int attack_val) {
+void Creature::be_attack(int attack_val) {
 	cout << code << " shield " << TmpShield << ", "<<code << " remain ";
 	if (TmpShield < attack_val) {
 		life_value -= (attack_val - TmpShield);
@@ -204,13 +207,18 @@ bool Creature::be_attack(int attack_val) {
 	cout << life_value << " hp" <<endl;
 	if (life_value <= 0) {
 		cout << code << " is killed!!" << endl;
-		return true;
+		this->map->show_room();
 	}
-	return false;
+	position = { -1,-1 };
 }
 
-void Creature::move(string step) {
-	cout << "someone move:" << step << endl;
+void Creature::move(string step,int step_count) {
+	if (step.length() > step_count && team_num == 0) {//角色不可超過最大步數，重新輸入
+		cout << "error move!!" << endl;
+		cin >> step;
+		this->move(step, step_count);
+		return;
+	}
 	Coord latest_allow = position;
 	Coord now = position;
 	for (int i = 0;i < step.length();i++) {
@@ -233,6 +241,20 @@ void Creature::move(string step) {
 		else if ((now_life = map->creature_in(direction[dir_index])) != nullptr) {
 			if (now_life->team_num == team_num) {
 				now = direction[dir_index];
+			}
+			else if (now_life->team_num != team_num && team_num == 0) {//角色不可穿過障礙物或敵人
+				cout << "error move!!" << endl;
+				cin >> step;
+				this->move(step,step_count);
+				return;
+			}
+		}
+		else if (now_char == '2') {
+			if (team_num == 0) {//角色不可穿過障礙物或敵人，怪物會被擋住
+				cout << "error move!!" << endl;
+				cin >> step;
+				this->move(step, step_count);
+				return;
 			}
 		}
 

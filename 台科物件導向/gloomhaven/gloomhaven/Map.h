@@ -22,9 +22,17 @@ public:
 	int now_door_amount();//目前門的數量
 	Creature* creature_in(Coord);
 	char& coord_in_body(Coord);
+
+	//in_range用完記得重設recursive_dedicated全部為false
+	bool in_range(Creature*,Coord,Coord,int);//遞迴計算2座標是否在range之內，int為range
+	void reset_in_range();//recursive_dedicated重設全部為false
+	bool in_vision(Coord, Coord);//線性差值法
+
 	int row=0, col=0;
 	char** body = nullptr;
 	bool** show = nullptr;
+	bool** recursive_dedicated = nullptr;//遞迴專用，目前使用到的func:in_range
+	void copy_to(bool**,bool**);//複製上方二維陣列用
 	Coord star_pos;//星星位置
 	Coord start_pos[4] = {};//可選位置，設為-1,-1代表已選擇
 	Coord fill_start;//遞迴起始位置，預設start_pos[0]
