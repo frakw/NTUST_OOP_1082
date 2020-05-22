@@ -10,6 +10,7 @@ Skill::Skill(string name, int val) : value(val) {
 Skill::Skill(int in_type, int val) : value(val) {
 	if (in_type < 0 || in_type > 3) {
 		this->type = -1;//skill type error!
+		cout << "skill type error!" << endl;
 	}
 	else {
 		this->type = in_type;
