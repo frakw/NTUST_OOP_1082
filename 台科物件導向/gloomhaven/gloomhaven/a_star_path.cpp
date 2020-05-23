@@ -37,21 +37,13 @@ int exist_in(vector<Grid*>* data_ptr, Coord check) {
 }
 
 int Map::a_star_path_step(Creature* self, Creature* dest) {
-	//檢查是否在四周
-	Coord around[4] = { { self->position.x,self->position.y - 1 },{ self->position.x,self->position.y + 1 },{self->position.x - 1,self->position.y },{self->position.x + 1,self->position.y } };
-	for (int i = 0;i < 4;i++) {
-		if (dest->position.x == around[i].x && dest->position.y == around[i].y) {
-			cout << "ha" << endl;
-			return 1;
-		}
-	}
 	vector<Grid*> close_list;//不可以用vector<Grid>，因為指標Grid*不可以指向vector中的元素
 	vector<Grid*> open_list;//不可以用vector<Grid>，因為指標Grid*不可以指向vector中的元素
 	Grid* current = new Grid(self->position, nullptr, dest->position);
 	open_list.push_back(current);
 	do {
 		if (open_list.empty()) {
-			return -1;//找不到路徑
+			return -1;//找不到路徑，無法到達回傳-1
 		}
 		int min = open_list[0]->F;
 		int pos = 0;
@@ -70,7 +62,7 @@ int Map::a_star_path_step(Creature* self, Creature* dest) {
 		for (int i = 0;i < 4;i++) {
 			char now_char = this->coord_in_body(direction[i]);
 			Creature* now_life = this->creature_in(direction[i]);
-			if (now_char != '0') {//排除牆壁
+			if (now_char == '0') {//排除牆壁，!=改==修復bug
 				continue;
 			}
 			if (now_life != nullptr && now_life != dest) {//排除敵人
@@ -90,7 +82,7 @@ int Map::a_star_path_step(Creature* self, Creature* dest) {
 			}
 		}
 	} while ((current->self.x != dest->position.x) || (current->self.y != dest->position.y));
-	int count = 0;
+	int count = 1;
 	current = current->father;
 	while (current->father!=nullptr) {
 		current = current->father;

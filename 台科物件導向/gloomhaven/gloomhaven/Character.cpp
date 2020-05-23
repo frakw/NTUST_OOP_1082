@@ -146,8 +146,12 @@ void Character::attack(Skill skill) {
 		this->attack(skill);
 		return;
 	}
-	if (map->a_star_path_step(this,map->monster + index) <= skill.value//檢查射程
-		&& map->in_vision(position, map->monster[index].position)){//檢查視野
+	int tmprange = map->a_star_path_step(this, map->monster + index);
+	if (tmprange <= skill.value/*檢查射程*/ &&
+		tmprange!=-1 /*可以到達(無法到達回傳-1)*/ &&
+		map->monster[index].show /*該怪物有出現*/ &&
+		map->monster[index].life_value>0/*該怪物存活*/ &&
+		map->in_vision(position, map->monster[index].position)){//視野之內(線性差值法)
 		map->monster[index].be_attack(skill.value);
 	}
 	else {
