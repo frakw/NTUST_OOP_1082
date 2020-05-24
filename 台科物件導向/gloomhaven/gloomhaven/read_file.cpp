@@ -76,9 +76,10 @@ int skill_input(string input,Skill** skill) {//for character only
 	*skill = new Skill[count];
 	int i = 0;
 	while (!ss.eof()) {
-		ss >> type >> val;
+		ss >> type >> val;	
 		if (type != "range") {
 			(*skill)[i].set(type,val);
+			(*skill)[i].range = 1;//重要，角色range都設為1
 			i++;
 		}
 		else {

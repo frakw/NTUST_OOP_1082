@@ -66,7 +66,14 @@ bool Character::choose_card() {
 
 void Character::print(){
 	if (life_value > 0) {//角色不判斷是否出現
-		cout << code << ' ' << use_card[0].agility << ' ' << use_card[0].number << ' ' << use_card[1].number << endl;
+		cout << code << ' ' << use_card[0].agility << ' ';
+		if (!sleep) {
+			cout << use_card[0].number << ' ' << use_card[1].number;
+		}
+		else {
+			cout << "-1";
+		} 
+		cout << endl;
 	}
 }
 
@@ -147,19 +154,19 @@ void Character::attack(Skill skill) {
 		return;
 	}
 	int tmprange = map->a_star_path_step(this, map->monster + index);
-	if (tmprange <= skill.value/*檢查射程*/ &&
-		tmprange!=-1 /*可以到達(無法到達回傳-1)*/ &&
+	if (tmprange <= skill.range/*檢查射程*/ &&
+		tmprange!=-87 /*可以到達(無法到達回傳-87)*/ &&
 		map->monster[index].show /*該怪物有出現*/ &&
 		map->monster[index].life_value>0/*該怪物存活*/ &&
 		map->in_vision(position, map->monster[index].position)){//視野之內(線性差值法)
-		map->monster[index].be_attack(skill.value);
+
+		map->monster[index].be_attack(code,skill.value);
 	}
 	else {
 		cout << "error target!!!" << endl;
 		this->attack(skill);
 		return;
 	}
-	map->reset_in_range();
 }
 
 void Character::round_end() {//該回合結束後的重整(重設數值)

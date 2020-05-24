@@ -11,7 +11,7 @@ public:
 	void set(string name, int val);
 	int type=-1;
 	int value=-1;
-	int range = 1;//attack時才用到，skill預設1 !!!
+	int range = -1;//attack時才用到，range 0 1 -1效果皆相同，但-1是指定為近戰怪，印print時會不同
 	string move_step;//只在怪物卡技能為move時使用，存wasd
 };
 
@@ -48,7 +48,7 @@ public:
 	void move(string,int);//int為最大步數，error move後檢查，只適用於角色(怪物move的int可隨便輸入)
 	void heal(int);//增加血量(不超過最大)，不要在action以外的地方呼叫
 	void shield(int);//增加護甲值，不要在action以外的地方呼叫，int為攻擊值
-	void be_attack(int);//被攻擊時呼叫，輸出護甲與剩餘血量，(已取消)bool為是否更新地圖(有生物死亡)
+	void be_attack(char,int);//被攻擊時呼叫，char為攻擊者代號，輸出護甲與剩餘血量
 	void discard_to_hand();//棄牌堆所有牌移回手牌，但不包含已被移除的牌(availible == false)
 	void check_card();//印出卡牌編號(手牌與棄牌)，編號由小到大
 	int card_available_amount();//持有卡牌數(棄牌堆+手牌)

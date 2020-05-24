@@ -4,11 +4,9 @@ Map::Map() {}
 Map::Map(int in_row, int in_col) :row(in_row), col(in_col) {
 	body = new char* [row] {};
 	show = new bool* [row] {};
-	recursive_dedicated = new bool* [row] {};
 	for (int i = 0;i < row;i++) {
 		body[i] = new char[col] {};
 		show[i] = new bool[col] {};
-		recursive_dedicated[i] = new bool[col] {};
 	}
 }
 Map::~Map() {
@@ -26,12 +24,6 @@ Map::~Map() {
 	}
 	if (door_pos != nullptr) {
 		delete[] door_pos;
-	}
-	if (recursive_dedicated != nullptr) {
-		for (int i = 0;i < row;i++) {
-			delete[] recursive_dedicated[i];
-		}
-		delete[] recursive_dedicated;
 	}
 }
 void Map::set(string input) {
@@ -384,12 +376,4 @@ bool Map::in_vision(Coord a, Coord b) {//線性差值法
 		}
 	}
 	return true;
-}
-
-void Map::reset_in_range() {//in_range重設全部為false
-	for (int i = 0;i < row;i++) {
-		for (int j = 0;j < row;j++) {
-			recursive_dedicated[i][j] = false;
-		}
-	}
 }

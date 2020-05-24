@@ -95,7 +95,7 @@ void Monster::action(bool debug_mode) {
 			this->move(use_card[0].skill_up[i].move_step,0);//0可任意更改(不影響)
 		}break;
 		case 1: {//attack
-			this->attack();
+			this->attack(use_card[0].skill_up[i]);
 		}break;
 		case 2: {//heal
 			this->heal(use_card[0].skill_up[i].value);
@@ -106,18 +106,61 @@ void Monster::action(bool debug_mode) {
 		default:break;
 		}
 	}
-	if (debug_mode) {
+	if (!debug_mode) {
 		_getch();
 	}
-	this->round_end();
+	this->round_end(debug_mode);
 }
 
-void Monster::attack() {
+void Monster::attack(Skill skill) {
 	//cout << "monster attack" << endl;
-	int max = -1;
-
+	int min = map->row * map->col;//最大可能的步數
+	int index=-1;//沒找到就是-1(可能角色死光了)
+	for (int i = 0;i < map->character_amount;i++) {
+		if (map->character[i].life_value > 0) {
+			int tmpstep = map->a_star_path_step(this, map->character + i);
+			if (tmpstep < min) {//找出距離最小的角色
+				index = i;
+				min = tmpstep;
+			}
+			else if (tmpstep == min) {//距離一樣比敏捷值
+				if (map->character[i].use_card[0].agility < map->character[index].use_card[0].agility) {
+					index = i;
+				}
+				else if (map->character[i].use_card[0].agility == map->character[index].use_card[0].agility) {
+					if (map->character[i].use_card[1].agility < map->character[index].use_card[1].agility) {
+						index = i;
+					}
+					else if (map->character[i].use_card[1].agility == map->character[index].use_card[1].agility) {
+						if (map->character[i].code < map->character[index].code) {
+							index = i;
+						}
+					}
+				}
+			}
+		}
+	}
+	if (min > range + skill.range || index==-1) {//自己的range加上卡牌的range
+		cout << "no one lock" << endl;
+		return;
+	}
+	if (map->in_vision(position, map->character[index].position)) {//檢查視野
+		cout << code << " lock " << map->character[index].code << " in distance " << min << endl;
+		map->character[index].be_attack(code,skill.value + damage);//加上自己的攻擊力
+	}
 }
 
-void Monster::round_end() {//該回合結束後的重整(重設數值)
+void Monster::round_end(bool debug_mode) {//該回合結束後的重整(重設數值)
 	//重洗標記
+	if (use_card[0].rewash_mark) {
+		if (debug_mode) {
+			debug_mode_card_number = 0;
+		}
+		this->discard_to_hand();
+	}
+	TmpShield = 0;
+	if (life_value <= 0) {
+		show = false;
+		position = { -1,-1 };
+	}
 }

@@ -11,8 +11,8 @@ public:
 	void choose_card(bool);//bool為debug mode
 	void print()override;//排序後的列印
 	void action(bool)override;//行動
-	void round_end();//該回合結束後的重整(重設數值)
-	void attack();//角色與怪物的attck各自分開
+	void round_end(bool);//該回合結束後的重整(重設數值)
+	void attack(Skill);//角色與怪物的attck各自分開
 	int damage=0;
 	int range=0;//0為近戰怪
 	bool show = true;//是(true)否(false)出現在場上

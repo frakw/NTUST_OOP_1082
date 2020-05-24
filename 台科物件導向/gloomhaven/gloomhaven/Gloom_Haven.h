@@ -36,7 +36,7 @@ using namespace std;
 //筆記: 怪物每輪出一張牌，角色每輪出二張牌，選第一張當敏捷值
 //攻擊可穿過障礙物
 //待解決:敏捷值排序
-//待做: discard改hand
+//待做: discard改hand,採用macro coord_in提升可讀性, regex , 
 class Gloom_Haven {
 public:
 	Gloom_Haven();

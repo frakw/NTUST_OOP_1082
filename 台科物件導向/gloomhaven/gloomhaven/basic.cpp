@@ -32,9 +32,6 @@ void Skill::set(string name, int val) {
 	else {
 		this->type = -1;//skill type error!
 	}
-	if (val < 1) {//range 為 0 時改設為1
-		val = 1;
-	}
 	this->value = val;
 }
 
@@ -200,7 +197,8 @@ void Creature::shield(int add) {
 	}
 }
 
-void Creature::be_attack(int attack_val) {
+void Creature::be_attack(char attacker_code,int attack_val) {
+	cout << attacker_code << " attack " << code << ' ' << attack_val << " damage, ";
 	cout << code << " shield " << TmpShield << ", "<<code << " remain ";
 	if (TmpShield < attack_val) {
 		life_value -= (attack_val - TmpShield);
@@ -231,15 +229,20 @@ void Creature::move(string step,int step_count) {
 		case'a':dir_index = 1;break;
 		case's':dir_index = 2;break;
 		case'd':dir_index = 3;break;
-		default:break;
+		default: {
+			cout << "error move!!" << endl;
+			cin >> step;
+			this->move(step, step_count);
+			return;
+		}break;
 		}
 		char now_char = map->coord_in_body(direction[dir_index]);
-		Creature* now_life = nullptr;
+		Creature* now_life = map->creature_in(direction[dir_index]);
 		if (now_char == '1' || (team_num != 1 && now_char == '3')) {
 			latest_allow = direction[dir_index];
 			now = direction[dir_index];
 		}
-		else if ((now_life = map->creature_in(direction[dir_index])) != nullptr) {
+		else if (now_life != nullptr) {
 			if (now_life->team_num == team_num) {
 				now = direction[dir_index];
 			}
@@ -250,8 +253,8 @@ void Creature::move(string step,int step_count) {
 				return;
 			}
 		}
-		else if (now_char == '2') {
-			if (team_num == 0) {//角色不可穿過障礙物或敵人，怪物會被擋住
+		else {//剩餘的是障礙物與牆壁
+			if (team_num == 0) {//角色不可穿過障礙物牆壁，怪物則會被擋住
 				cout << "error move!!" << endl;
 				cin >> step;
 				this->move(step, step_count);

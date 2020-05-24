@@ -43,7 +43,7 @@ int Map::a_star_path_step(Creature* self, Creature* dest) {
 	open_list.push_back(current);
 	do {
 		if (open_list.empty()) {
-			return -1;//找不到路徑，無法到達回傳-1
+			return -87;//找不到路徑，無法到達回傳-1
 		}
 		int min = open_list[0]->F;
 		int pos = 0;
