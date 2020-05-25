@@ -157,7 +157,7 @@ b-hp: 4, shield: 0
 round 4:
 hand: discard: 0, 1, 2, 3, 4, 5
 hand: 3, 4, 5; discard: 6, 7
-archer 16 move sa attack -1 range 0 
+archer 16 move sa attack -1 range 0
 B 28 3 5
 A 99 -1
          

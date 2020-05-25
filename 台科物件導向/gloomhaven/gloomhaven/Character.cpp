@@ -91,7 +91,6 @@ void Character::action(bool) {
 		cin >> remove_card_number;
 		find_card(remove_card_number).available = false;
 		this->heal(2);
-		this->discard_to_hand();//棄牌堆所有牌移回手牌
 		cout << "remove card: " << remove_card_number << endl;
 		return;
 	}
@@ -178,8 +177,14 @@ void Character::attack(Skill skill) {
 }
 
 void Character::round_end(bool debug_mode) {//該回合結束後的重整(重設數值)
+	if (!sleep) {//沒長休就將出的2張牌移至棄牌堆
+		find_card(use_card[0].number).discard = true;
+		find_card(use_card[1].number).discard = true;
+	}
+	else {//長休
+		this->discard_to_hand();//棄牌堆所有牌移回手牌(不包含已移除的牌)
+	}
 	sleep = false;
 	TmpShield = 0;
-	find_card(use_card[0].number).discard = true;
-	find_card(use_card[1].number).discard = true;
+
 }

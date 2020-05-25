@@ -230,6 +230,7 @@ void Creature::move(string step,int step_count) {
 		case'a':dir_index = 1;break;
 		case's':dir_index = 2;break;
 		case'd':dir_index = 3;break;
+		case'e':continue;
 		default: {
 			cout << "error move!!" << endl;
 			cin >> step;

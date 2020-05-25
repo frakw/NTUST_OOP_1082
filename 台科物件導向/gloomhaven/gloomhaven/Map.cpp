@@ -47,7 +47,8 @@ void Map::set(string input) {
 	}
 }
 
-void Map::check_room() {
+bool Map::check_room() {
+	bool open = false;
 	for (int i = 0;i < row;i++) {//重設所有區域
 		for (int j = 0;j < col;j++) {
 			show[i][j] = false;
@@ -65,9 +66,11 @@ void Map::check_room() {
 		if (!door_pos[i].is_null()) {
 			if (coord_in_body(door_pos[i]) != '3'/* && show[][]*/) {
 				door_pos[i] = { -1,-1 };
+				open = true;//有開門
 			}
 		}
 	}
+	return open;
 }
 
 void Map::fill_room(Coord pos) {

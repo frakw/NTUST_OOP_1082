@@ -43,10 +43,11 @@ void Gloom_Haven::start() {
 		cin >> step;
 		this->map->choose_pos(i,step);
 	}
+	this->map->show_room();//第一次輸出地圖(非選擇狀態)
 	int round_count = 1;
 	char code;
 	while ((character_remain() != 0 && monster_remain() != 0) || this->map->door_amount()!=0) {
-		this->map->show_room();
+		//this->map->show_room();移到下面
 		int card_number1, card_number2;
 		cout << "round " << round_count <<':'<< endl;
 		for (int i = 0;i < character_amount;i++) {
@@ -102,7 +103,9 @@ void Gloom_Haven::start() {
 		for (int i = 0;i < character_amount + monster_amount;i++) {
 			all[i]->round_end(DEBUG_MODE);//該回合結束後的重整(重設數值)
 		}
-		this->map->check_room();//重新檢查房間視野，並將開啟的門設為地板
+		if (this->map->check_room()) {//重新檢查房間視野，並將開啟的門設為地板，有開門就重新輸出地圖
+			this->map->show_room();//有開門才需要輸出地圖
+		}
 		round_count++;
 	}
 	if (!character_remain()) {
@@ -151,7 +154,7 @@ int Gloom_Haven::character_remain() {//角色剩餘數
 int Gloom_Haven::monster_remain() {//怪物剩餘數
 	int count = 0;
 	for (int i = 0;i < monster_amount;i++) {
-		if (monster[i].life_value > 0) {
+		if (monster[i].life_value > 0 && monster[i].show) {
 			count++;
 		}
 	}

@@ -13,7 +13,7 @@ public:
 	void choose_pos(int,string);//int為第幾隻腳色，string 為wasd
 	void set_choosing_environment();//變更選擇位置的char與怪物位置的char
 	void show_choosing_room();//選擇時專用的顯示地圖
-	void check_room();//檢查可視範圍，可視座標show[y][x]設為true
+	bool check_room();//檢查可視範圍，可視座標show[y][x]設為true，有開門則回傳true
 	void fill_room(Coord pos);//遞迴函式，由check_room呼叫
 	void show_room();//呼叫前記得先check找出可視範圍
 	void update_all_creature();//更新生物位置，或死亡刪除

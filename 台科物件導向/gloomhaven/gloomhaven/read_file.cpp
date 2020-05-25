@@ -146,11 +146,7 @@ void TXT::read_monster(string filename) {
 					x++;
 				}
 				else {
-					int tmp_val = atoi(value.c_str());
-					if (tmp_val < 1) {//­Yrange¬°0´N¬Orange1
-						tmp_val = 1;
-					}
-					monster[i].card[j].skill_up[x - 1].range = tmp_val;
+					monster[i].card[j].skill_up[x - 1].range = atoi(value.c_str());
 				}
 			}
 		}
