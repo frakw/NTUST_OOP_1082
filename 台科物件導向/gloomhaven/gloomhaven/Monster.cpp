@@ -47,6 +47,9 @@ void Monster::switch_status(int num) {
 }
 
 void Monster::choose_card(bool debug_mode) {
+	if (life_value <= 0 || !show_in_room) {
+		return;
+	}
 	if (debug_mode) {
 		use_card[0] = card[debug_mode_card_number];
 		debug_mode_card_number++;
@@ -107,9 +110,9 @@ void Monster::action(bool debug_mode) {
 		}
 	}
 	if (!debug_mode) {
+		cout << "請確認怪物的行動(getch):" << endl;
 		_getch();
 	}
-	this->round_end(debug_mode);
 }
 
 void Monster::attack(Skill skill) {
@@ -117,28 +120,30 @@ void Monster::attack(Skill skill) {
 	int min = map->row * map->col;//最大可能的步數
 	int index=-1;//沒找到就是-1(可能角色死光了)
 	for (int i = 0;i < map->character_amount;i++) {
-		if (map->character[i].life_value > 0) {
-			int tmpstep = map->a_star_path_step(this, map->character + i);
-			if (tmpstep < min) {//找出距離最小的角色
+		int tmpstep = map->a_star_path_step(this, map->character + i);
+		if (tmpstep == -87) {//無法攻擊到
+			continue;
+		}
+		if (tmpstep < min) {//找出距離最小的角色
+			index = i;
+			min = tmpstep;
+		}
+		else if (tmpstep == min) {//距離一樣比敏捷值
+			if (map->character[i].use_card[0].agility < map->character[index].use_card[0].agility) {
 				index = i;
-				min = tmpstep;
 			}
-			else if (tmpstep == min) {//距離一樣比敏捷值
-				if (map->character[i].use_card[0].agility < map->character[index].use_card[0].agility) {
+			else if (map->character[i].use_card[0].agility == map->character[index].use_card[0].agility) {
+				if (map->character[i].use_card[1].agility < map->character[index].use_card[1].agility) {
 					index = i;
 				}
-				else if (map->character[i].use_card[0].agility == map->character[index].use_card[0].agility) {
-					if (map->character[i].use_card[1].agility < map->character[index].use_card[1].agility) {
+				else if (map->character[i].use_card[1].agility == map->character[index].use_card[1].agility) {
+					if (map->character[i].code < map->character[index].code) {
 						index = i;
-					}
-					else if (map->character[i].use_card[1].agility == map->character[index].use_card[1].agility) {
-						if (map->character[i].code < map->character[index].code) {
-							index = i;
-						}
 					}
 				}
 			}
 		}
+
 	}
 	if (min > range + skill.range || index==-1) {//自己的range加上卡牌的range
 		cout << "no one lock" << endl;
@@ -152,15 +157,18 @@ void Monster::attack(Skill skill) {
 
 void Monster::round_end(bool debug_mode) {//該回合結束後的重整(重設數值)
 	//重洗標記
-	if (use_card[0].rewash_mark) {
-		if (debug_mode) {
-			debug_mode_card_number = 0;
-		}
-		this->discard_to_hand();
-	}
 	TmpShield = 0;
-	if (life_value <= 0) {
+	if (life_value > 0) {
+		if (use_card[0].rewash_mark) {
+			if (debug_mode) {
+				debug_mode_card_number = 0;
+			}
+			this->discard_to_hand();
+		}
+	}
+	else {
 		show = false;
+		show_in_room = false;
 		position = { -1,-1 };
 	}
 }

@@ -55,9 +55,16 @@ void Map::check_room() {
 	}
 	this->fill_room(fill_start);
 	for (int i = 0;i < monster_amount;i++) {
-		if (monster[i].show) {
+		if (monster[i].show && monster[i].position.x!=-1 && monster[i].position.y!=-1) {
 			if (show[monster[i].position.y][monster[i].position.x]) {
 				monster[i].show_in_room = true;
+			}
+		}
+	}
+	for (int i = 0;i < door_total_amount;i++) {//檢查門有沒有角色踩著，開啟後設為-1,-1
+		if (!door_pos[i].is_null()) {
+			if (coord_in_body(door_pos[i]) != '3'/* && show[][]*/) {
+				door_pos[i] = { -1,-1 };
 			}
 		}
 	}
@@ -295,12 +302,12 @@ int Map::now_door_amount() {
 
 Creature* Map::creature_in(Coord pos) {
 	for (int i = 0;i < character_amount;i++) {
-		if (character[i].position.x == pos.x && character[i].position.y == pos.y) {
+		if (character[i].position.x == pos.x && character[i].position.y == pos.y && character[i].life_value > 0) {
 			return character + i;
 		}
 	}
 	for (int i = 0;i < monster_amount;i++) {
-		if (monster[i].position.x == pos.x && monster[i].position.y == pos.y) {
+		if (monster[i].position.x == pos.x && monster[i].position.y == pos.y && monster[i].life_value>0 && monster[i].show && monster[i].show_in_room) {
 			return monster + i;
 		}
 	}
@@ -376,4 +383,18 @@ bool Map::in_vision(Coord a, Coord b) {//線性差值法
 		}
 	}
 	return true;
+}
+
+
+void Map::check() {//角色行動前，輸入check，要列出所有角色與怪物的hp與防禦值
+	for (int i = 0;i < character_amount;i++) {
+		if (character[i].life_value > 0) {
+			character[i].check();
+		}
+	}
+	for (int i = 0;i < monster_amount;i++) {
+		if (monster[i].life_value > 0 && monster[i].show_in_room && monster[i].show) {
+			monster[i].check();
+		}
+	}
 }

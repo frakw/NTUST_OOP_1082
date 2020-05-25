@@ -36,7 +36,8 @@ using namespace std;
 //筆記: 怪物每輪出一張牌，角色每輪出二張牌，選第一張當敏捷值
 //攻擊可穿過障礙物
 //待解決:敏捷值排序
-//待做: discard改hand,採用macro coord_in提升可讀性, regex , 
+//待做: discard改hand,採用macro coord_in提升可讀性, regex ,choose_card改virtual 
+//採用nullcoord 與 == coord
 class Gloom_Haven {
 public:
 	Gloom_Haven();
@@ -46,6 +47,7 @@ public:
 	void set(tuple<Character*, int, Monster*, int, Map*> input, bool mode);
 	void start();//main process
 	void stop();
+	
 	int character_remain();//角色剩餘數
 	int monster_remain();//怪物剩餘數
 private:

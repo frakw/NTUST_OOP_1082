@@ -207,8 +207,9 @@ void Creature::be_attack(char attacker_code,int attack_val) {
 	if (life_value <= 0) {
 		cout << code << " is killed!!" << endl;
 		this->map->show_room();
+		position = { -1,-1 };
 	}
-	position = { -1,-1 };
+
 }
 
 void Creature::move(string step,int step_count) {
@@ -238,13 +239,16 @@ void Creature::move(string step,int step_count) {
 		}
 		char now_char = map->coord_in_body(direction[dir_index]);
 		Creature* now_life = map->creature_in(direction[dir_index]);
+
 		if (now_char == '1' || (team_num != 1 && now_char == '3')) {
 			latest_allow = direction[dir_index];
 			now = direction[dir_index];
+
 		}
 		else if (now_life != nullptr) {
 			if (now_life->team_num == team_num) {
 				now = direction[dir_index];
+
 			}
 			else if (now_life->team_num != team_num && team_num == 0) {//角色不可穿過障礙物或敵人
 				cout << "error move!!" << endl;
@@ -265,4 +269,8 @@ void Creature::move(string step,int step_count) {
 	}
 	position = latest_allow;
 	map->show_room();
+}
+
+void Creature::check() {//角色行動前，輸入check，要列出所有角色與怪物的hp與防禦值
+	cout << code << "-hp: " << life_value << ", shield: " << TmpShield << endl;
 }

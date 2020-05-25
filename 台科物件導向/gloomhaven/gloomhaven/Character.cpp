@@ -81,7 +81,9 @@ void Character::action(bool) {
 	if (life_value <= 0) {
 		return;
 	}
+	cout << code << "'s turn: card ";
 	if (sleep) {//長休
+		cout << "-1" << endl;
 #ifdef prompt_input
 		cout << "請輸入要移除卡牌:" << endl;
 #endif
@@ -90,30 +92,36 @@ void Character::action(bool) {
 		find_card(remove_card_number).available = false;
 		this->heal(2);
 		this->discard_to_hand();//棄牌堆所有牌移回手牌
+		cout << "remove card: " << remove_card_number << endl;
 		return;
 	}
-	cout << code << "'s turn: card " << use_card[0].number << ' ' << use_card[1].number << endl;
+	else {
+		cout << use_card[0].number << ' ' << use_card[1].number << endl;
+	}
 	bool card_first_index;
 	string number_up_down;
 	cin >> number_up_down;
-	card_first_index = use_card[0].number == (number_up_down[0] - '0')?false:true;
+	while(number_up_down == "check") {
+		map->check();
+		cin >> number_up_down;
+	}
+	card_first_index = (use_card[0].number == (number_up_down[0] - '0'))?false:true;
 	if (number_up_down[1] == 'u') {//上半部
-		for (int i = 0;i < card[card_first_index].skill_up_amount;i++) {//第一張
-			run_skill(card[card_first_index].skill_up[i]);
+		for (int i = 0;i < use_card[card_first_index].skill_up_amount;i++) {//第一張
+			run_skill(use_card[card_first_index].skill_up[i]);
 		}
-		for (int i = 0;i < card[!card_first_index].skill_down_amount;i++) {//第二張
-			run_skill(card[!card_first_index].skill_down[i]);
+		for (int i = 0;i < use_card[!card_first_index].skill_down_amount;i++) {//第二張
+			run_skill(use_card[!card_first_index].skill_down[i]);
 		}
 	}
 	else {//下半部
-		for (int i = 0;i < card[card_first_index].skill_down_amount;i++) {//第一張
-			run_skill(card[card_first_index].skill_down[i]);
+		for (int i = 0;i < use_card[card_first_index].skill_down_amount;i++) {//第一張
+			run_skill(use_card[card_first_index].skill_down[i]);
 		}
-		for (int i = 0;i < card[!card_first_index].skill_up_amount;i++) {//第二張
-			run_skill(card[!card_first_index].skill_up[i]);
+		for (int i = 0;i < use_card[!card_first_index].skill_up_amount;i++) {//第二張
+			run_skill(use_card[!card_first_index].skill_up[i]);
 		}
 	}
-	this->round_end();
 }
 
 void Character::run_skill(Skill skill) {
@@ -169,7 +177,7 @@ void Character::attack(Skill skill) {
 	}
 }
 
-void Character::round_end() {//該回合結束後的重整(重設數值)
+void Character::round_end(bool debug_mode) {//該回合結束後的重整(重設數值)
 	sleep = false;
 	TmpShield = 0;
 	find_card(use_card[0].number).discard = true;

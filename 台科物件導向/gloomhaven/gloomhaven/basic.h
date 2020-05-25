@@ -56,7 +56,8 @@ public:
 	int card_throw_amount();//棄牌堆數
 	virtual void print() { cout << "virtual error" << endl; }//排序後的列印
 	virtual void action(bool) { cout << "virtual error" << endl; }//行動，bool為debug_mode
-	//virtual void round_end() { cout << "virtual error" << endl; }//該回合結束後的重整(重設數值)
+	virtual void round_end(bool) { cout << "virtual error" << endl; }//該回合結束後的重整(重設數值)
+	void check();//角色行動前，輸入check，要列出所有角色與怪物的hp與防禦值
 	Card use_card[2];//若為怪物則只有一張卡
 	int life_value=0;//目前血量
 	int max_life_value = 0;//最大血量

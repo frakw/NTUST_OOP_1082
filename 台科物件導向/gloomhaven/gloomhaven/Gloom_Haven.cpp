@@ -36,20 +36,19 @@ void Gloom_Haven::start() {
 	cout << "game start"<< endl;
 
 	this->map->check_room();
-	this->map->set_choosing_environment();//選擇位置時專用
-	this->map->show_choosing_room();
+	this->map->set_choosing_environment();//選擇位置時專用，choose_pos裡也會呼叫到
 	for (int i = 0;i < character_amount;i++) {
+		this->map->show_choosing_room();
 		string step;
 		cin >> step;
 		this->map->choose_pos(i,step);
-		this->map->show_choosing_room();
 	}
 	int round_count = 1;
 	char code;
 	while ((character_remain() != 0 && monster_remain() != 0) || this->map->door_amount()!=0) {
-
+		this->map->show_room();
 		int card_number1, card_number2;
-		cout << "round " << round_count << endl;
+		cout << "round " << round_count <<':'<< endl;
 		for (int i = 0;i < character_amount;i++) {
 			if (character[i].card_hand_amount() < 2 && character[i].card_throw_amount() < 2) {//檢查有無角色無法長休或出牌，死亡
 				character[i].life_value = 0;
@@ -59,7 +58,7 @@ void Gloom_Haven::start() {
 				
 			}
 		}
-		for (int i = 0;i < character_amount;i++) {//角色選牌
+		for (int i = 0;i < character_amount;i++) {//角色選牌(這個不能用virtual，因為會check並且順序不一定)
 			cin >> code;
 			for (int j = 0;j < character_amount;j++) {
 				if (character[j].code == code) {
@@ -100,6 +99,10 @@ void Gloom_Haven::start() {
 		for (int i = 0;i < character_amount + monster_amount;i++) {
 			all[i]->action(DEBUG_MODE);
 		}
+		for (int i = 0;i < character_amount + monster_amount;i++) {
+			all[i]->round_end(DEBUG_MODE);//該回合結束後的重整(重設數值)
+		}
+		this->map->check_room();//重新檢查房間視野，並將開啟的門設為地板
 		round_count++;
 	}
 	if (!character_remain()) {

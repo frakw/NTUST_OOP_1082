@@ -24,6 +24,7 @@ public:
 	Creature* creature_in(Coord);
 	char& coord_in_body(Coord);
 
+	void check();//角色行動前，輸入check，要列出所有角色與怪物的hp與防禦值
 
 	int a_star_path_step(Creature*, Creature*);//A星演算法找尋最短步數
 
