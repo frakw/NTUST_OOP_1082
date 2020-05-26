@@ -44,5 +44,4 @@ public:
 	int character_amount = 0;
 	Monster* monster = nullptr;
 	int monster_amount = 0;
-
 };

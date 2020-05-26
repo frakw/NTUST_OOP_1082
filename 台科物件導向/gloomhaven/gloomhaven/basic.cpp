@@ -35,6 +35,17 @@ void Skill::set(string name, int val) {
 	this->value = val;
 }
 
+Skill::Skill(const Skill& input) {
+	*this = input;
+}
+Skill& Skill::operator=(const Skill& input) {
+	this->type = input.type;
+	this->value = input.value;
+	this->range = input.range;
+	this->move_step = input.move_step;
+	return *this;
+}
+
 //============================================================
 Card::Card() {
 	skill_up = nullptr;
@@ -111,7 +122,7 @@ int Creature::card_hand_amount() {//可用卡牌數
 	}
 	return count;
 }
-int Creature::card_throw_amount() {//棄牌堆數
+int Creature::card_discard_amount() {//棄牌堆數
 	int count = 0;
 	for (int i = 0;i < card_amount;i++) {
 		if (card[i].discard) {
@@ -215,8 +226,7 @@ void Creature::be_attack(char attacker_code,int attack_val) {
 void Creature::move(string step,int step_count) {
 	if (step.length() > step_count && team_num == 0) {//角色不可超過最大步數，重新輸入
 		cout << "error move!!" << endl;
-		cin >> step;
-		this->move(step, step_count);
+		this->move(wasd(), step_count);
 		return;
 	}
 	Coord latest_allow = position;
@@ -231,12 +241,7 @@ void Creature::move(string step,int step_count) {
 		case's':dir_index = 2;break;
 		case'd':dir_index = 3;break;
 		case'e':continue;
-		default: {
-			cout << "error move!!" << endl;
-			cin >> step;
-			this->move(step, step_count);
-			return;
-		}break;
+		default:break;
 		}
 		char now_char = map->coord_in_body(direction[dir_index]);
 		Creature* now_life = map->creature_in(direction[dir_index]);
@@ -253,16 +258,14 @@ void Creature::move(string step,int step_count) {
 			}
 			else if (now_life->team_num != team_num && team_num == 0) {//角色不可穿過障礙物或敵人
 				cout << "error move!!" << endl;
-				cin >> step;
-				this->move(step,step_count);
+				this->move(wasd(),step_count);
 				return;
 			}
 		}
 		else {//剩餘的是障礙物與牆壁
 			if (team_num == 0) {//角色不可穿過障礙物牆壁，怪物則會被擋住
 				cout << "error move!!" << endl;
-				cin >> step;
-				this->move(step, step_count);
+				this->move(wasd(), step_count);
 				return;
 			}
 		}
@@ -274,4 +277,22 @@ void Creature::move(string step,int step_count) {
 
 void Creature::check() {//角色行動前，輸入check，要列出所有角色與怪物的hp與防禦值
 	cout << code << "-hp: " << life_value << ", shield: " << TmpShield << endl;
+}
+
+bool Creature::card_in_hand(int number) {//傳入編號，回傳該牌是不是手牌，error handling用
+	for (int i = 0;i < card_amount;i++) {
+		if (card[i].number == number && card[i].available && !card[i].discard) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Creature::card_in_discard(int number) {
+	for (int i = 0;i < card_amount;i++) {
+		if (card[i].number == number && card[i].available && card[i].discard) {//傳入編號，回傳該牌在不在棄牌堆，error handling用
+			return true;
+		}
+	}
+	return false;
 }

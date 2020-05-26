@@ -20,7 +20,7 @@ tuple<Character*,int, Monster*,int, Map*> TXT::return_tuple() {
 
 void TXT::read_character(string filename) {
 	fstream file;
-	file.open(filename, ios::in);
+	open_file(file, filename);
 	file >> total_chr;
 	character = new Character[total_chr];
 	for (int i = 0;i < total_chr;i++) {
@@ -91,7 +91,7 @@ int skill_input(string input,Skill** skill) {//for character only
 
 void TXT::read_monster(string filename) {
 	fstream file;
-	file.open(filename, ios::in);
+	open_file(file, filename);
 	file >> total_mon;
 	monster = new Monster[total_mon];
 	for (int i = 0;i < total_mon;i++) {
@@ -158,34 +158,19 @@ void TXT::input_character_data() {
 	cout << "請輸入出場角色數量:"<<endl;
 	string Character_name;
 	int number;
-	cin >> Character_amount;
+    Character_amount = character_amount_input();
 	char code = 'A';
 	chrput = new Character[Character_amount];
 	for (int i = 0;i < Character_amount;i++) {
-		cin >> Character_name;
-		for (int j = 0;j < total_chr;j++) {
-			if (character[j].name == Character_name) {
-				chrput[i] = character[j];
-				chrput[i].code = code;
-				code++;
-				for (int k = 0;k < character[j].card_amount;k++) {
-					cin >> number;
-					for (int m = 0; m < character[j].card_total;m++) {
-						if (number == character[j].card[m].number) {
-							chrput[i].card[k] = character[j].card[m];
-							break;
-						}
-					}
-				}
-			}
-		}
+		character_data_input(chrput[i], character, total_chr, code);
+		code++;
 	}
 }
 
 
 void TXT::read_map(string filename) {//call this func after above two func 
 	fstream file;
-	file.open(filename, ios::in);
+	open_file(file, filename);
 	if (map != nullptr) {
 		delete map;
 		map = nullptr;

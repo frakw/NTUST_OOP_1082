@@ -49,25 +49,33 @@ void Map::set(string input) {
 
 bool Map::check_room() {
 	bool open = false;
-	for (int i = 0;i < row;i++) {//重設所有區域
+	if (!now_monster_amount()) {//若場上沒有怪物，檢查門是否開啟
+		for (int i = 0;i < door_total_amount;i++) {//檢查門有沒有角色踩著，開啟後設為-1,-1
+			if (!door_pos[i].is_null()) {
+				if (coord_in_body(door_pos[i]) != '3') {
+					door_pos[i].to_null();
+					open = true;//有開門
+				}
+			}
+		}
+	}
+	for (int i = 0;i < row;i++) {//重設所有區域，可寫成reset funtion
 		for (int j = 0;j < col;j++) {
 			show[i][j] = false;
 		}
 	}
-	this->fill_room(fill_start);
+	this->fill_room(fill_start);//產生新的show
 	for (int i = 0;i < monster_amount;i++) {
-		if (monster[i].show && monster[i].position.x!=-1 && monster[i].position.y!=-1) {
+		if (monster[i].show && !monster[i].position.is_null() && monster[i].life_value > 0) {
 			if (show[monster[i].position.y][monster[i].position.x]) {
 				monster[i].show_in_room = true;
 			}
-		}
-	}
-	for (int i = 0;i < door_total_amount;i++) {//檢查門有沒有角色踩著，開啟後設為-1,-1
-		if (!door_pos[i].is_null()) {
-			if (coord_in_body(door_pos[i]) != '3'/* && show[][]*/) {
-				door_pos[i] = { -1,-1 };
-				open = true;//有開門
+			else {
+				monster[i].show_in_room = false;
 			}
+		}
+		else {
+			monster[i].show_in_room = false;
 		}
 	}
 	return open;
@@ -270,10 +278,8 @@ void Map::update_all_creature() {
 int Map::now_monster_amount() {
 	int count = 0;
 	for (int i = 0;i < monster_amount;i++) {
-		if (monster[i].life_value > 0) {
-			if (show[monster[i].position.y][monster[i].position.x]) {
-				count++;
-			}
+		if (monster[i].life_value > 0 && monster[i].show_in_room && monster[i].show) {
+			count++;
 		}
 	}
 	return count;

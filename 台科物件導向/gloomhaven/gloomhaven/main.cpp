@@ -22,18 +22,17 @@ int main(int argc, char** argv) {
 	preprocess.read_monster(input[2]);
 #endif
 
-	;
-	while (cin >> play) {
+	
+	while (getline(cin, play)) {
 		while(play != "play" && play != "exit") {
 			cout << "error command input again!(play or exit)" << endl;
-			cin >> play;
+			getline(cin, play);
 		}
 		if (play == "exit") {
 			break;
 		}
 		preprocess.input_character_data();
-		cin.ignore();
-		cout << "input map file name" << endl;
+		cout << "input map file name :" << endl;
 		getline(cin, map_filename);
 		cout << map_filename << endl;
 		preprocess.read_map(map_filename);
@@ -43,7 +42,7 @@ int main(int argc, char** argv) {
 		Gloom_Haven game(preprocess.return_tuple(), (bool)atoi(input[3].c_str()));
 #endif
 		game.start();
-		cout << "next turn" << endl;
+		cout << "next game" << endl;
 	}
 	cout << "bye bye~~";
 	return 0;

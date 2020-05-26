@@ -110,7 +110,7 @@ void Monster::action(bool debug_mode) {
 		}
 	}
 	if (!debug_mode) {
-		cout << "請確認怪物的行動(getch):" << endl;
+		cout << "請確認怪物的行動，按任意鍵以繼續(getch):" << endl;
 		_getch();
 	}
 }
@@ -128,24 +128,23 @@ void Monster::attack(Skill skill) {
 			index = i;
 			min = tmpstep;
 		}
-		else if (tmpstep == min) {//距離一樣比敏捷值
+		else if (tmpstep == min) {//距離一樣比第一張敏捷值
 			if (map->character[i].use_card[0].agility < map->character[index].use_card[0].agility) {
 				index = i;
 			}
 			else if (map->character[i].use_card[0].agility == map->character[index].use_card[0].agility) {
-				if (map->character[i].use_card[1].agility < map->character[index].use_card[1].agility) {
+				if (map->character[i].use_card[1].agility < map->character[index].use_card[1].agility) {//比第二張敏捷值
 					index = i;
 				}
 				else if (map->character[i].use_card[1].agility == map->character[index].use_card[1].agility) {
-					if (map->character[i].code < map->character[index].code) {
+					if (map->character[i].code < map->character[index].code) {//比代號
 						index = i;
 					}
 				}
 			}
 		}
-
 	}
-	if (min > range + skill.range || index==-1) {//自己的range加上卡牌的range
+	if (min > (range + skill.range) || index==-1) {//自己的range加上卡牌的range
 		cout << "no one lock" << endl;
 		return;
 	}
@@ -169,6 +168,6 @@ void Monster::round_end(bool debug_mode) {//該回合結束後的重整(重設數值)
 	else {
 		show = false;
 		show_in_room = false;
-		position = { -1,-1 };
+		position.to_null();
 	}
 }

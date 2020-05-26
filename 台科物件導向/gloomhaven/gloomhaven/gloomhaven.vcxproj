@@ -142,7 +142,7 @@
     <ClCompile Include="basic.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Gloom_Haven.cpp" />
-    <ClCompile Include="log.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="read_file.cpp" />
@@ -154,7 +154,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Coord.h" />
     <ClInclude Include="Gloom_Haven.h" />
-    <ClInclude Include="log.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="read_file.h" />

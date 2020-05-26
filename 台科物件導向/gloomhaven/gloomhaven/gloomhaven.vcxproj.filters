@@ -30,9 +30,6 @@
     <ClCompile Include="basic.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
-    <ClCompile Include="log.cpp">
-      <Filter>資源檔</Filter>
-    </ClCompile>
     <ClCompile Include="read_file.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
@@ -40,6 +37,9 @@
       <Filter>資源檔</Filter>
     </ClCompile>
     <ClCompile Include="a_star_path.cpp">
+      <Filter>資源檔</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,9 +59,6 @@
     <ClInclude Include="basic.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="log.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
     <ClInclude Include="read_file.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
@@ -69,6 +66,9 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="a_star_path.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>

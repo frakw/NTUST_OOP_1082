@@ -15,10 +15,10 @@ Character& Character::operator=(const Character& input) {
 	this->use_card[0] = input.use_card[0];
 	this->use_card[1] = input.use_card[1];
 	this->sleep = input.sleep;
-	//this->TmpAgility = input.TmpAgility;
 	this->TmpShield = input.TmpShield;
 	this->team_num = input.team_num;
 	this->map = input.map;
+	this->finished_choose = input.finished_choose;
 
 	this->card = new Card[card_amount];
 	for (int i = 0;i < card_amount;i++) {
@@ -27,41 +27,51 @@ Character& Character::operator=(const Character& input) {
 	return *this;
 }
 
-bool Character::choose_card() {
-	if (life_value < 0) {
-		return true;
+void Character::choose_card(string input) {
+	if (life_value <= 0) {
+		cout << "this character already died! input again!" << endl;
+		return;
 	}
+
+	stringstream ss(input);
 	string card_number1;//因有可能輸入check，顧使用string
 	int  card_number2;
-	cin >> card_number1;
+	ss >> card_number1;
 	if (card_number1 == "check") {
 		//資訊
 		this->check_card();
-		return false;
+		return;
 	}
-	else if (card_number1 == "-1") {
+	if (finished_choose) {//曾經輸入過
+		cout << "this character already choose card,Do you want to modify it(y/n)?" << endl;
+		char ch = getline_char();
+		while (ch != 'y' && ch != 'n') {
+			cout << err << endl;
+			ch = getline_char();
+		}
+		if (ch == 'n') {
+			return;
+		}
+		sleep = false;//remember
+	}
+	if (card_number1 == "-1") {
 		//長休
 		sleep = true;
 		use_card[0].agility = 99;
 		use_card[1].agility = 99;
-//#ifdef prompt_input
-//		cout << "請輸入要移除卡牌:" << endl;
-//#endif
-		//cin >> card_number2;//    行動階段再做
-		//find_card(card_number2).available = false;//    行動階段再做
-		//this->heal(2);//    行動階段再做
-		//TmpAgility = 99;//    行動階段再做
-		//this->discard_to_hand();//棄牌堆所有牌移回手牌 //    行動階段再做
+		finished_choose = true;
 	}
 	else {
-		cin >> card_number2;
-		sleep = false;//要記得***
-		use_card[0] = find_card(atoi(card_number1.c_str()));
-		use_card[1] = find_card(card_number2);
-		//err handle 若輸入在棄牌堆或以移除牌 not finished
-		//TmpAgility = use_card[0].agility;//第一張牌作為敏捷值
+		ss >> card_number2;
+		if (card_in_hand(atoi(card_number1.c_str())) && card_in_hand(card_number2)) {
+			use_card[0] = find_card(atoi(card_number1.c_str()));
+			use_card[1] = find_card(card_number2);
+			finished_choose = true;
+		}
+		else {
+			cout << "card number is not correct(not exist or discard or unavailable)! please input again!"<<endl;
+		}
 	}
-	return true;
 }
 
 void Character::print(){
@@ -82,30 +92,40 @@ void Character::action(bool) {
 		return;
 	}
 	cout << code << "'s turn: card ";
-	if (sleep) {//長休
+	if (sleep) {//長休，   ====== 尚未檢查IO err
 		cout << "-1" << endl;
+		this->heal(2);
 #ifdef prompt_input
 		cout << "請輸入要移除卡牌:" << endl;
 #endif
-		int remove_card_number;
-		cin >> remove_card_number;
-		find_card(remove_card_number).available = false;
-		this->heal(2);
-		cout << "remove card: " << remove_card_number << endl;
+		int remove_number = getline_int();
+		while (!card_in_discard(remove_number)) {
+			cout << "card number is not correct(not exist or in hand or unavailable)! please input again!" << endl;
+			remove_number = getline_int();
+		}
+		find_card(remove_number).available = false;
+		cout << "remove card: " << remove_number << endl;
 		return;
 	}
 	else {
 		cout << use_card[0].number << ' ' << use_card[1].number << endl;
 	}
 	bool card_first_index;
-	string number_up_down;
-	cin >> number_up_down;
-	while(number_up_down == "check") {
+	string NumUD;
+	int num;
+num_err:
+	NumUD = character_card_first_ud();
+	while(NumUD == "check") {
 		map->check();
-		cin >> number_up_down;
+		goto num_err;
 	}
-	card_first_index = (use_card[0].number == (number_up_down[0] - '0'))?false:true;
-	if (number_up_down[1] == 'u') {//上半部
+	num = atoi(NumUD.substr(0, NumUD.length() - 1).c_str());
+	if (num != use_card[0].number && num != use_card[1].number) {
+		cout << "card number error!,please choose one of the two selected cards" << endl;
+		goto num_err;
+	}
+	card_first_index = (use_card[0].number == (NumUD[0] - '0'))?false:true;
+	if (NumUD[1] == 'u') {//上半部
 		for (int i = 0;i < use_card[card_first_index].skill_up_amount;i++) {//第一張
 			run_skill(use_card[card_first_index].skill_up[i]);
 		}
@@ -126,9 +146,7 @@ void Character::action(bool) {
 void Character::run_skill(Skill skill) {
 	switch (skill.type) {
 	case 0: {//move
-		string step;
-		cin >> step;
-		this->move(step, skill.value);
+		this->move(wasd(), skill.value);
 	}break;
 	case 1: {//attack
 		this->attack(skill);
@@ -143,14 +161,14 @@ void Character::run_skill(Skill skill) {
 }
 
 void Character::attack(Skill skill) {
-	char code;
+	char mon_code;
 	int index =-1;
-	cin >> code;
-	if (code == '0') {
+	mon_code = getline_char();
+	if (mon_code == '0') {
 		return;
 	}
 	for (int i = 0;i < map->monster_amount;i++) {
-		if (map->monster[i].code == code) {
+		if (map->monster[i].code == mon_code) {
 			index = i;
 			break;
 		}
@@ -167,7 +185,7 @@ void Character::attack(Skill skill) {
 		map->monster[index].life_value>0/*該怪物存活*/ &&
 		map->in_vision(position, map->monster[index].position)){//視野之內(線性差值法)
 
-		map->monster[index].be_attack(code,skill.value);
+		map->monster[index].be_attack(this->code,skill.value);
 	}
 	else {
 		cout << "error target!!!" << endl;
@@ -184,6 +202,7 @@ void Character::round_end(bool debug_mode) {//該回合結束後的重整(重設數值)
 	else {//長休
 		this->discard_to_hand();//棄牌堆所有牌移回手牌(不包含已移除的牌)
 	}
+	finished_choose = life_value <= 0;
 	sleep = false;
 	TmpShield = 0;
 
