@@ -40,7 +40,7 @@ void Map::set(string input) {
 	for (int i = 0;i < row;i++) {
 		for (int j = 0;j < col;j++) {
 			if (body[i][j] == '3') {
-				door_pos[index] = { j,i };
+				door_pos[index] = Coord( j,i );
 				index++;
 			}
 		}
@@ -51,7 +51,7 @@ bool Map::check_room() {
 	bool open = false;
 	if (!now_monster_amount()) {//若場上沒有怪物，檢查門是否開啟
 		for (int i = 0;i < door_total_amount;i++) {//檢查門有沒有角色踩著，開啟後設為-1,-1
-			if (!door_pos[i].is_null()) {
+			if (door_pos[i].not_null()) {
 				if (coord_in_body(door_pos[i]) != '3') {
 					door_pos[i].to_null();
 					open = true;//有開門
@@ -67,7 +67,7 @@ bool Map::check_room() {
 	this->fill_room(fill_start);//產生新的show
 	for (int i = 0;i < monster_amount;i++) {
 		if (monster[i].show && !monster[i].position.is_null() && monster[i].life_value > 0) {
-			if (show[monster[i].position.y][monster[i].position.x]) {
+			if (coord_in(show,monster[i].position)) {
 				monster[i].show_in_room = true;
 			}
 			else {
@@ -82,20 +82,20 @@ bool Map::check_room() {
 }
 
 void Map::fill_room(Coord pos) {
-	if (pos.x >= col || pos.x < 0 || pos.y >= row || pos.y < 0) {
+	if (!coord_legal(pos)) {
 		return;
 	}
-	if (body[pos.y][pos.x] == '0' || show[pos.y][pos.x]) {
+	if (coord_in(body,pos) == '0' || coord_in(show, pos)) {
 		return;
 	}
-	else if (body[pos.y][pos.x] == '3') {
-		show[pos.y][pos.x] = true;
+	else if (coord_in(body, pos) == '3') {
+		coord_in(show, pos) = true;
 		return;
 	}
 	else {
-		show[pos.y][pos.x] = true;
+		coord_in(show, pos) = true;
 	}
-	Coord direction[4] = { {pos.x,pos.y - 1},{pos.x,pos.y + 1} ,{pos.x - 1 ,pos.y} ,{pos.x + 1,pos.y} };
+	Coord direction[4] = {UP(pos),DOWN(pos),LEFT(pos),RIGHT(pos)};
 	for (int i = 0;i < 4;i++) {
 		this->fill_room(direction[i]);
 	}
@@ -106,10 +106,7 @@ void Map::show_room() {
 	for (int i = 0;i < row;i++) {
 		for (int j = 0;j < col;j++) {
 			if (show[i][j]) {
-				switch (body[i][j]) {
-				case'0':cout << ' ';break;
-				default:cout << body[i][j];break;
-				}
+				cout << ((body[i][j] == '0') ? ' ' : body[i][j]);
 			}
 			else {
 				cout << ' ';
@@ -121,30 +118,27 @@ void Map::show_room() {
 
 void Map::show_choosing_room() {
 	for (int i = 0;i < monster_amount;i++) {//copy from update
-		if (!monster[i].show || monster[i].position.y == -1 || monster[i].position.x == -1) continue;
+		if (!monster[i].show || monster[i].position.is_null()) continue;
 		if (monster[i].life_value > 0) {
-			body[monster[i].position.y][monster[i].position.x] = monster[i].code;
+			coord_in(body, monster[i].position) = monster[i].code;
 		}
 		else {
-			body[monster[i].position.y][monster[i].position.x] = '1';
+			coord_in(body, monster[i].position) = '1';
 		}
 	}
 	for (int i = 0;i < character_amount;i++) {
-		if (character[i].position.y == -1 || character[i].position.x == -1) continue;
+		if (character[i].position.is_null()) continue;
 		if (character[i].life_value > 0) {
-			body[character[i].position.y][character[i].position.x] = character[i].code;
+			coord_in(body, character[i].position) = character[i].code;
 		}
 		else {
-			body[character[i].position.y][character[i].position.x] = '1';
+			coord_in(body, character[i].position) = '1';
 		}
 	}
-	for (int i = 0;i < row;i++) {//copy from show
+	for (int i = 0;i < row;i++) {//do not call show_room function，no need to update
 		for (int j = 0;j < col;j++) {
 			if (show[i][j]) {
-				switch (body[i][j]) {
-				case'0':cout << ' ';break;
-				default:cout << body[i][j];break;
-				}
+				cout << ((body[i][j] == '0') ? ' ' : body[i][j]);
 			}
 			else {
 				cout << ' ';
@@ -171,14 +165,8 @@ void Map::set_choosing_environment() {
 		}
 	}
 	for (int i = 0;i < 4;i++) {//可選位置設為_ *
-
 		if (start_pos[i].y != -1 && start_pos[i].x != -1) {
-			if (start_index != i) {
-				body[start_pos[i].y][start_pos[i].x] = '_';
-			}
-			else {
-				body[start_pos[i].y][start_pos[i].x] = '*';
-			}
+			body[start_pos[i].y][start_pos[i].x] = start_index != i?'_':'*';
 		}
 	}
 	star_pos = start_pos[start_index];
@@ -187,7 +175,7 @@ void Map::set_choosing_environment() {
 
 Coord& Map::find_pos(Coord* check,int max,Coord pos) {
 	for (int i = 0;i < max;i++) {
-		if (check[i].x == pos.x && check[i].y == pos.y) {
+		if (check[i] == pos) {
 			return check[i];
 		}
 	}
@@ -196,34 +184,34 @@ Coord& Map::find_pos(Coord* check,int max,Coord pos) {
 void Map::choose_pos(int index, string step) {
 	this->set_choosing_environment();//設置底線與選擇星星位置
 	Coord now = star_pos;
-	body[now.y][now.x] = '_';//暫時設為底線，方便wasd
+	coord_in(body, now) = '_';//暫時設為底線，方便wasd
 	for (int i = 0;i < step.length();i++) {
 		switch (step[i]) {
 		case'w': {
 			if (now.y - 1 >= 0) {
-				if (body[now.y - 1][now.x] == '_') {
-					now = { now.x, now.y-1 };
+				if (coord_in(body, now.up()) == '_') {
+					now = now.up();
 				}
 			}
 		}break;
 		case'a': {
 			if (now.x - 1 >= 0) {
-				if (body[now.y][now.x-1] == '_') {
-					now = { now.x-1, now.y };
+				if (coord_in(body, now.left()) == '_') {
+					now = now.left();
 				}
 			}
 		}break;
 		case's': {
 			if (star_pos.y + 1 < row) {
-				if (body[now.y + 1][now.x] == '_') {
-					now = { now.x, now.y+1};
+				if (coord_in(body, now.down()) == '_') {
+					now = now.down();
 				}
 			}
 		}break;;
 		case'd': {
 			if (star_pos.x + 1 < col) {
-				if (body[now.y][now.x+1] == '_') {
-					now = { now.x+1, now.y };
+				if (coord_in(body, now.right()) == '_') {
+					now = now.right();
 				}
 			}
 		}break;
@@ -231,13 +219,12 @@ void Map::choose_pos(int index, string step) {
 		default:break;
 		}
 	}
-	//body[now.y][now.x] = character[index].code;
 	character[index].position = now;
-	find_pos(start_pos, 4, now) = { -1,-1 };
+	find_pos(start_pos, 4, now).to_null();
 	if (index == character_amount - 1) {//最後一個角色選擇完後，將所有底線改回1
 		for (int i = 0;i < 4;i++) {
-			if (start_pos[i].y != -1 && start_pos[i].x != -1) {
-				body[start_pos[i].y][start_pos[i].x] = '1';
+			if (start_pos[i].not_null()) {
+				coord_in(body, start_pos[i]) = '1';
 			}
 		}
 	}
@@ -257,21 +244,17 @@ void Map::update_all_creature() {
 		}
 	}
 	for (int i = 0;i < door_total_amount;i++) {//門
-		if (door_pos[i].x != -1 && door_pos[i].y != -1) {
-			body[door_pos[i].y][door_pos[i].x] = '3';
+		if (door_pos[i].not_null()) {
+			coord_in(body,door_pos[i]) = '3';
 		}
 	}
 	for (int i = 0;i < monster_amount;i++) {
-		if (!monster[i].show || monster[i].position.y == -1 || monster[i].position.x == -1) continue;
-		if (monster[i].life_value > 0) {
-			body[monster[i].position.y][monster[i].position.x] = monster[i].code;
-		}
+		if (!monster[i].show || monster[i].position.is_null() || monster[i].life_value <= 0) continue;
+		coord_in(body, monster[i].position) = monster[i].code;
 	}
 	for (int i = 0;i < character_amount;i++) {
-		if (character[i].position.y == -1 || character[i].position.x == -1) continue;
-		if (character[i].life_value > 0) {
-			body[character[i].position.y][character[i].position.x] = character[i].code;
-		}
+		if (character[i].position.is_null() || character[i].life_value <= 0) continue;
+		coord_in(body, character[i].position) = character[i].code;
 	}
 }
 
@@ -288,7 +271,7 @@ int Map::now_monster_amount() {
 int Map::door_amount() {
 	int count = 0;
 	for (int i = 0;i < door_total_amount;i++) {
-		if (door_pos[i].x != -1 && door_pos[i].y != -1) {
+		if (door_pos[i].not_null()) {
 			count++;
 		}
 	}
@@ -311,12 +294,12 @@ int Map::now_door_amount() {
 
 Creature* Map::creature_in(Coord pos) {
 	for (int i = 0;i < character_amount;i++) {
-		if (character[i].position.x == pos.x && character[i].position.y == pos.y && character[i].life_value > 0) {
+		if (character[i].position == pos && character[i].life_value > 0) {
 			return character + i;
 		}
 	}
 	for (int i = 0;i < monster_amount;i++) {
-		if (monster[i].position.x == pos.x && monster[i].position.y == pos.y && monster[i].life_value>0 && monster[i].show && monster[i].show_in_room) {
+		if (monster[i].position == pos && monster[i].life_value>0 && monster[i].show && monster[i].show_in_room) {
 			return monster + i;
 		}
 	}
@@ -324,44 +307,13 @@ Creature* Map::creature_in(Coord pos) {
 }
 
 char& Map::coord_in_body(Coord pos) {
+	if (!coord_legal(pos)) {
+		cout << "coord ilegal!!" << endl;
+		return body[0][0];
+	}
 	return body[pos.y][pos.x];
 }
 
-
-//bool Map::in_range(Creature* main,Coord a, Coord b, int count) {//計算2座標間的步數
-//	A_star_path_step(this,make_pair(a,b));
-//	return false;
-//	if (a.x >= col || a.x < 0 || a.y >= row || a.y < 0 || count<0) {
-//		return false;
-//	}
-//	if (body[a.y][a.x] == '0' || creature_in(a)->team_num!=main->team_num) {
-//		return false;
-//	}
-//	if (a.x == b.x && a.y == b.y) {
-//		return true;
-//	}
-//	if (!recursive_dedicated[a.y][a.x]) {
-//		recursive_dedicated[a.y][a.x] = true;
-//	}
-//	else {
-//		return false;
-//	}
-//	Coord direction[4] = { {a.x,a.y-1},{a.x,a.y+1},{a.x-1,a.y},{a.x+1,a.y} };
-//	for (int i = 0;i < 4;i++) {
-//		if (in_range(main,direction[i], b, count - 1)) {
-//			return true;
-//		}
-//	}
-//	return false;
-//}
-
-void Map::copy_to(bool** a, bool** b) {
-	for (int i = 0;i < row;i++) {
-		for (int j = 0;j < col;j++) {
-			a[i][j] = b[i][j];
-		}
-	}
-}
 
 bool Map::in_vision(Coord a, Coord b) {//線性差值法
 	Coord check;
@@ -406,4 +358,8 @@ void Map::check() {//角色行動前，輸入check，要列出所有角色與怪物的hp與防禦值
 			monster[i].check();
 		}
 	}
+}
+
+bool Map::coord_legal(Coord a) {
+	return (a.x < col) && (a.x >= 0) && (a.y < row) && (a.y >= 0);
 }

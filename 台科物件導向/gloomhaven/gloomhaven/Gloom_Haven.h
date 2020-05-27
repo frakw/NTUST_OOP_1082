@@ -13,11 +13,13 @@
 #include <algorithm>
 #include <conio.h>
 #include <regex>
+#include <iomanip>
 #include "Coord.h"//先後順序要對
 #include "basic.h"//先後順序要對
 #include "Character.h"//先後順序要對
 #include "Monster.h"//先後順序要對
 #include "Map.h"//先後順序要對
+#include "a_star_path.h"
 #include "read_file.h"//先後順序要對
 #include "Input.h"
 //提示輸入
@@ -25,10 +27,7 @@
 
 using namespace std;
 
-//筆記: 怪物每輪出一張牌，角色每輪出二張牌，選第一張當敏捷值
-//攻擊可穿過障礙物
-//待解決:敏捷值排序
-//待做: discard改hand,採用macro coord_in提升可讀性, regex ,choose_card改virtual 
+//待做:採用macro coord_in提升可讀性, regex
 //採用nullcoord 與 == coord creature die funtion
 //macro庫，集中管理遊戲輸出訊息
 //cout與txt檔同時輸出

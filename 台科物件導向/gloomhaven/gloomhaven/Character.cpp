@@ -38,7 +38,6 @@ void Character::choose_card(string input) {
 	int  card_number2;
 	ss >> card_number1;
 	if (card_number1 == "check") {
-		//資訊
 		this->check_card();
 		return;
 	}
@@ -52,9 +51,8 @@ void Character::choose_card(string input) {
 		if (ch == 'n') {
 			return;
 		}
-		sleep = false;//remember
 	}
-	if (card_number1 == "-1") {
+	if (card_number1 == "-1" && ss.eof()) {
 		//長休
 		sleep = true;
 		use_card[0].agility = 99;
@@ -67,6 +65,7 @@ void Character::choose_card(string input) {
 			use_card[0] = find_card(atoi(card_number1.c_str()));
 			use_card[1] = find_card(card_number2);
 			finished_choose = true;
+			sleep = false;//remember
 		}
 		else {
 			cout << "card number is not correct(not exist or discard or unavailable)! please input again!"<<endl;
@@ -76,7 +75,7 @@ void Character::choose_card(string input) {
 
 void Character::print(){
 	if (life_value > 0) {//角色不判斷是否出現
-		cout << code << ' ' << use_card[0].agility << ' ';
+		cout << code << ' ' <<setw(2) << setfill('0') << use_card[0].agility << ' ';
 		if (!sleep) {
 			cout << use_card[0].number << ' ' << use_card[1].number;
 		}

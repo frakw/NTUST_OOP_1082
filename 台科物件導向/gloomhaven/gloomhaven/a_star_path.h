@@ -2,6 +2,7 @@
 #include <vector>
 class Map;
 class Creature;
+typedef struct _Coord_ Coord;
 
 using namespace std;
 class Grid {

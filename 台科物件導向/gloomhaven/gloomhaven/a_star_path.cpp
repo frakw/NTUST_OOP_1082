@@ -1,6 +1,6 @@
 #include "Gloom_Haven.h"
-#include "a_star_path.h"
 
+int Manhattan_distance(Coord,Coord);
 
 Grid::Grid(Coord in, Grid* the_father, Coord end_point) {
 	this->self = in;
@@ -10,11 +10,11 @@ Grid::Grid(Coord in, Grid* the_father, Coord end_point) {
 }
 
 void Grid::calc_val(Grid* the_father, Coord end_point) {
-	int tmp = abs(the_father->self.x - self.x) + abs(the_father->self.y - self.y);
+	int tmp = Manhattan_distance(the_father->self, this->self);
 	if (father == nullptr) {
 		this->father = the_father;
 		G = father->G + tmp;
-		H = abs(end_point.x - self.x) + abs(end_point.y - self.y);
+		H = Manhattan_distance(end_point, this->self);
 		F = G + H;
 	}
 	else {
@@ -28,7 +28,7 @@ void Grid::calc_val(Grid* the_father, Coord end_point) {
 
 int exist_in(vector<Grid*>* data_ptr, Coord check) {
 	for (int i = 0;i < data_ptr->size();i++) {
-		if ((*data_ptr)[i]->self.x == check.x && (*data_ptr)[i]->self.y == check.y) {
+		if ((*data_ptr)[i]->self == check) {
 			return i;
 		}
 	}
@@ -42,7 +42,7 @@ int Map::a_star_path_step(Creature* self, Creature* dest) {
 	open_list.push_back(current);
 	do {
 		if (open_list.empty()) {
-			return -87;//找不到路徑，無法到達回傳-1
+			return -87;//找不到路徑，無法到達回傳-87
 		}
 		int min = open_list[0]->F;
 		int pos = 0;
@@ -80,7 +80,7 @@ int Map::a_star_path_step(Creature* self, Creature* dest) {
 				}
 			}
 		}
-	} while ((current->self.x != dest->position.x) || (current->self.y != dest->position.y));
+	} while (current->self != dest->position);
 	int count = 1;
 	current = current->father;
 	while (current->father!=nullptr) {
@@ -95,6 +95,9 @@ int Map::a_star_path_step(Creature* self, Creature* dest) {
 		delete[] open_list[i];
 		open_list[i] = nullptr;
 	}
-	cout << "a star step:" << count << endl;
+	//cout << "a star step:" << count << endl;
 	return count;
+}
+int Manhattan_distance(Coord a, Coord b) {//曼哈頓距離
+	return abs(a.x - b.x) + abs(a.y - b.y);
 }

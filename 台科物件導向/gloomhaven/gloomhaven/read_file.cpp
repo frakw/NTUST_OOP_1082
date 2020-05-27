@@ -4,9 +4,6 @@ using namespace std;
 
 int skill_input(string input,Skill** card);
 
-
-
-
 tuple<Character*,int, Monster*,int, Map*> TXT::return_tuple() {
 	for (int i = 0;i < Character_amount;i++) {//地圖指標存入所有生物，方便之後的行動action
 		chrput[i].map = map;

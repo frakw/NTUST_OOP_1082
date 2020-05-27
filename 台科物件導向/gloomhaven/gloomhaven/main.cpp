@@ -12,11 +12,13 @@ int main(int argc, char** argv) {
 	input[2] = "./monster1.txt";
 	input[3] = "1";
 #ifdef command_line
+	int start_index = 1;
 	if (argc != 4) {
 		cout << "error command line input !" << endl;
+		return 0;
 	}
-	preprocess.read_character(argv[1]);
-	preprocess.read_monster(argv[2]);
+	preprocess.read_character(argv[start_index + 0]);
+	preprocess.read_monster(argv[start_index + 1]);
 #else
 	preprocess.read_character(input[1]);
 	preprocess.read_monster(input[2]);
@@ -34,15 +36,13 @@ int main(int argc, char** argv) {
 		preprocess.input_character_data();
 		cout << "input map file name :" << endl;
 		getline(cin, map_filename);
-		cout << map_filename << endl;
 		preprocess.read_map(map_filename);
 #ifdef command_line
-		Gloom_Haven game(preprocess.return_tuple(), (bool)atoi(argv[3]));
+		Gloom_Haven game(preprocess.return_tuple(), (bool)atoi(argv[start_index + 2]));
 #else
 		Gloom_Haven game(preprocess.return_tuple(), (bool)atoi(input[3].c_str()));
 #endif
 		game.start();
-		cout << "next game" << endl;
 	}
 	cout << "bye bye~~";
 	return 0;

@@ -4,13 +4,20 @@ using namespace std;
 
 int character_amount_input() {
 	string input;
-	getline(cin, input);
 	regex reg(R"(^[+]?\d+$)");
-	while(!regex_match(input, reg)) {
+	int result = 2;
+check:
+	getline(cin, input);
+	while (!regex_match(input, reg)) {
 		cout << err << endl;
 		getline(cin, input);
 	}
-	return atoi(input.c_str());
+	result = atoi(input.c_str());
+	if (result > 4 || result < 2) {
+		cout << "character amount should be 2~4 , input again!" << endl;
+		goto check;
+	}
+	return result;
 }
 void character_data_input(Character& life, Character* db, int total_chr, char code) {//brute 0 1 2 3 4 5
 	string number;
