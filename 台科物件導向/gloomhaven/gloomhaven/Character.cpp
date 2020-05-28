@@ -94,9 +94,7 @@ void Character::action(bool) {
 	if (sleep) {//長休
 		cout << "-1" << endl;
 		this->heal(2);
-#ifdef prompt_input
-		cout << "請輸入要移除卡牌:" << endl;
-#endif
+		prompt_input("請輸入要移除卡牌:");
 		int remove_number = getline_int();
 		while (!card_in_discard(remove_number)) {
 			cout << "card number is not correct(not exist or in hand or unavailable)! please input again!" << endl;
@@ -160,6 +158,7 @@ void Character::run_skill(Skill skill) {
 }
 
 void Character::attack(Skill skill) {
+	prompt_input("輸入要攻擊怪物代號，放棄攻擊輸入0");
 	char mon_code;
 	int index =-1;
 	mon_code = getline_char();

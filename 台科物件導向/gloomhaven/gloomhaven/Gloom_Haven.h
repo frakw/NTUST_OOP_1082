@@ -22,9 +22,16 @@
 #include "a_star_path.h"
 #include "read_file.h"//先後順序要對
 #include "Input.h"
-//提示輸入
-#define prompt_input 
+//提示輸入，註解掉就沒有提示
+#define prompt
 
+#ifdef prompt
+#define prompt_input(output) cout<< output <<endl
+#else
+#define prompt_input(output)
+#endif
+
+#define mygetline(cin,input)  if(cin.eof()){cin.clear();} getline(cin, input);
 using namespace std;
 
 //待做:採用macro coord_in提升可讀性, regex
@@ -46,7 +53,7 @@ public:
 	int monster_remain();//怪物剩餘數
 	int choose_remain();//剩餘幾個角色未選牌或長休
 private:
-	Creature** all = nullptr;//所有角色與怪物排序後存放區，初始化時，先角色再怪物
+	Creature** all = nullptr;//所有角色與怪物指標排序後存放區，初始化時，先角色再怪物
 
 	bool DEBUG_MODE = false;
 	Map* map = nullptr;

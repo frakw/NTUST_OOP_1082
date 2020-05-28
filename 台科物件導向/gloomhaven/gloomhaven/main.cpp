@@ -25,17 +25,19 @@ int main(int argc, char** argv) {
 #endif
 
 	
-	while (getline(cin, play)) {
+	while (1) {
+		prompt_input("輸入遊玩指令play或離開指令exit");
+		mygetline(cin, play);
 		while(play != "play" && play != "exit") {
 			cout << "error command input again!(play or exit)" << endl;
-			getline(cin, play);
+			mygetline(cin, play);
 		}
 		if (play == "exit") {
 			break;
 		}
 		preprocess.input_character_data();
-		cout << "input map file name :" << endl;
-		getline(cin, map_filename);
+		prompt_input("輸入地圖txt檔案路徑");
+		mygetline(cin, map_filename);
 		preprocess.read_map(map_filename);
 #ifdef command_line
 		Gloom_Haven game(preprocess.return_tuple(), (bool)atoi(argv[start_index + 2]));

@@ -1,9 +1,12 @@
 #include "Gloom_Haven.h"
 #include "Input.h"
-#define mygetline(cin,input)  if(cin.eof()){cin.clear();} getline(cin, input);
+
+
+
 using namespace std;
 
 int character_amount_input() {
+	cout << "請輸入出場角色數量:" << endl;//必要
 	string input;
 	regex reg(R"(^[+]?\d+$)");
 	int result = 2;
@@ -21,6 +24,7 @@ check:
 	return result;
 }
 void character_data_input(Character& life, Character* db, int total_chr, char code) {//brute 0 1 2 3 4 5
+	prompt_input("請輸入" << code << "的角色類別與起始手牌編號(例:brute 0 1 2 3 4 5)");
 	string number;
 	int db_index = -1;
 	string input;
@@ -98,6 +102,7 @@ void open_file(fstream& file, string filename) {//map1.txt
 }
 
 string wasd() {
+	prompt_input("請輸入wasd組成的移動指令或e");
 	regex reg(R"(^[wasd]+$)");
 	string input;
 	mygetline(cin, input);
@@ -108,6 +113,7 @@ string wasd() {
 	return input;
 }
 string character_card_choose() {//A 0 3 B -1，bool回傳false代表check或輸入錯誤，重新輸入
+	prompt_input("請輸入角色代號與選擇卡牌(2張)編號，長休輸入-1(例:A -1)，輸入check顯示手牌與棄牌堆");
 	regex reg(R"(^[A-Z] [+-]?[0-9]+ [+-]?[0-9]+$)");
 	regex sleep(R"(^[A-Z] -1)");
 	regex check(R"(^[A-Z] check$)");
@@ -120,6 +126,7 @@ string character_card_choose() {//A 0 3 B -1，bool回傳false代表check或輸入錯誤，
 	return input;
 }
 string character_card_first_ud() {//角色輸入第一張使用的牌與上半部或下半部(2u)
+	prompt_input("輸入第一張使用的牌之編號與上半部或下半部(例:2u)");
 	regex reg(R"(^[+-]?\d+[ud]$)");
 	string input;
 	mygetline(cin, input);

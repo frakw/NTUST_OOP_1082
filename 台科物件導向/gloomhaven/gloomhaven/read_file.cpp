@@ -152,9 +152,6 @@ void TXT::read_monster(string filename) {
 }
 
 void TXT::input_character_data() {
-	cout << "請輸入出場角色數量:"<<endl;
-	string Character_name;
-	int number;
     Character_amount = character_amount_input();
 	char code = 'A';
 	chrput = new Character[Character_amount];

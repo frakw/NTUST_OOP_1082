@@ -89,10 +89,11 @@ void Gloom_Haven::start() {
 				}
 				return a->use_card[0].agility < b->use_card[0].agility;
 			});
-
+		prompt_input("角色與怪物行動順序如下:");
 		for (int i = 0;i < character_amount + monster_amount;i++) {//印出順序 角色印敏捷值與手牌編號 怪物印卡牌內容
 			all[i]->print();//virtual
 		}
+		prompt_input("行動階段:");
 		for (int i = 0;i < character_amount + monster_amount;i++) {//行動時間
 			all[i]->action(DEBUG_MODE);//virtual
 		}
