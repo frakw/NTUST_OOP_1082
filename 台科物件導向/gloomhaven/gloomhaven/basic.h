@@ -15,7 +15,7 @@ public:
 	void set(string name, int val);
 	int type=-1;//0 move 1 attack 2 heal 3 shield
 	int value=-1;//技能數值
-	int range = -1;//attack時才用到，range 0 1 -1效果皆相同，但-1是指定為近戰怪，印print時會不同
+	int range = 0;//attack時才用到，range 0 1效果皆相同，但0是指定為近戰怪，印print時會不同，角色range預設為1(角色屬於遠程)
 	string move_step="";//只在怪物卡技能為move時使用，存wasd
 };
 

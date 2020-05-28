@@ -218,7 +218,7 @@ void Creature::be_attack(char attacker_code,int attack_val) {
 	if (life_value <= 0) {
 		cout << code << " is killed!!" << endl;
 		this->map->show_room();
-		position = { -1,-1 };
+		position.to_null();
 	}
 
 }

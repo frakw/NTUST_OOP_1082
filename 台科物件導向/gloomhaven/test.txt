@@ -1,0 +1,241 @@
+play
+請輸入出場角色數量:
+2
+brute 0 1 2 3 4 5
+brute 2 3 4 5 6 7
+input map file name :
+map1.txt
+
+
+
+
+
+
+    3
+ 111e111
+ 1111111
+ 111*111
+ 11___11
+
+wsa
+
+
+
+
+
+
+    3
+ 111e111
+ 1111111
+ 111*111
+ 11A__11
+
+sd
+
+
+
+
+
+
+    3
+ 111e111
+ 1111111
+ 1111111
+ 11A1B11
+
+round 1:
+wwaw
+input error,please input again!
+wwaa
+input error,please input again!
+wwa
+input error,please input again!
+3u
+input error,please input again!
+A 0 3
+B 2 3
+A 05 0 3
+B 20 2 3
+guard 30 move sd attack -1
+A's turn: card 0 3
+3u
+waw
+input error,please input again!
+wwaw
+input error,please input again!
+e
+error target!!!
+0
+A shield 1 this turn
+A shield 2 this turn
+B's turn: card 2 3
+3d
+gg
+input error,please input again!
+ww
+
+
+
+
+
+
+    3
+ 111e111
+ 1111B11
+ 1111111
+ 11A1111
+
+e
+error target!!!
+A
+error target!!!
+0
+
+
+
+
+
+
+    3
+ 1111111
+ 111eB11
+ 1111111
+ 11A1111
+
+e lock B in distance 1
+e attack B 1 damage, B shield 0, B remain 13 hp
+round 2:
+A check
+hand: 1, 2, 4, 5; discard: 0, 3
+B check'
+input error,please input again!
+B check
+hand: 4, 5, 6, 7; discard: 2, 3
+A 0 3
+card number is not correct(not exist or discard or duplication or unavailable)! please input again!
+A 0 0
+card number is not correct(not exist or discard or duplication or unavailable)! please input again!
+A 1 1
+card number is not correct(not exist or discard or duplication or unavailable)! please input again!
+B 2 4
+card number is not correct(not exist or discard or duplication or unavailable)! please input again!
+B check
+hand: 4, 5, 6, 7; discard: 2, 3
+B 4 4
+card number is not correct(not exist or discard or duplication or unavailable)! please input again!
+B 5 7
+B -1
+this character already choose card,Do you want to modify it(y/n)?
+n
+A check
+hand: 1, 2, 4, 5; discard: 0, 3
+A 2 4
+A 20 2 4
+B 49 5 7
+guard 55 move wa attack 0
+A's turn: card 2 4
+3d
+card number error!,please choose one of the two selected cards
+0u
+card number error!,please choose one of the two selected cards
+2u
+e
+error target!!!
+e
+error target!!!
+B
+error target!!!
+A
+error target!!!
+O
+error target!!!
+difjgdif
+input error,please input again!
+dfgdnfgj
+input error,please input again!
+asjdnajsdnas
+input error,please input again!
+E
+error target!!!
+
+input error,please input again!
+
+input error,please input again!
+
+input error,please input again!
+
+input error,please input again!
+
+input error,please input again!
+e
+error target!!!
+0
+wd
+error move!!
+wd
+error move!!
+wd
+error move!!
+d
+
+
+
+
+
+
+    3
+ 1111111
+ 111eB11
+ 1111111
+ 111A111
+
+A shield 1 this turn
+B's turn: card 5 7
+7d
+wwrrr
+input error,please input again!
+aww
+error move!!
+waw
+
+
+
+
+
+
+    B
+ 1111111
+ 111e111
+ 1111111
+ 111A111
+
+B shield 2 this turn
+
+
+
+
+
+
+    B
+ 11e1111
+ 1111111
+ 1111111
+ 111A111
+
+no one lock
+round 3:
+A check
+hand: 1, 5; discard: 0, 2, 3, 4
+B check
+hand: 4, 6; discard: 2, 3, 5, 7
+A -1
+B -1
+guard 15 shield
+archer 68 attack 1 range 1
+A 99 -1
+B 99 -1
+e shield 2 this turn
+no one lock
+A's turn: card -1
+A heal 2, now hp is 14
+請輸入要移除卡牌:

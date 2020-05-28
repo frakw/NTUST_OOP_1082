@@ -92,7 +92,16 @@ void Map::fill_room(Coord pos) {
 		coord_in(show, pos) = true;
 		return;
 	}
-	else {
+	else if(coord_in(body, pos) != '1' && coord_in(body, pos) != '2'){//角色或怪物
+		for (int i = 0;i < door_total_amount;i++) {
+			if (door_pos[i] == pos) {//若該地方為門，但有角色踩上去
+				coord_in(show, pos) = true;
+				return;
+			}
+		}
+		coord_in(show, pos) = true;
+	}
+	else {//地板或障礙
 		coord_in(show, pos) = true;
 	}
 	Coord direction[4] = {UP(pos),DOWN(pos),LEFT(pos),RIGHT(pos)};

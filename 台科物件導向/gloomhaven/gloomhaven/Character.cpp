@@ -61,14 +61,14 @@ void Character::choose_card(string input) {
 	}
 	else {
 		ss >> card_number2;
-		if (card_in_hand(atoi(card_number1.c_str())) && card_in_hand(card_number2)) {
+		if (card_in_hand(atoi(card_number1.c_str())) && card_in_hand(card_number2) && /*檢查是否重複*/atoi(card_number1.c_str())!= card_number2) {
 			use_card[0] = find_card(atoi(card_number1.c_str()));
 			use_card[1] = find_card(card_number2);
 			finished_choose = true;
 			sleep = false;//remember
 		}
 		else {
-			cout << "card number is not correct(not exist or discard or unavailable)! please input again!"<<endl;
+			cout << "card number is not correct(not exist or discard or duplication or unavailable)! please input again!"<<endl;
 		}
 	}
 }
@@ -91,7 +91,7 @@ void Character::action(bool) {
 		return;
 	}
 	cout << code << "'s turn: card ";
-	if (sleep) {//長休，   ====== 尚未檢查IO err
+	if (sleep) {//長休
 		cout << "-1" << endl;
 		this->heal(2);
 #ifdef prompt_input

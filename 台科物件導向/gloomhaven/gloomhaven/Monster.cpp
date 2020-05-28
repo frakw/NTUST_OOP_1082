@@ -72,7 +72,7 @@ void Monster::print(){
 		}break;
 		case 1: {
 			cout << " attack " << use_card[0].skill_up[i].value;
-			if (use_card[0].skill_up[i].range != -1) {
+			if (range != 0) {//遠程怪需印range
 				cout << " range " << use_card[0].skill_up[i].range;
 			}
 		}break;
@@ -80,7 +80,7 @@ void Monster::print(){
 			cout << " heal " << use_card[0].skill_up[i].value;
 		}break;
 		case 3: {
-			cout << " shield " << use_card[0].skill_up[i].move_step;
+			cout << " shield " << use_card[0].skill_up[i].value;
 		}break;
 		default:
 			break;
@@ -118,7 +118,7 @@ void Monster::action(bool debug_mode) {
 void Monster::attack(Skill skill) {
 	//cout << "monster attack" << endl;
 	int min = map->row * map->col;//最大可能的步數
-	int index=-1;//沒找到就是-1(可能角色死光了)
+	int index = -1;//沒找到就是-1(可能角色死光了)
 	for (int i = 0;i < map->character_amount;i++) {
 		int tmpstep = map->a_star_path_step(this, map->character + i);
 		if (tmpstep == -87) {//無法攻擊到
@@ -144,13 +144,27 @@ void Monster::attack(Skill skill) {
 			}
 		}
 	}
-	if (min > (range + skill.range) || index==-1) {//自己的range加上卡牌的range
-		cout << "no one lock" << endl;
-		return;
+	if (range != 0 && (range + skill.range) >= 1) {//遠程
+		if (min > (range + skill.range) || index == -1) {//自己的range加上卡牌的range
+			cout << "no one lock" << endl;
+			return;
+		}
 	}
+	else {//近戰
+		if (min > 1 || index == -1) {
+			cout << "no one lock" << endl;
+			return;
+		}
+	}
+
 	if (map->in_vision(position, map->character[index].position)) {//檢查視野
 		cout << code << " lock " << map->character[index].code << " in distance " << min << endl;
-		map->character[index].be_attack(code,skill.value + damage);//加上自己的攻擊力
+		if (skill.value + damage > 0) {
+			map->character[index].be_attack(code, skill.value + damage);//加上自己的攻擊力
+		}
+		else {
+			map->character[index].be_attack(code,0);
+		}
 	}
 }
 

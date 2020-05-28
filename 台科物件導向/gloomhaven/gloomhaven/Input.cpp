@@ -1,5 +1,6 @@
 #include "Gloom_Haven.h"
 #include "Input.h"
+#define mygetline(cin,input)  if(cin.eof()){cin.clear();} getline(cin, input);
 using namespace std;
 
 int character_amount_input() {
@@ -7,10 +8,10 @@ int character_amount_input() {
 	regex reg(R"(^[+]?\d+$)");
 	int result = 2;
 check:
-	getline(cin, input);
+	mygetline(cin, input);
 	while (!regex_match(input, reg)) {
 		cout << err << endl;
-		getline(cin, input);
+		mygetline(cin, input);
 	}
 	result = atoi(input.c_str());
 	if (result > 4 || result < 2) {
@@ -25,7 +26,7 @@ void character_data_input(Character& life, Character* db, int total_chr, char co
 	string input;
 name_input:
 	db_index = -1;
-	getline(cin, input);
+	mygetline(cin, input);
 	stringstream ss(input);
 	ss >> life.name;
 	for (int i = 0;i < total_chr;i++) {
@@ -63,14 +64,19 @@ name_input:
 		final >> num;
 
 		int m;
-
 		for (m = 0; m < db[db_index].card_total;m++) {
 			if (num == db[db_index].card[m].number) {
 				life.card[i] = db[db_index].card[m];
 				break;
 			}
 		}
-		if (m == db[db_index].card_total) {
+		int j;
+		for (j = 0;j < i;j++) {//檢查與之前卡牌是否重複
+			if (num == life.card[j].number) {
+				break;
+			}				
+		}
+		if (m == db[db_index].card_total || j!=i) {
 			cout << err << endl;
 			goto name_input;
 		}
@@ -86,7 +92,7 @@ void open_file(fstream& file, string filename) {//map1.txt
 	file.open(filename, ios::in);
 	while(!file.is_open()) {
 		cout <<'"'<<filename<<'"'<<" file open error please input file path again:";
-		getline(cin, filename);
+		mygetline(cin, filename);
 		file.open(filename, ios::in);
 	}
 }
@@ -94,10 +100,10 @@ void open_file(fstream& file, string filename) {//map1.txt
 string wasd() {
 	regex reg(R"(^[wasd]+$)");
 	string input;
-	getline(cin, input);
+	mygetline(cin, input);
 	while(!regex_match(input, reg) && input != "e") {
 		cout << err << endl;
-		getline(cin, input);
+		mygetline(cin, input);
 	}
 	return input;
 }
@@ -106,20 +112,20 @@ string character_card_choose() {//A 0 3 B -1，bool回傳false代表check或輸入錯誤，
 	regex sleep(R"(^[A-Z] -1)");
 	regex check(R"(^[A-Z] check$)");
 	string input;
-	getline(cin, input);
+	mygetline(cin, input);
 	while (!regex_match(input, reg) && !regex_match(input,sleep) && !regex_match(input, check)) {
 		cout << err << endl;
-		getline(cin, input);
+		mygetline(cin, input);
 	}
 	return input;
 }
 string character_card_first_ud() {//角色輸入第一張使用的牌與上半部或下半部(2u)
 	regex reg(R"(^[+-]?\d+[ud]$)");
 	string input;
-	getline(cin, input);
+	mygetline(cin, input);
 	while (!regex_match(input, reg) && input!="check") {
 		cout << err << endl;
-		getline(cin, input);
+		mygetline(cin, input);
 	}
 	return input;
 }
@@ -127,20 +133,20 @@ string character_card_first_ud() {//角色輸入第一張使用的牌與上半部或下半部(2u)
 int getline_int() {
 	regex int_check(R"([+-]?[0-9]*)");
 	string in;
-	getline(cin, in);
+	mygetline(cin, in);
 	while (!regex_match(in, int_check)) {
 		cout << err << endl;
-		getline(cin, in);
+		mygetline(cin, in);
 	}
 	return atoi(in.c_str());
 }
 
 char getline_char() {
 	string ch;
-	getline(cin, ch);
+	mygetline(cin, ch);
 	while (ch.length() != 1) {
 		cout << err << endl;
-		getline(cin, ch);
+		mygetline(cin, ch);
 	}
 	return ch[0];
 }
