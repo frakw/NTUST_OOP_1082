@@ -20,20 +20,17 @@ public:
 	Coord& find_pos(Coord*, int max, Coord pos);
 	int now_monster_amount();//目前場上怪物數(活著)
 	int door_amount();//門剩餘的數量
-	int now_door_amount();//目前門的數量
 	Creature* creature_in(Coord);
 	char& coord_in_body(Coord);
 	bool coord_legal(Coord);
 	void check();//角色行動前，輸入check，要列出所有角色與怪物的hp與防禦值
 
 	int a_star_path_step(Creature*, Creature*);//A星演算法找尋最短步數
-
-
 	bool in_vision(Coord, Coord);//線性差值法
 
 	int row=0, col=0;
-	char** body = nullptr;
-	bool** show = nullptr;
+	char** body = nullptr;//地圖主體
+	bool** show = nullptr;//是否在視野內
 	Coord star_pos;//星星位置
 	Coord start_pos[4] = {};//可選位置，設為-1,-1代表已選擇
 	Coord fill_start;//遞迴起始位置，預設start_pos[0]

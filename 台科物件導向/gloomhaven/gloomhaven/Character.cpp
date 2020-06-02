@@ -1,9 +1,7 @@
 #include "Gloom_Haven.h"
 
-Character::Character() :Creature() {
-}
-Character::Character(string in_name, int val, int in_card_amount) :Creature(in_name, val, in_card_amount) {
-}
+Character::Character() :Creature() {}
+Character::Character(string in_name, int val, int in_card_amount) :Creature(in_name, val, in_card_amount) {}
 Character& Character::operator=(const Character& input) {
 	this->name = input.name;
 	this->life_value = input.life_value;
@@ -73,7 +71,7 @@ void Character::choose_card(string input) {
 	}
 }
 
-void Character::print(){
+void Character::print(){//virtual
 	if (life_value > 0) {//角色不判斷是否出現
 		cout << code << ' ' <<setw(2) << setfill('0') << use_card[0].agility << ' ';
 		if (!sleep) {
@@ -86,7 +84,7 @@ void Character::print(){
 	}
 }
 
-void Character::action(bool) {
+void Character::action(bool) {//virtual
 	if (life_value <= 0) {
 		return;
 	}
@@ -94,7 +92,7 @@ void Character::action(bool) {
 	if (sleep) {//長休
 		cout << "-1" << endl;
 		this->heal(2);
-		prompt_input("請輸入要移除卡牌:");
+		prompt_input("請從棄牌堆中輸入要移除卡牌編號:");
 		int remove_number = getline_int();
 		while (!card_in_discard(remove_number)) {
 			cout << "card number is not correct(not exist or in hand or unavailable)! please input again!" << endl;
@@ -192,7 +190,7 @@ void Character::attack(Skill skill) {
 	}
 }
 
-void Character::round_end(bool debug_mode) {//該回合結束後的重整(重設數值)
+void Character::round_end(bool debug_mode) {//virtual//該回合結束後的重整(重設數值)
 	if (!sleep) {//沒長休就將出的2張牌移至棄牌堆
 		find_card(use_card[0].number).discard = true;
 		find_card(use_card[1].number).discard = true;
@@ -203,5 +201,4 @@ void Character::round_end(bool debug_mode) {//該回合結束後的重整(重設數值)
 	finished_choose = life_value <= 0;
 	sleep = false;
 	TmpShield = 0;
-
 }

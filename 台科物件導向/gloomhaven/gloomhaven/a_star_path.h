@@ -7,7 +7,7 @@ typedef struct _Coord_ Coord;
 using namespace std;
 class Grid {
 public:
-	Coord self;
+	Coord coord;
 	Grid* father = nullptr;
 	int F = 0;
 	int G = 0;

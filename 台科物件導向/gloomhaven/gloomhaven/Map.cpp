@@ -10,21 +10,9 @@ Map::Map(int in_row, int in_col) :row(in_row), col(in_col) {
 	}
 }
 Map::~Map() {
-	if (body != nullptr) {
-		for (int i = 0;i < row;i++) {
-			delete[] body[i];
-		}
-		delete[] body;
-	}
-	if (show != nullptr) {
-		for (int i = 0;i < row;i++) {
-			delete[] show[i];
-		}
-		delete[] show;
-	}
-	if (door_pos != nullptr) {
-		delete[] door_pos;
-	}
+	delete_2d(body, row);
+	delete_2d(show, row);
+	mydelete(door_pos);
 }
 void Map::set(string input) {
 	for (int i = 0;i < row;i++) {
@@ -66,7 +54,7 @@ bool Map::check_room() {
 	}
 	this->fill_room(fill_start);//產生新的show
 	for (int i = 0;i < monster_amount;i++) {
-		if (monster[i].show && !monster[i].position.is_null() && monster[i].life_value > 0) {
+		if (monster[i].show && monster[i].position.not_null() && monster[i].life_value > 0) {
 			if (coord_in(show,monster[i].position)) {
 				monster[i].show_in_room = true;
 			}
@@ -158,28 +146,26 @@ void Map::show_choosing_room() {
 }
 
 void Map::set_choosing_environment() {
-	int min = row + col;
+	int miny = row;
 	int start_index = 0;
 	for (int i = 0;i < 4;i++) {
-		if (start_pos[i].y == -1) continue;
-		int dis = start_pos[i].x + start_pos[i].y;
-		if (dis < min) {
+		if (start_pos[i].is_null()) continue;
+		if (start_pos[i].y < miny) {
 			start_index = i;
-			min = dis;
+			miny = start_pos[i].y;
 		}
-		else if (dis == min) {
-			if (start_pos[i].y < start_pos[start_index].y) {
+		else if (start_pos[i].y == miny) {
+			if (start_pos[i].x < start_pos[start_index].x) {
 				start_index = i;
 			}
 		}
 	}
 	for (int i = 0;i < 4;i++) {//可選位置設為_ *
-		if (start_pos[i].y != -1 && start_pos[i].x != -1) {
-			body[start_pos[i].y][start_pos[i].x] = start_index != i?'_':'*';
+		if (start_pos[i].not_null()) {
+			coord_in(body, start_pos[i]) = start_index != i ? '_' : '*';
 		}
 	}
 	star_pos = start_pos[start_index];
-
 }
 
 Coord& Map::find_pos(Coord* check,int max,Coord pos) {
@@ -282,20 +268,6 @@ int Map::door_amount() {
 	for (int i = 0;i < door_total_amount;i++) {
 		if (door_pos[i].not_null()) {
 			count++;
-		}
-	}
-	return count;
-}
-
-int Map::now_door_amount() {
-	int count = 0;
-	for (int i = 0;i < row;i++) {
-		for (int j = 0;j < col;j++) {
-			if (show[i][j]) {
-				if (body[i][j] == '3') {
-					count++;
-				}
-			}
 		}
 	}
 	return count;

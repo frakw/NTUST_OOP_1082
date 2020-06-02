@@ -1,40 +1,19 @@
 #include "Gloom_Haven.h"
-Skill::Skill():type(-1), value(-1) {
-	
-}
-
+Skill::Skill():type(-1), value(-1) {}
 Skill::Skill(string name, int val) : value(val) {
 	this->set(name, val);
 }
-
-Skill::Skill(int in_type, int val) : value(val) {
-	if (in_type < 0 || in_type > 3) {
-		this->type = -1;//skill type error!
-		cout << "skill type error!" << endl;
-	}
-	else {
-		this->type = in_type;
-	}
-}
+Skill::Skill(int in_type, int val) : type(in_type),value(val) {}
 void Skill::set(string name, int val) {
-	if (name == "move") {
-		this->type = 0;
-	}
-	else if (name == "attack") {
-		this->type = 1;
-	}
-	else if (name == "heal") {
-		this->type = 2;
-	}
-	else if (name == "shield") {
-		this->type = 3;
-	}
-	else {
-		this->type = -1;//skill type error!
-	}
 	this->value = val;
+	string sk_name[4] = { "move" ,"attack" ,"heal" ,"shield" };
+	for (int i = 0;i < 4;i++) {
+		if (name == sk_name[i]) {
+			this->type = i;
+			break;
+		}
+	}
 }
-
 Skill::Skill(const Skill& input) {
 	*this = input;
 }
@@ -47,26 +26,17 @@ Skill& Skill::operator=(const Skill& input) {
 }
 
 //============================================================
-Card::Card() {
-	skill_up = nullptr;
-	skill_down = nullptr;
-}
+Card::Card():skill_up(nullptr),skill_down(nullptr){}
 Card::Card(const Card& input) {
 	*this = input;
 }
 Card::Card(int in_agility, bool mark, Skill* a) : agility(in_agility), rewash_mark(mark), skill_up(a) {}
 Card::Card(int in_agility, bool mark, Skill* a, Skill* b) : agility(in_agility), rewash_mark(mark), skill_up(a), skill_down(b) {}
 Card::~Card() {
-	if (skill_up != nullptr) {
-		delete[] skill_up;
-		skill_up = nullptr;
-		skill_up_amount = 0;
-	}
-	if (skill_down != nullptr) {
-		delete[] skill_down;
-		skill_down = nullptr;
-		skill_down_amount = 0;
-	}
+	mydelete(skill_up);
+	skill_up_amount = 0;
+	mydelete(skill_down);
+	skill_down_amount = 0;
 }
 Card& Card::operator=(const Card& input) {
 	this->~Card();
@@ -94,14 +64,9 @@ Card& Card::operator=(const Card& input) {
 
 //==================================================================
 Creature::Creature() {}
-Creature::Creature(string in_name, int val, int in_card_amount) :name(in_name), life_value(val), card_amount(in_card_amount) {
-
-}
+Creature::Creature(string in_name, int val, int in_card_amount) :name(in_name), life_value(val), card_amount(in_card_amount) {}
 Creature::~Creature() {
-	if (card != nullptr) {
-		delete[] card;
-		card = nullptr;
-	} 
+	mydelete(card);
 }
 
 int Creature::card_available_amount() {//持有卡牌數(棄牌堆+手牌)
@@ -141,13 +106,14 @@ Card& Creature::find_card(int number) {//int 傳入編號number，回傳該Card referenc
 }
 
 void Creature::heal(int add) {
-	if (add > 0) {
-		life_value += add;
-		if (life_value > max_life_value) {
-			life_value = max_life_value;
-		}
-		cout << code << " heal " << add << ", now hp is " << life_value << endl;
+	if (add < 0) {
+		add = 0;
 	}
+	life_value += add;
+	if (life_value > max_life_value) {
+		life_value = max_life_value;
+	}
+	cout << code << " heal " << add << ", now hp is " << life_value << endl;
 }
 
 void Creature::discard_to_hand() {//棄牌堆所有牌移回手牌，但不包含已被移除的牌(availible == false)
@@ -172,12 +138,12 @@ void Creature::check_card() {//印出卡牌編號(手牌與棄牌)，編號由小到大
 		}
 	}
 	int count = 0;
-	cout << "hand:";
-	for (int i = min_number;i <= max_number;i++) {//從0開始跑大最
+	cout << "hand: ";
+	for (int i = min_number;i <= max_number;i++) {//從0開始跑到最大
 		for (int j = 0;j < card_amount;j++) {
 			if (card[j].number == i) {
 				if (card[j].available && !card[j].discard) {
-					cout << (count != 0?", ":" ")<< card[j].number;
+					cout << (count != 0?", ":"")<< card[j].number;
 					count++;
 					break;
 				}
@@ -185,12 +151,12 @@ void Creature::check_card() {//印出卡牌編號(手牌與棄牌)，編號由小到大
 		}
 	}
 	count = 0;
-	cout << "; discard:";
-	for (int i = min_number;i <= max_number;i++) {//從0開始跑大最
+	cout << "; discard: ";
+	for (int i = min_number;i <= max_number;i++) {//從0開始跑到最大
 		for (int j = 0;j < card_amount;j++) {
 			if (card[j].number == i) {
 				if (card[j].available && card[j].discard) {
-					cout << (count != 0 ? ", " : " ") << card[j].number;
+					cout << (count != 0 ? ", " : "") << card[j].number;
 					count++;
 					break;
 				}
@@ -202,13 +168,17 @@ void Creature::check_card() {//印出卡牌編號(手牌與棄牌)，編號由小到大
 
 
 void Creature::shield(int add) {
-	if (life_value > 0) {
-		cout << code << " shield " << add << " this turn"<<endl;
-		TmpShield += add;
+	if (add < 0) {
+		add = 0;
 	}
+	cout << code << " shield " << add << " this turn"<<endl;
+	TmpShield += add;
 }
 
 void Creature::be_attack(char attacker_code,int attack_val) {
+	if (attack_val < 0) {
+		attack_val = 0;
+	}
 	cout << attacker_code << " attack " << code << ' ' << attack_val << " damage, ";
 	cout << code << " shield " << TmpShield << ", "<<code << " remain ";
 	if (TmpShield < attack_val) {
@@ -221,7 +191,6 @@ void Creature::be_attack(char attacker_code,int attack_val) {
 		position.to_null();
 		this->map->show_room();
 	}
-
 }
 
 void Creature::move(string step,int step_count) {

@@ -3,18 +3,18 @@
 int Manhattan_distance(Coord,Coord);
 
 Grid::Grid(Coord in, Grid* the_father, Coord end_point) {
-	this->self = in;
+	this->coord = in;
 	if (the_father != nullptr) {
 		this->calc_val(the_father, end_point);
 	}
 }
 
 void Grid::calc_val(Grid* the_father, Coord end_point) {
-	int tmp = Manhattan_distance(the_father->self, this->self);
+	int tmp = Manhattan_distance(the_father->coord, this->coord);
 	if (father == nullptr) {
 		this->father = the_father;
 		G = father->G + tmp;
-		H = Manhattan_distance(end_point, this->self);
+		H = Manhattan_distance(end_point, this->coord);
 		F = G + H;
 	}
 	else {
@@ -28,17 +28,17 @@ void Grid::calc_val(Grid* the_father, Coord end_point) {
 
 int exist_in(vector<Grid*>* data_ptr, Coord check) {
 	for (int i = 0;i < data_ptr->size();i++) {
-		if ((*data_ptr)[i]->self == check) {
+		if ((*data_ptr)[i]->coord == check) {
 			return i;
 		}
 	}
 	return -1;
 }
 
-int Map::a_star_path_step(Creature* self, Creature* dest) {
+int Map::a_star_path_step(Creature* coord, Creature* dest) {
 	vector<Grid*> close_list;//不可以用vector<Grid>，因為指標Grid*不可以指向vector中的元素
 	vector<Grid*> open_list;//不可以用vector<Grid>，因為指標Grid*不可以指向vector中的元素
-	Grid* current = new Grid(self->position, nullptr, dest->position);
+	Grid* current = new Grid(coord->position, nullptr, dest->position);
 	open_list.push_back(current);
 	do {
 		if (open_list.empty()) {
@@ -55,9 +55,7 @@ int Map::a_star_path_step(Creature* self, Creature* dest) {
 		close_list.push_back(open_list[pos]);
 		open_list.erase(open_list.begin() + pos);
 		current = close_list[close_list.size() - 1];
-		int tmpx = current->self.x;
-		int tmpy = current->self.y;
-		Coord direction[4] = { { tmpx,tmpy - 1 },{ tmpx,tmpy + 1 },{tmpx - 1,tmpy },{tmpx + 1,tmpy } };
+		Coord direction[4] = { UP(current->coord),DOWN(current->coord),LEFT(current->coord),RIGHT(current->coord) };
 		for (int i = 0;i < 4;i++) {
 			char now_char = this->coord_in_body(direction[i]);
 			Creature* now_life = this->creature_in(direction[i]);
@@ -65,7 +63,7 @@ int Map::a_star_path_step(Creature* self, Creature* dest) {
 				continue;
 			}
 			if (now_life != nullptr && now_life != dest) {//排除敵人
-				if (self->team_num != now_life->team_num) {
+				if (coord->team_num != now_life->team_num) {
 					continue;
 				}
 			}
@@ -80,7 +78,7 @@ int Map::a_star_path_step(Creature* self, Creature* dest) {
 				}
 			}
 		}
-	} while (current->self != dest->position);
+	} while (current->coord != dest->position);
 	int count = 1;
 	current = current->father;
 	while (current->father!=nullptr) {
@@ -95,7 +93,6 @@ int Map::a_star_path_step(Creature* self, Creature* dest) {
 		delete[] open_list[i];
 		open_list[i] = nullptr;
 	}
-	//cout << "a star step:" << count << endl;
 	return count;
 }
 int Manhattan_distance(Coord a, Coord b) {//曼哈頓距離

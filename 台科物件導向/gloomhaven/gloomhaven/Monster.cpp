@@ -14,7 +14,6 @@ Monster& Monster::operator=(const Monster& input) {
 	this->code = input.code;
 	this->position = input.position;
 	this->TmpShield = input.TmpShield;
-	//this->TmpAgility = input.TmpAgility;
 	this->team_num = input.team_num;
 	this->show_in_room = input.show_in_room;
 	this->map = input.map;
@@ -25,6 +24,9 @@ Monster& Monster::operator=(const Monster& input) {
 	this->elite_damage = input.elite_damage;
 	this->elite_range = input.elite_range;
 	//------------------------------------------
+
+	//memcpy(this,&input,sizeof(Monster));
+
 	this->card = new Card[card_amount];
 	for (int i = 0;i < card_amount;i++) {
 		card[i] = input.card[i];
@@ -34,9 +36,9 @@ Monster& Monster::operator=(const Monster& input) {
 void Monster::switch_status(int num) {
 	switch (num)
 	{
-	case 0:show = false;break;
-	case 1:break;
-	case 2: {
+	case 0:show = false;break;//不出現
+	case 1:break;//普通怪
+	case 2: {//菁英怪
 		elite = true;
 		damage = elite_damage;
 		max_life_value = elite_max_life_value;
@@ -120,12 +122,14 @@ void Monster::action(bool debug_mode) {
 }
 
 void Monster::attack(Skill skill) {
-	//cout << "monster attack" << endl;
 	int min = map->row * map->col;//最大可能的步數
 	int index = -1;//沒找到就是-1(可能角色死光了)
 	for (int i = 0;i < map->character_amount;i++) {
 		int tmpstep = map->a_star_path_step(this, map->character + i);
 		if (tmpstep == -87) {//無法攻擊到
+			continue;
+		}
+		if (!map->in_vision(position, map->character[i].position)) {//沒有視野
 			continue;
 		}
 		if (tmpstep < min) {//找出距離最小的角色
@@ -148,28 +152,26 @@ void Monster::attack(Skill skill) {
 			}
 		}
 	}
+	if (index == -1) {
+		cout << "no one lock" << endl;
+		return;
+	}
 	if (range != 0 && (range + skill.range) >= 1) {//遠程
-		if (min > (range + skill.range) || index == -1) {//自己的range加上卡牌的range
+		if (min > (range + skill.range)) {//自己的range加上卡牌的range
 			cout << "no one lock" << endl;
 			return;
 		}
 	}
 	else {//近戰
-		if (min > 1 || index == -1) {
+		if (min > 1) {
 			cout << "no one lock" << endl;
 			return;
 		}
 	}
 
-	if (map->in_vision(position, map->character[index].position)) {//檢查視野
-		cout << code << " lock " << map->character[index].code << " in distance " << min << endl;
-		if (skill.value + damage > 0) {
-			map->character[index].be_attack(code, skill.value + damage);//加上自己的攻擊力
-		}
-		else {
-			map->character[index].be_attack(code,0);
-		}
-	}
+	cout << code << " lock " << map->character[index].code << " in distance " << min << endl;
+	map->character[index].be_attack(code,skill.value + damage);//加上自己的攻擊力
+
 }
 
 void Monster::round_end(bool debug_mode) {//該回合結束後的重整(重設數值)

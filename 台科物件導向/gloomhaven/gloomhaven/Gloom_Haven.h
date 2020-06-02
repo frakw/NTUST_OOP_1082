@@ -32,6 +32,10 @@
 #endif
 
 #define mygetline(cin,input)  if(cin.eof()){cin.clear();} getline(cin, input);
+#define mydelete(ptr) do{if(ptr!=nullptr){delete[] ptr;ptr = nullptr;}}while(0)
+#define mydelete_single(ptr) do{if(ptr!=nullptr){delete ptr;ptr = nullptr;}}while(0)
+#define delete_2d(ptr,row) do{if(ptr!=nullptr){for(int __i=0;__i<row;__i++){delete[] ptr[__i];}delete[] ptr;ptr=nullptr;}}while(0)
+#define self_assign_err_handle(input) do{if(this==&input)return;}while(0)
 using namespace std;
 
 //待做:採用macro coord_in提升可讀性, regex
@@ -40,6 +44,8 @@ using namespace std;
 //cout與txt檔同時輸出
 //input output 包裝成class可任意更改輸入或輸出，也可多個輸出
 //提示輸入訊息
+
+//資料封裝，self assign，註解
 class Gloom_Haven {
 public:
 	Gloom_Haven();

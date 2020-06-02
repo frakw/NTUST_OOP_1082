@@ -117,24 +117,16 @@ void Gloom_Haven::start() {
 	}
 }
 
-Gloom_Haven::Gloom_Haven() {
-
-}
+Gloom_Haven::Gloom_Haven() {}
 
 Gloom_Haven::~Gloom_Haven() {
 	//if (map != nullptr) { map 要在class txt 裡釋放記憶體(因為地圖會重新載入)，否則會重複釋放記憶體
 	//	delete map;//不可用delete[]
 	//	map = nullptr;
 	//}
-	if (character != nullptr) {
-		delete[] character;
-	}
-	if (monster != nullptr) {
-		delete[] monster;
-	}
-	if (all != nullptr) {
-		delete[] all;
-	}
+	mydelete(character);
+	mydelete(monster);
+	mydelete(all);
 }
 
 int Gloom_Haven::character_remain() {//角色剩餘數
