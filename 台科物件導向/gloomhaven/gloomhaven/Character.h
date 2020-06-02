@@ -15,5 +15,5 @@ public:
 	void attack(Skill);//角色與怪物的attck各自分開
 	//Card use_card[2];//該輪選擇的2張卡，已轉移至basic
 	bool sleep = false;//是否長休
-	bool finished_choose = false;//該回合是否完成選牌或選擇長休
+	
 };

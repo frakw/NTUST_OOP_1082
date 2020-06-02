@@ -217,15 +217,16 @@ void Creature::be_attack(char attacker_code,int attack_val) {
 	cout << life_value << " hp" <<endl;
 	if (life_value <= 0) {
 		cout << code << " is killed!!" << endl;
-		this->map->show_room();
+		prompt_input(code << " 死亡後的地圖:");
 		position.to_null();
+		this->map->show_room();
 	}
 
 }
 
 void Creature::move(string step,int step_count) {
 	if (step.length() > step_count && team_num == 0) {//角色不可超過最大步數，重新輸入
-		cout << "error move!!" << endl;
+		cout << "error move!!!" << endl;
 		this->move(wasd(), step_count);
 		return;
 	}
@@ -257,14 +258,14 @@ void Creature::move(string step,int step_count) {
 
 			}
 			else if (now_life->team_num != team_num && team_num == 0) {//角色不可穿過障礙物或敵人
-				cout << "error move!!" << endl;
+				cout << "error move!!!" << endl;
 				this->move(wasd(),step_count);
 				return;
 			}
 		}
 		else {//剩餘的是障礙物與牆壁
 			if (team_num == 0) {//角色不可穿過障礙物牆壁，怪物則會被擋住
-				cout << "error move!!" << endl;
+				cout << "error move!!!" << endl;
 				this->move(wasd(), step_count);
 				return;
 			}

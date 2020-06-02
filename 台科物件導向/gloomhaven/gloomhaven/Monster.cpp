@@ -18,6 +18,7 @@ Monster& Monster::operator=(const Monster& input) {
 	this->team_num = input.team_num;
 	this->show_in_room = input.show_in_room;
 	this->map = input.map;
+	this->finished_choose = input.finished_choose;
 	//elite系列---------------------------------
 	this->elite = input.elite;
 	this->elite_max_life_value = input.elite_max_life_value;
@@ -47,15 +48,18 @@ void Monster::switch_status(int num) {
 }
 
 void Monster::choose_card(bool debug_mode) {
-	if (life_value <= 0 || !show_in_room) {
+	if (life_value <= 0 || !show_in_room || finished_choose) {
 		return;
 	}
-	if (debug_mode) {
-		use_card[0] = card[debug_mode_card_number];
-		debug_mode_card_number++;
-	}
-	else {
-		use_card[0] = card[rand() % card_amount];
+	//該種族怪物的第一隻(活著且出現)
+	use_card[0] = (debug_mode ? find_card(debug_mode_card_number) : card[rand() % card_amount]);
+	for (int i = 0;i < map->monster_amount;i++) {
+		if (map->monster + i == this || map->monster[i].name != name) continue;
+		if (map->monster[i].life_value > 0 && map->monster[i].show_in_room) {
+			map->monster[i].use_card[0] = use_card[0];
+			map->monster[i].finished_choose = true;
+		}
+		map->monster[i].debug_mode_card_number = this->debug_mode_card_number;
 	}
 }
 
@@ -171,12 +175,19 @@ void Monster::attack(Skill skill) {
 void Monster::round_end(bool debug_mode) {//該回合結束後的重整(重設數值)
 	//重洗標記
 	TmpShield = 0;
+	finished_choose = false;
 	if (life_value > 0) {
-		if (use_card[0].rewash_mark) {
-			if (debug_mode) {
-				debug_mode_card_number = 0;
+		if (show_in_room) {
+			find_card(use_card[0].number).discard = true;
+			if (use_card[0].rewash_mark) {
+				if (debug_mode) {
+					this->debug_mode_card_number = 0;
+				}
+				this->discard_to_hand();
 			}
-			this->discard_to_hand();
+			else if (debug_mode) {
+				this->debug_mode_card_number++;
+			}
 		}
 	}
 	else {

@@ -35,10 +35,13 @@ void Gloom_Haven::start() {
 	this->map->check_room();
 	this->map->set_choosing_environment();//選擇位置時專用，choose_pos裡也會呼叫到
 	for (int i = 0;i < character_amount;i++) {
+		prompt_input("請選擇角色 "<<character[i].code<<" 的位置:");
 		this->map->show_choosing_room();//輸出選擇時的地圖，輸出前要set_choosing_environment
 		this->map->choose_pos(i,wasd());//選擇位置主程式
 	}
+	prompt_input("起始地圖:");
 	this->map->show_room();//第一次輸出地圖(非選擇狀態)
+	prompt_input("開始遊戲");
 	int round_count = 1;
 	string choose;
 	while ((character_remain() != 0 && monster_remain() != 0) || this->map->door_amount()!=0) {

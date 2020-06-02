@@ -1,7 +1,7 @@
 #include "Gloom_Haven.h"
 using namespace std;
 #include <iostream>
-//#define command_line
+#define command_line
 int main(int argc, char** argv) {
 	srand(time(NULL));
 	TXT preprocess;
@@ -46,6 +46,6 @@ int main(int argc, char** argv) {
 #endif
 		game.start();
 	}
-	cout << "bye bye~~";
+	prompt_input("bye bye~~");
 	return 0;
 }

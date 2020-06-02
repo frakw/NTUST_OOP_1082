@@ -76,6 +76,7 @@ public:
 	Coord position = {-1,-1};
 	int team_num = 0;//隊伍編號，角色為0，怪物為1
 	Map* map = nullptr;
+	bool finished_choose = false;//該回合是否完成選牌或選擇長休
 };
 
 
