@@ -32,7 +32,7 @@ public:
 	char** body = nullptr;//地圖主體
 	bool** show = nullptr;//是否在視野內
 	Coord star_pos;//星星位置
-	Coord start_pos[4] = {};//可選位置，設為-1,-1代表已選擇
+	Coord start_pos[4];//可選位置，設為-1,-1代表已選擇
 	Coord fill_start;//遞迴起始位置，預設start_pos[0]
 	Coord* door_pos = nullptr;//門的位置，開門後記得設為-1,-1
 	int door_total_amount=0;//總共門的數量(輸入地圖時計算)

@@ -52,6 +52,11 @@ void Character::choose_card(string input) {
 	}
 	if (card_number1 == "-1" && ss.eof()) {
 		//長休
+		if (card_discard_amount() < 1) {
+			cout << err << endl;
+			prompt_input("棄牌堆數量不足，無法長休");
+			return;
+		}
 		sleep = true;
 		use_card[0].agility = 99;
 		use_card[1].agility = 99;

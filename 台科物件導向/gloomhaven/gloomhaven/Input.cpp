@@ -151,7 +151,7 @@ int getline_int() {
 char getline_char() {
 	string ch;
 	mygetline(cin, ch);
-	while (ch.length() != 1) {
+	while (ch.length() != 1 ) {
 		cout << err << endl;
 		mygetline(cin, ch);
 	}

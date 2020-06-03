@@ -23,7 +23,7 @@
 #include "read_file.h"//先後順序要對
 #include "Input.h"
 //提示輸入，註解掉就沒有提示
-//#define prompt
+#define prompt
 
 #ifdef prompt
 #define prompt_input(output) cout<< output <<endl

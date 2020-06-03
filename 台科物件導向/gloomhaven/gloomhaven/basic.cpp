@@ -81,7 +81,7 @@ int Creature::card_available_amount() {//持有卡牌數(棄牌堆+手牌)
 int Creature::card_hand_amount() {//可用卡牌數
 	int count = 0;
 	for (int i = 0;i < card_amount;i++) {
-		if (!card[i].discard) {
+		if (!card[i].discard && card[i].available) {
 			count++;
 		}
 	}
@@ -90,7 +90,7 @@ int Creature::card_hand_amount() {//可用卡牌數
 int Creature::card_discard_amount() {//棄牌堆數
 	int count = 0;
 	for (int i = 0;i < card_amount;i++) {
-		if (card[i].discard) {
+		if (card[i].discard && card[i].available) {
 			count++;
 		}
 	}
@@ -168,11 +168,11 @@ void Creature::check_card() {//印出卡牌編號(手牌與棄牌)，編號由小到大
 
 
 void Creature::shield(int add) {
-	if (add < 0) {
-		add = 0;
-	}
 	cout << code << " shield " << add << " this turn"<<endl;
 	TmpShield += add;
+	if (TmpShield < 0) {
+		TmpShield = 0;
+	}
 }
 
 void Creature::be_attack(char attacker_code,int attack_val) {
@@ -240,6 +240,11 @@ void Creature::move(string step,int step_count) {
 			}
 		}
 
+	}
+	if (team_num == 0 && now != latest_allow) {//角色最終不可停留在門與地板外的地方
+		cout << "error move!!!" << endl;
+		this->move(wasd(), step_count);
+		return;
 	}
 	position = latest_allow;
 	map->show_room();
