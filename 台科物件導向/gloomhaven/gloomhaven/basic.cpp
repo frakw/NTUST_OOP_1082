@@ -216,7 +216,7 @@ void Creature::move(string step,int step_count) {
 		char now_char = map->coord_in_body(direction[dir_index]);
 		Creature* now_life = map->creature_in(direction[dir_index]);
 
-		if (now_char == '1' || (team_num != 1 && now_char == '3')) {
+		if (now_char == '1' || (team_num != 1 && now_char == '3') || now_life == this) {
 			latest_allow = direction[dir_index];
 			now = direction[dir_index];
 

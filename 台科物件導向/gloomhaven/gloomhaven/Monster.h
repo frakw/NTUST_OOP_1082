@@ -24,5 +24,5 @@ public:
 	int elite_damage=-1;//µ×­^©Ç§ðÀ»
 	int elite_range=-1;//µ×­^©Ç®gµ{
 	//---------------------------------------------
-	
+	bool finished_show = false;
 };

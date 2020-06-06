@@ -18,6 +18,7 @@ Monster& Monster::operator=(const Monster& input) {
 	this->show_in_room = input.show_in_room;
 	this->map = input.map;
 	this->finished_choose = input.finished_choose;
+	this->finished_show = input.finished_show;
 	//elite系列---------------------------------
 	this->elite = input.elite;
 	this->elite_max_life_value = input.elite_max_life_value;
@@ -66,7 +67,7 @@ void Monster::choose_card(bool debug_mode) {
 }
 
 void Monster::print(){
-	if(life_value  <= 0 || !show_in_room){
+	if(life_value  <= 0 || !show_in_room || finished_show){
 		return;
 	}
 	cout << name << ' ' << use_card[0].agility;
@@ -93,6 +94,12 @@ void Monster::print(){
 		}
 	}
 	cout << endl;
+	for (int i = 0;i < map->monster_amount;i++) {
+		if (map->monster + i == this || map->monster[i].name != name) continue;
+		if (map->monster[i].life_value > 0 && map->monster[i].show_in_room) {
+			map->monster[i].finished_show = true;
+		}
+	}
 }
 void Monster::action(bool debug_mode) {
 	if (life_value <= 0 || !show_in_room) {
@@ -178,6 +185,7 @@ void Monster::round_end(bool debug_mode) {//該回合結束後的重整(重設數值)
 	//重洗標記
 	TmpShield = 0;
 	finished_choose = false;
+	finished_show = false;
 	if (life_value > 0) {
 		if (show_in_room) {
 			find_card(use_card[0].number).discard = true;
