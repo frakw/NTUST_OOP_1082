@@ -42,7 +42,7 @@ int Map::a_star_path_step(Creature* coord, Creature* dest) {
 	open_list.push_back(current);
 	do {
 		if (open_list.empty()) {
-			return -87;//找不到路徑，無法到達回傳-87
+			return no_path_found;//找不到路徑，無法到達回傳-87
 		}
 		int min = open_list[0]->F;
 		int pos = 0;
@@ -59,14 +59,14 @@ int Map::a_star_path_step(Creature* coord, Creature* dest) {
 		for (int i = 0;i < 4;i++) {
 			char now_char = this->coord_in_body(direction[i]);
 			Creature* now_life = this->creature_in(direction[i]);
-			if (now_char == '0') {//排除牆壁，!=改==修復bug
+			if (now_char == map_obj::wall) {//排除牆壁，!=改==修復bug
 				continue;
 			}
-			if (now_life != nullptr && now_life != dest) {//排除敵人
-				if (coord->team_num != now_life->team_num) {
-					continue;
-				}
-			}
+			//if (now_life != nullptr && now_life != dest) {//排除敵人
+			//	if (coord->team_num != now_life->team_num) {
+			//		continue;
+			//	}
+			//}
 			if (exist_in(&close_list, direction[i]) == -1) {
 				int pos2 = exist_in(&open_list, direction[i]);
 				if (pos2 == -1) {

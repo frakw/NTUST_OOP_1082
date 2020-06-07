@@ -46,7 +46,6 @@ public:
 class Creature {
 public:
 	Creature();
-	Creature(string in_name, int val, int in_card_amount);
 	~Creature();
 	Card* card = nullptr;//¿ï¾Ü¥dµP
 	string name="";

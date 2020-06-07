@@ -48,7 +48,7 @@ void Gloom_Haven::start() {
 		cout << "round " << round_count <<':'<< endl;
 		bool card_too_little = false;
 		for (int i = 0;i < character_amount;i++) {//檢查有無角色無法長休或出牌
-			if (character[i].card_hand_amount() < 2 && character[i].card_discard_amount() < 2 && character[i].life_value>0/*該角色也必須存活*/) {
+			if (character[i].card_hand_amount() < 2 && character[i].card_discard_amount() < 2 && character[i].life_value > 0/*該角色也必須存活*/) {
 				character[i].life_value = 0;
 				card_too_little = true;
 			}
@@ -76,18 +76,18 @@ void Gloom_Haven::start() {
 			[](Creature* const& a, Creature* const& b) -> bool {
 				if (a->use_card[0].agility == b->use_card[0].agility) {
 					if (a->team_num == b->team_num) {//隊伍與敏捷相同
-						if (a->team_num == 0) {//角色與角色敏捷相同
+						if (a->team_num == Team_num::character) {//角色與角色敏捷相同
 							if (a->use_card[1].agility == b->use_card[1].agility) {
 								return a->code < b->code;
 							}
 							return a->use_card[1].agility < b->use_card[1].agility;
 						}
-						else if (a->team_num == 1) {//怪物與怪物敏捷相同
+						else if (a->team_num == Team_num::monster) {//怪物與怪物敏捷相同
 							return a->code < b->code;
 						}
 					}
 					else {//角色與怪物敏捷相同
-						return a->team_num == 0;
+						return a->team_num == Team_num::character;
 					}
 				}
 				return a->use_card[0].agility < b->use_card[0].agility;

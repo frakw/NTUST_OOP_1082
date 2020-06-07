@@ -153,6 +153,7 @@
     <ClInclude Include="basic.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Coord.h" />
+    <ClInclude Include="enum.h" />
     <ClInclude Include="Gloom_Haven.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Map.h" />

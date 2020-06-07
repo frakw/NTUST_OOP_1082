@@ -5,7 +5,6 @@ class Creature;
 class Monster : public Creature{
 public:
 	Monster();
-	Monster(string in_name, int val, int in_damage, int in_range, bool in_elite);
 	Monster& operator=(const Monster& input);
 	void switch_status(int num);
 	void choose_card(bool);//bool¬°debug mode

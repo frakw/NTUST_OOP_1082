@@ -26,7 +26,7 @@ void TXT::read_character(string filename) {
 			>> character_db[i].card_amount
 			>> character_db[i].card_total;
 		character_db[i].life_value = character_db[i].max_life_value;
-		character_db[i].team_num = 0;//角色為0
+		character_db[i].team_num = Team_num::character;//角色為0
 		file.ignore();
 		character_db[i].card = new Card[character_db[i].card_total];
 		for (int j = 0;j < character_db[i].card_total;j++) {
@@ -101,7 +101,7 @@ void TXT::read_monster(string filename) {
 			 >> monster_db[i].elite_range;
 		monster_db[i].life_value = monster_db[i].max_life_value;
 		monster_db[i].card_amount = 6;//記得要加，怪物卡牌皆為6張
-		monster_db[i].team_num = 1;//怪物為1
+		monster_db[i].team_num = Team_num::monster;//怪物為1
 		monster_db[i].card = new Card[6];
 		string trash;
 		for (int j = 0;j < 6;j++) {

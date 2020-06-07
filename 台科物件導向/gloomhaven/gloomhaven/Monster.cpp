@@ -1,7 +1,6 @@
 #include "Gloom_Haven.h"
 Monster::Monster() :Creature() {
-}
-Monster::Monster(string in_name, int val, int in_damage, int in_range, bool in_elite) : Creature(in_name, val, 6), damage(in_damage), range(in_range), elite(in_elite) {
+	//team_num = Team_num::monster;
 }
 Monster& Monster::operator=(const Monster& input) {
 	this->name = input.name;
@@ -26,8 +25,6 @@ Monster& Monster::operator=(const Monster& input) {
 	this->elite_range = input.elite_range;
 	//------------------------------------------
 
-	//memcpy(this,&input,sizeof(Monster));
-
 	this->card = new Card[card_amount];
 	for (int i = 0;i < card_amount;i++) {
 		card[i] = input.card[i];
@@ -37,9 +34,9 @@ Monster& Monster::operator=(const Monster& input) {
 void Monster::switch_status(int num) {
 	switch (num)
 	{
-	case 0:show = false;break;//不出現
-	case 1:break;//普通怪
-	case 2: {//菁英怪
+	case monster_status::disappear:show = false;break;//不出現
+	case monster_status::normal:break;//普通怪
+	case monster_status::elite: {//菁英怪
 		elite = true;
 		damage = elite_damage;
 		max_life_value = elite_max_life_value;
@@ -74,19 +71,19 @@ void Monster::print(){
 	for (int i = 0;i < use_card[0].skill_up_amount;i++) {
 		switch (use_card[0].skill_up[i].type)
 		{
-		case 0: {
+		case skill_type::move: {
 			cout << " move " << use_card[0].skill_up[i].move_step;
 		}break;
-		case 1: {
+		case skill_type::attack: {
 			cout << " attack " << use_card[0].skill_up[i].value;
 			if (range != 0) {//遠程怪需印range
 				cout << " range " << use_card[0].skill_up[i].range;
 			}
 		}break;
-		case 2: {
+		case skill_type::heal: {
 			cout << " heal " << use_card[0].skill_up[i].value;
 		}break;
-		case 3: {
+		case skill_type::shield: {
 			cout << " shield " << use_card[0].skill_up[i].value;
 		}break;
 		default:
@@ -107,16 +104,16 @@ void Monster::action(bool debug_mode) {
 	}
 	for (int i = 0;i < use_card[0].skill_up_amount;i++) {
 		switch(use_card[0].skill_up[i].type) {
-		case 0: {//move
+		case skill_type::move: {//move
 			this->move(use_card[0].skill_up[i].move_step,0);//0可任意更改(不影響)
 		}break;
-		case 1: {//attack
+		case skill_type::attack: {//attack
 			this->attack(use_card[0].skill_up[i]);
 		}break;
-		case 2: {//heal
+		case skill_type::heal: {//heal
 			this->heal(use_card[0].skill_up[i].value);
 		}break;
-		case 3: {//shield
+		case skill_type::shield: {//shield
 			this->shield(use_card[0].skill_up[i].value);
 		}break;
 		default:break;
@@ -133,7 +130,7 @@ void Monster::attack(Skill skill) {
 	int index = -1;//沒找到就是-1(可能角色死光了)
 	for (int i = 0;i < map->character_amount;i++) {
 		int tmpstep = map->a_star_path_step(this, map->character + i);
-		if (tmpstep == -87) {//無法攻擊到
+		if (tmpstep == no_path_found) {//無法攻擊到
 			continue;
 		}
 		if (!map->in_vision(position, map->character[i].position)) {//沒有視野

@@ -22,8 +22,9 @@
 #include "a_star_path.h"
 #include "read_file.h"//先後順序要對
 #include "Input.h"
+#include "enum.h"
 //提示輸入，註解掉就沒有提示
-#define prompt
+//#define prompt
 
 #ifdef prompt
 #define prompt_input(output) cout<< output <<endl
@@ -36,6 +37,8 @@
 #define mydelete_single(ptr) do{if(ptr!=nullptr){delete ptr;ptr = nullptr;}}while(0)
 #define delete_2d(ptr,row) do{if(ptr!=nullptr){for(int __i=0;__i<row;__i++){delete[] ptr[__i];}delete[] ptr;ptr=nullptr;}}while(0)
 #define self_assign_err_handle(input) do{if(this==&input)return;}while(0)
+#define no_path_found -87
+
 using namespace std;
 
 //待做:採用macro coord_in提升可讀性, regex

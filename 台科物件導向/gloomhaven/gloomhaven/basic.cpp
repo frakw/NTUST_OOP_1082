@@ -64,7 +64,6 @@ Card& Card::operator=(const Card& input) {
 
 //==================================================================
 Creature::Creature() {}
-Creature::Creature(string in_name, int val, int in_card_amount) :name(in_name), life_value(val), card_amount(in_card_amount) {}
 Creature::~Creature() {
 	mydelete(card);
 }
@@ -139,27 +138,27 @@ void Creature::check_card() {//印出卡牌編號(手牌與棄牌)，編號由小到大
 	}
 	int count = 0;
 	cout << "hand: ";
-	for (int i = min_number;i <= max_number;i++) {//從0開始跑到最大
+	for (int i = min_number;i <= max_number;i++) {//從最小開始跑到最大
 		for (int j = 0;j < card_amount;j++) {
 			if (card[j].number == i) {
 				if (card[j].available && !card[j].discard) {
 					cout << (count != 0?", ":"")<< card[j].number;
 					count++;
-					break;
 				}
+				break;
 			}
 		}
 	}
 	count = 0;
 	cout << "; discard: ";
-	for (int i = min_number;i <= max_number;i++) {//從0開始跑到最大
+	for (int i = min_number;i <= max_number;i++) {//從最小開始跑到最大
 		for (int j = 0;j < card_amount;j++) {
 			if (card[j].number == i) {
 				if (card[j].available && card[j].discard) {
 					cout << (count != 0 ? ", " : "") << card[j].number;
 					count++;
-					break;
 				}
+				break;
 			}
 		}
 	}
@@ -194,7 +193,7 @@ void Creature::be_attack(char attacker_code,int attack_val) {
 }
 
 void Creature::move(string step,int step_count) {
-	if (step.length() > step_count && team_num == 0) {//角色不可超過最大步數，重新輸入
+	if (step.length() > step_count && team_num == Team_num::character) {//角色不可超過最大步數，重新輸入
 		cout << "error move!!!" << endl;
 		this->move(wasd(), step_count);
 		return;
@@ -202,21 +201,21 @@ void Creature::move(string step,int step_count) {
 	Coord latest_allow = position;
 	Coord now = position;
 	for (int i = 0;i < step.length();i++) {
-		Coord direction[4] = { {now.x,now.y - 1},{now.x - 1,now.y},{now.x,now.y + 1},{now.x + 1,now.y} };
+		Coord direction[4] = { UP(now),LEFT(now),DOWN(now),RIGHT(now)};
 		int dir_index;
 		switch (step[i])
 		{
-		case'w':dir_index = 0;break;
-		case'a':dir_index = 1;break;
-		case's':dir_index = 2;break;
-		case'd':dir_index = 3;break;
-		case'e':continue;
+		case dir::up:dir_index = 0;break;
+		case dir::left:dir_index = 1;break;
+		case dir::down:dir_index = 2;break;
+		case dir::right:dir_index = 3;break;
+		case dir::stay:continue;
 		default:break;
 		}
 		char now_char = map->coord_in_body(direction[dir_index]);
 		Creature* now_life = map->creature_in(direction[dir_index]);
 
-		if (now_char == '1' || (team_num != 1 && now_char == '3') || now_life == this) {
+		if (now_char == map_obj::m_floor || (team_num != Team_num::monster && now_char == map_obj::door) || now_life == this) {
 			latest_allow = direction[dir_index];
 			now = direction[dir_index];
 
@@ -226,14 +225,14 @@ void Creature::move(string step,int step_count) {
 				now = direction[dir_index];
 
 			}
-			else if (now_life->team_num != team_num && team_num == 0) {//角色不可穿過障礙物或敵人
+			else if (now_life->team_num != team_num && team_num == Team_num::character) {//角色不可穿過障礙物或敵人
 				cout << "error move!!!" << endl;
 				this->move(wasd(),step_count);
 				return;
 			}
 		}
 		else {//剩餘的是障礙物與牆壁
-			if (team_num == 0) {//角色不可穿過障礙物牆壁，怪物則會被擋住
+			if (team_num == Team_num::character) {//角色不可穿過障礙物牆壁，怪物則會被擋住
 				cout << "error move!!!" << endl;
 				this->move(wasd(), step_count);
 				return;
@@ -241,7 +240,7 @@ void Creature::move(string step,int step_count) {
 		}
 
 	}
-	if (team_num == 0 && now != latest_allow) {//角色最終不可停留在門與地板外的地方
+	if (team_num == Team_num::character && now != latest_allow) {//角色最終不可停留在門與地板外的地方
 		cout << "error move!!!" << endl;
 		this->move(wasd(), step_count);
 		return;

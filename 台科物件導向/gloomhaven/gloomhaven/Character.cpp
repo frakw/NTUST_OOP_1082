@@ -1,7 +1,8 @@
 #include "Gloom_Haven.h"
 
-Character::Character() :Creature() {}
-Character::Character(string in_name, int val, int in_card_amount) :Creature(in_name, val, in_card_amount) {}
+Character::Character() :Creature() {
+	this->team_num = Team_num::character;
+}
 Character& Character::operator=(const Character& input) {
 	this->name = input.name;
 	this->life_value = input.life_value;
@@ -64,7 +65,10 @@ void Character::choose_card(string input) {
 	}
 	else {
 		ss >> card_number2;
-		if (card_in_hand(atoi(card_number1.c_str())) && card_in_hand(card_number2) && /*檢查是否重複*/atoi(card_number1.c_str())!= card_number2) {
+		if (card_in_hand(atoi(card_number1.c_str())) &&
+			card_in_hand(card_number2) && /*檢查是否重複*/
+			atoi(card_number1.c_str())!= card_number2) 
+		{
 			use_card[0] = find_card(atoi(card_number1.c_str()));
 			use_card[1] = find_card(card_number2);
 			finished_choose = true;
@@ -120,7 +124,9 @@ num_err:
 		goto num_err;
 	}
 	num = atoi(NumUD.substr(0, NumUD.length() - 1).c_str());
-	if (num != use_card[0].number && num != use_card[1].number) {
+	if (num != use_card[0].number && 
+		num != use_card[1].number) 
+	{
 		cout << "card number error!,please choose one of the two selected cards" << endl;
 		goto num_err;
 	}
@@ -133,7 +139,7 @@ num_err:
 			run_skill(use_card[!card_first_index].skill_down[i]);
 		}
 	}
-	else {//下半部
+	else if (NumUD[1] == 'd') {//下半部
 		for (int i = 0;i < use_card[card_first_index].skill_down_amount;i++) {//第一張
 			run_skill(use_card[card_first_index].skill_down[i]);
 		}
@@ -145,16 +151,16 @@ num_err:
 
 void Character::run_skill(Skill skill) {
 	switch (skill.type) {
-	case 0: {//move
+	case skill_type::move: {//move
 		this->move(wasd(), skill.value);
 	}break;
-	case 1: {//attack
+	case skill_type::attack: {//attack
 		this->attack(skill);
 	}break;
-	case 2: {//heal
+	case skill_type::heal: {//heal
 		this->heal(skill.value);
 	}break;
-	case 3: {//shield
+	case skill_type::shield: {//shield
 		this->shield(skill.value);
 	}break;
 	}
@@ -181,7 +187,7 @@ void Character::attack(Skill skill) {
 	}
 	int tmprange = map->a_star_path_step(this, map->monster + index);
 	if (tmprange <= skill.range/*檢查射程*/ &&
-		tmprange!=-87 /*可以到達(無法到達回傳-87)*/ &&
+		tmprange!= no_path_found /*可以到達(無法到達回傳-87)*/ &&
 		map->monster[index].show /*該怪物有出現*/ &&
 		map->monster[index].life_value>0/*該怪物存活*/ &&
 		map->in_vision(position, map->monster[index].position)){//視野之內(線性差值法)
