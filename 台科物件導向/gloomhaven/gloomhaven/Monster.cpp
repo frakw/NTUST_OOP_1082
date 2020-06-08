@@ -1,6 +1,6 @@
 #include "Gloom_Haven.h"
 Monster::Monster() :Creature() {
-	//team_num = Team_num::monster;
+	team_num = Team_num::monster;
 }
 Monster& Monster::operator=(const Monster& input) {
 	this->name = input.name;
@@ -52,7 +52,16 @@ void Monster::choose_card(bool debug_mode) {
 		return;
 	}
 	//該種族怪物的第一隻(活著且出現)
-	use_card[0] = (debug_mode ? find_card(debug_mode_card_number) : card[rand() % card_amount]);
+	if (debug_mode) {
+		use_card[0] = find_card(debug_mode_card_number);
+	}
+	else {
+		int rnd_num;
+		do {
+			rnd_num = rand() % card_amount;
+		} while (card[rnd_num].discard || !card[rnd_num].available);
+		use_card[0] = card[rnd_num];
+	}
 	for (int i = 0;i < map->monster_amount;i++) {
 		if (map->monster + i == this || map->monster[i].name != name) continue;
 		if (map->monster[i].life_value > 0 && map->monster[i].show_in_room) {
@@ -125,7 +134,7 @@ void Monster::action(bool debug_mode) {
 	}
 }
 
-void Monster::attack(Skill skill) {
+void Monster::attack(const Skill const& skill) {
 	int min = map->row * map->col;//最大可能的步數
 	int index = -1;//沒找到就是-1(可能角色死光了)
 	for (int i = 0;i < map->character_amount;i++) {
@@ -141,18 +150,8 @@ void Monster::attack(Skill skill) {
 			min = tmpstep;
 		}
 		else if (tmpstep == min) {//距離一樣比第一張敏捷值
-			if (map->character[i].use_card[0].agility < map->character[index].use_card[0].agility) {
+			if (creature_order_compare(map->character + i, map->character + index)) {
 				index = i;
-			}
-			else if (map->character[i].use_card[0].agility == map->character[index].use_card[0].agility) {
-				if (map->character[i].use_card[1].agility < map->character[index].use_card[1].agility) {//比第二張敏捷值
-					index = i;
-				}
-				else if (map->character[i].use_card[1].agility == map->character[index].use_card[1].agility) {
-					if (map->character[i].code < map->character[index].code) {//比代號
-						index = i;
-					}
-				}
 			}
 		}
 	}

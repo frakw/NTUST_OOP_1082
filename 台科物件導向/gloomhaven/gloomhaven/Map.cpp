@@ -162,7 +162,7 @@ void Map::set_choosing_environment() {
 	}
 	for (int i = 0;i < 4;i++) {//可選位置設為_ *
 		if (start_pos[i].not_null()) {
-			coord_in(body, start_pos[i]) = start_index != i ? map_obj::select_pos : map_obj::star_pos;
+			coord_in(body, start_pos[i]) = start_index != i ? (char)map_obj::select_pos : (char)map_obj::star_pos;
 		}
 	}
 	star_pos = start_pos[start_index];

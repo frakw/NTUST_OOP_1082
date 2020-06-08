@@ -149,7 +149,7 @@ num_err:
 	}
 }
 
-void Character::run_skill(Skill skill) {
+void Character::run_skill(const Skill const& skill) {
 	switch (skill.type) {
 	case skill_type::move: {//move
 		this->move(wasd(), skill.value);
@@ -166,7 +166,7 @@ void Character::run_skill(Skill skill) {
 	}
 }
 
-void Character::attack(Skill skill) {
+void Character::attack(const Skill const& skill) {
 	prompt_input("輸入要攻擊怪物代號，放棄攻擊輸入0");
 	char mon_code;
 	int index =-1;

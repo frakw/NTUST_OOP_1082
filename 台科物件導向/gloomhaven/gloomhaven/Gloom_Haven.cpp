@@ -72,26 +72,7 @@ void Gloom_Haven::start() {
 		for (int i = 0;i < monster_amount;i++) {//怪物選牌
 			monster[i].choose_card(DEBUG_MODE);
 		}
-		sort(all, all + character_amount + monster_amount,
-			[](Creature* const& a, Creature* const& b) -> bool {
-				if (a->use_card[0].agility == b->use_card[0].agility) {
-					if (a->team_num == b->team_num) {//隊伍與敏捷相同
-						if (a->team_num == Team_num::character) {//角色與角色敏捷相同
-							if (a->use_card[1].agility == b->use_card[1].agility) {
-								return a->code < b->code;
-							}
-							return a->use_card[1].agility < b->use_card[1].agility;
-						}
-						else if (a->team_num == Team_num::monster) {//怪物與怪物敏捷相同
-							return a->code < b->code;
-						}
-					}
-					else {//角色與怪物敏捷相同
-						return a->team_num == Team_num::character;
-					}
-				}
-				return a->use_card[0].agility < b->use_card[0].agility;
-			});
+		sort(all, all + character_amount + monster_amount, creature_order_compare);
 		prompt_input("角色與怪物行動順序如下:");
 		for (int i = 0;i < character_amount + monster_amount;i++) {//印出順序 角色印敏捷值與手牌編號 怪物印卡牌內容
 			all[i]->print();//virtual
@@ -157,4 +138,24 @@ int Gloom_Haven::choose_remain() {//剩餘幾個角色未選牌或長休
 		}
 	}
 	return count;
+}
+
+bool creature_order_compare(const Creature* const& a, const Creature* const& b) {
+	if (a->use_card[0].agility == b->use_card[0].agility) {
+		if (a->team_num == b->team_num) {//隊伍與敏捷相同
+			if (a->team_num == Team_num::character) {//角色與角色敏捷相同
+				if (a->use_card[1].agility == b->use_card[1].agility) {
+					return a->code < b->code;
+				}
+				return a->use_card[1].agility < b->use_card[1].agility;
+			}
+			else if (a->team_num == Team_num::monster) {//怪物與怪物敏捷相同
+				return a->code < b->code;
+			}
+		}
+		else {//角色與怪物敏捷相同
+			return a->team_num == Team_num::character;
+		}
+	}
+	return a->use_card[0].agility < b->use_card[0].agility;
 }

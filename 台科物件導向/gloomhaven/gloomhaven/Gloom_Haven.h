@@ -40,7 +40,7 @@
 #define no_path_found -87
 
 using namespace std;
-
+bool creature_order_compare(const Creature * const&a, const Creature * const&b);//生物與生物比較行動先後，可放怪物或角色
 //待做:採用macro coord_in提升可讀性, regex
 //採用nullcoord 與 == coord creature die funtion
 //macro庫，集中管理遊戲輸出訊息
