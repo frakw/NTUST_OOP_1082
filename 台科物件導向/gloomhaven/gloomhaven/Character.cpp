@@ -93,7 +93,7 @@ void Character::print(){//virtual
 	}
 }
 
-void Character::action(bool) {//virtual
+void Character::action() {//virtual
 	if (life_value <= 0) {
 		return;
 	}
@@ -189,6 +189,7 @@ void Character::attack(const Skill const& skill) {
 	if (tmprange <= skill.range/*檢查射程*/ &&
 		tmprange!= no_path_found /*可以到達(無法到達回傳-87)*/ &&
 		map->monster[index].show /*該怪物有出現*/ &&
+		map->monster[index].show_in_room /*該怪物有出現在場上*/ &&
 		map->monster[index].life_value>0/*該怪物存活*/ &&
 		map->in_vision(position, map->monster[index].position)){//視野之內(線性差值法)
 
@@ -201,7 +202,7 @@ void Character::attack(const Skill const& skill) {
 	}
 }
 
-void Character::round_end(bool debug_mode) {//virtual//該回合結束後的重整(重設數值)
+void Character::round_end() {//virtual//該回合結束後的重整(重設數值)
 	if (!sleep) {//沒長休就將出的2張牌移至棄牌堆
 		find_card(use_card[0].number).discard = true;
 		find_card(use_card[1].number).discard = true;

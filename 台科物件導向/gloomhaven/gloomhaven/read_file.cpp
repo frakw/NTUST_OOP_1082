@@ -10,6 +10,7 @@ tuple<Character*,int, Monster*,int, Map*> TXT::return_tuple() {
 	}
 	for (int i = 0;i < monster_amount;i++) {//地圖指標存入所有生物，方便之後的行動action
 		monster_output[i].map = map;
+		if (debug_mode) monster_output[i].set_debug(); 
 	}
 	return make_tuple(character_output,character_amount, monster_output,monster_amount, map);
 }

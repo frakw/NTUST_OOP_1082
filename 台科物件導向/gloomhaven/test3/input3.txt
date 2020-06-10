@@ -1,0 +1,154 @@
+play
+4
+threekiller 0 1 2 3 4 5
+threekiller 0 1 2 3 4 5
+threekiller 0 1 2 3 4 5
+threekiller 0 1 2 3 4 5
+map3.txt
+ss
+ss
+e
+e
+A 0 4
+B 0 5
+C 0 4
+D 1 0
+4d
+wd
+e
+0
+check
+0u
+a
+0
+sdd
+5d
+wds
+sdw
+wd
+0
+0d
+0
+0
+A 1 5
+B 4 1
+C 5 1
+D 5 4
+5d
+d
+0
+0
+4d
+sdd
+0
+0
+5d
+dw
+0
+0
+4d
+ddd
+0
+A -1
+B -1
+C -1
+D -1
+0
+0
+0
+A check
+B check
+C check
+A 1 5
+B 1 5
+C 4 1
+check
+5d
+wd
+f
+b
+0
+0
+5u
+f
+b
+check
+4d
+sdd
+f
+c
+e
+C check
+C 2 5
+2d
+c
+C -1
+4
+C check
+C 1 5
+5d
+sdd
+d
+a
+C -1
+5
+C 1 2
+1d
+0
+C -1
+1
+C check
+C 2 3
+3d
+0
+C -1
+2
+play
+2
+threekiller 0 1 2 3 5 6
+threekiller 0 1 2 3 5 6
+map3.txt
+sd
+s
+A 1 3
+B 0 5
+5d
+dd
+0
+1d
+0
+A 5 2
+B 1 2
+1d
+0
+2u
+0
+ddd
+A 0 6
+B -1
+6d
+dsddwdd
+0
+0
+A -1
+B 6 2
+6d
+dddsdd
+a
+B 5 1
+1d
+0
+B -1
+6
+B check
+B 2 5
+5d
+wdd
+g
+c
+B 3 1
+3d
+g
+g
+B -1
+exit

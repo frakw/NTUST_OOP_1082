@@ -1,4 +1,5 @@
 #include "Gloom_Haven.h"
+
 Monster::Monster() :Creature() {
 	team_num = Team_num::monster;
 }
@@ -16,7 +17,6 @@ Monster& Monster::operator=(const Monster& input) {
 	this->team_num = input.team_num;
 	this->show_in_room = input.show_in_room;
 	this->map = input.map;
-	this->finished_choose = input.finished_choose;
 	this->finished_show = input.finished_show;
 	//elite系列---------------------------------
 	this->elite = input.elite;
@@ -47,36 +47,20 @@ void Monster::switch_status(int num) {
 	}
 }
 
-void Monster::choose_card(bool debug_mode) {
-	if (life_value <= 0 || !show_in_room || finished_choose) {
+void Monster::choose_card() {
+	if (life_value <= 0 || !show_in_room || !show) {
 		return;
 	}
 	//該種族怪物的第一隻(活著且出現)
-	if (debug_mode) {
-		use_card[0] = find_card(debug_mode_card_number);
-	}
-	else {
-		int rnd_num;
-		do {
-			rnd_num = rand() % card_amount;
-		} while (card[rnd_num].discard || !card[rnd_num].available);
-		use_card[0] = card[rnd_num];
-	}
-	for (int i = 0;i < map->monster_amount;i++) {
-		if (map->monster + i == this || map->monster[i].name != name) continue;
-		if (map->monster[i].life_value > 0 && map->monster[i].show_in_room) {
-			map->monster[i].use_card[0] = use_card[0];
-			map->monster[i].finished_choose = true;
-		}
-		map->monster[i].debug_mode_card_number = this->debug_mode_card_number;
-	}
+	use_card[0] = find_card(race_card_number[name]);
+
 }
 
 void Monster::print(){
-	if(life_value  <= 0 || !show_in_room || finished_show){
+	if(life_value  <= 0 || !show_in_room || finished_show || !show){
 		return;
 	}
-	cout << name << ' ' << use_card[0].agility;
+	cout << name << ' ' << setw(2) << setfill('0') << use_card[0].agility;
 	for (int i = 0;i < use_card[0].skill_up_amount;i++) {
 		switch (use_card[0].skill_up[i].type)
 		{
@@ -107,7 +91,7 @@ void Monster::print(){
 		}
 	}
 }
-void Monster::action(bool debug_mode) {
+void Monster::action() {
 	if (life_value <= 0 || !show_in_room) {
 		return;
 	}
@@ -155,6 +139,7 @@ void Monster::attack(const Skill const& skill) {
 			}
 		}
 	}
+
 	if (index == -1) {
 		cout << "no one lock" << endl;
 		return;
@@ -177,28 +162,30 @@ void Monster::attack(const Skill const& skill) {
 
 }
 
-void Monster::round_end(bool debug_mode) {//該回合結束後的重整(重設數值)
+void Monster::round_end() {//該回合結束後的重整(重設數值)
 	//重洗標記
 	TmpShield = 0;
 	finished_choose = false;
 	finished_show = false;
-	if (life_value > 0) {
-		if (show_in_room) {
-			find_card(use_card[0].number).discard = true;
-			if (use_card[0].rewash_mark) {
-				if (debug_mode) {
-					this->debug_mode_card_number = 0;
-				}
-				this->discard_to_hand();
-			}
-			else if (debug_mode) {
-				this->debug_mode_card_number++;
-			}
-		}
-	}
-	else {
+	if (life_value <= 0) {
 		show = false;
 		show_in_room = false;
 		position.to_null();
+	}
+}
+
+void Monster::to_discard() {
+	if (life_value <= 0 || !show) {
+		return;
+	}
+	find_card(race_card_number[name]).discard = true;
+	if (find_card(race_card_number[name]).rewash_mark) {
+		this->discard_to_hand();
+	}
+}
+
+void Monster::set_debug() {
+	if (race_card_number.find(name) == race_card_number.end()) {
+		race_card_number.insert(make_pair(name,-1));
 	}
 }

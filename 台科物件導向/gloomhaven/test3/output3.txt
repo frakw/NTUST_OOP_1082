@@ -1,0 +1,571 @@
+請輸入出場角色數量:
+             
+ *1          
+ __3         
+ _1          
+             
+             
+ *1          
+ __3         
+ A1          
+             
+             
+ *1          
+ B_3         
+ A1          
+             
+             
+ C1          
+ B*3         
+ A1          
+             
+             
+ C1          
+ BD3         
+ A1          
+             
+round 1:
+A 01 0 4
+C 01 0 4
+B 01 0 5
+D 02 1 0
+A's turn: card 0 4
+error move!!!
+             
+ C1          
+ BD3         
+ A1          
+             
+C's turn: card 0 4
+A-hp: 9, shield: 0
+B-hp: 9, shield: 0
+C-hp: 9, shield: 0
+D-hp: 9, shield: 0
+error target!!!
+             
+ 11          
+ BDC         
+ A1          
+             
+B's turn: card 0 5
+error move!!!
+error move!!!
+             
+ 1B          
+ 1DC         
+ A1          
+             
+D's turn: card 1 0
+D heal 3, now hp is 9
+             
+ 1B 1        
+ 1DC13       
+ A1 1        
+             
+round 2:
+A 02 1 5
+B 05 4 1
+C 06 5 1
+D 06 5 4
+A's turn: card 1 5
+             
+ 1B 1        
+ 1DC13       
+ 1A 1        
+             
+B's turn: card 4 1
+             
+ 11 1        
+ 1DCB3       
+ 1A 1        
+             
+C's turn: card 5 1
+             
+ 11 C        
+ 1D1B3       
+ 1A 1        
+             
+D's turn: card 5 4
+             
+ 11 C        
+ 111BD       
+ 1A 1        
+             
+             
+ 11 C 21da   
+ 111BD12eb3  
+ 1A 1 11fc   
+             
+round 3:
+archer 01 move aa attack 0 range 0
+A 99 -1
+B 99 -1
+C 99 -1
+D 99 -1
+             
+ 11 C 2ad1   
+ 111BD12eb3  
+ 1A 1 11fc   
+             
+a lock D in distance 3
+a attack D 3 damage, D shield 0, D remain 6 hp
+             
+ 11 C 2ad1   
+ 111BD12eb3  
+ 1A 1 11fc   
+             
+no one lock
+             
+ 11 C 2ad1   
+ 111BD12eb3  
+ 1A 1 1cf1   
+             
+c lock D in distance 3
+c attack D 3 damage, D shield 0, D remain 3 hp
+             
+ 11 C 2ad1   
+ 111BD12eb3  
+ 1A 1 1cf1   
+             
+no one lock
+             
+ 11 C 2ad1   
+ 111BD12eb3  
+ 1A 1 1cf1   
+             
+e lock D in distance 3
+e attack D 3 damage, D shield 0, D remain 0 hp
+D is killed!!
+             
+ 11 C 2ad1   
+ 111B112eb3  
+ 1A 1 1cf1   
+             
+             
+ 11 C 2ad1   
+ 111B112eb3  
+ 1A 1 fc11   
+             
+no one lock
+A's turn: card -1
+A heal 2, now hp is 9
+remove card: 0
+B's turn: card -1
+B heal 2, now hp is 9
+remove card: 0
+C's turn: card -1
+C heal 2, now hp is 9
+remove card: 0
+round 4:
+hand: 1, 2, 3, 4, 5; discard: 
+hand: 1, 2, 3, 4, 5; discard: 
+hand: 1, 2, 3, 4, 5; discard: 
+A 02 1 5
+B 02 1 5
+archer 02 move dd attack 0 range 3 attack 0 range 3
+C 05 4 1
+A's turn: card 1 5
+A-hp: 9, shield: 0
+B-hp: 9, shield: 0
+C-hp: 9, shield: 0
+a-hp: 3, shield: 0
+b-hp: 3, shield: 0
+c-hp: 3, shield: 0
+d-hp: 3, shield: 0
+e-hp: 3, shield: 0
+f-hp: 3, shield: 0
+             
+ 11 C 2ad1   
+ 11AB112eb3  
+ 11 1 fc11   
+             
+error target!!!
+error target!!!
+B's turn: card 1 5
+error target!!!
+B attack b 6 damage, b shield 0, b remain -3 hp
+b is killed!!
+             
+ 11 C 2ad1   
+ 11AB112e13  
+ 11 1 fc11   
+             
+B heal 3, now hp is 9
+             
+ 11 C 21da   
+ 11AB112e13  
+ 11 1 fc11   
+             
+a lock B in distance 6
+a attack B 3 damage, B shield 0, b remain 6 hp
+a lock B in distance 6
+a attack B 3 damage, B shield 0, b remain 3 hp
+             
+ 11 C 21da   
+ 11AB112e13  
+ 11 1 f11c   
+             
+c lock B in distance 6
+c attack B 3 damage, B shield 0, b remain 0 hp
+B is killed!!
+             
+ 11 C 21da   
+ 11A1112e13  
+ 11 1 f11c   
+             
+no one lock
+             
+ 11 C 21da   
+ 11A1112e13  
+ 11 1 f11c   
+             
+d lock A in distance 6
+d attack A 3 damage, A shield 0, A remain 6 hp
+d lock A in distance 6
+d attack A 3 damage, A shield 0, A remain 3 hp
+             
+ 11 C 21da   
+ 11A11121e3  
+ 11 1 f11c   
+             
+e lock A in distance 6
+e attack A 3 damage, A shield 0, A remain 0 hp
+A is killed!!
+             
+ 11 C 21da   
+ 11111121e3  
+ 11 1 f11c   
+             
+no one lock
+             
+ 11 C 21da   
+ 11111121e3  
+ 11 1 11fc   
+             
+no one lock
+no one lock
+C's turn: card 4 1
+C-hp: 9, shield: 0
+a-hp: 3, shield: 0
+c-hp: 3, shield: 0
+d-hp: 3, shield: 0
+e-hp: 3, shield: 0
+f-hp: 3, shield: 0
+             
+ 11 1 21da   
+ 11111C21e3  
+ 11 1 11fc   
+             
+C attack f 3 damage, f shield 0, f remain 0 hp
+f is killed!!
+             
+ 11 1 21da   
+ 11111C21e3  
+ 11 1 111c   
+             
+error target!!!
+C attack e 3 damage, e shield 0, e remain 0 hp
+e is killed!!
+             
+ 11 1 21da   
+ 11111C2113  
+ 11 1 111c   
+             
+round 5:
+hand: 2, 3, 5; discard: 1, 4
+C 03 2 5
+archer 03 move aaa attack 0 range 1
+C's turn: card 2 5
+C shield 2 this turn
+C shield 2 this turn
+C attack c 3 damage, c shield 0, c remain 0 hp
+c is killed!!
+             
+ 11 1 21da   
+ 11111C2113  
+ 11 1 1111   
+             
+             
+ 11 1 2ad1   
+ 11111C2113  
+ 11 1 1111   
+             
+a lock C in distance 2
+a attack C 3 damage, C shield 4, C remain 9 hp
+             
+ 11 1 2ad1   
+ 11111C2113  
+ 11 1 1111   
+             
+d lock C in distance 2
+d attack C 3 damage, C shield 4, C remain 9 hp
+round 6:
+archer 04 move ddd attack 0 range 2
+C 99 -1
+             
+ 11 1 21da   
+ 11111C2113  
+ 11 1 1111   
+             
+a lock C in distance 4
+a attack C 3 damage, C shield 0, C remain 6 hp
+             
+ 11 1 21da   
+ 11111C2113  
+ 11 1 1111   
+             
+d lock C in distance 3
+d attack C 3 damage, C shield 0, C remain 3 hp
+C's turn: card -1
+C heal 2, now hp is 5
+remove card: 4
+round 7:
+hand: 1, 2, 3, 5; discard: 
+C 02 1 5
+archer 05 attack 0 range 1
+C's turn: card 1 5
+             
+ 11 1 21da   
+ 1111112113  
+ 11 1 11C1   
+             
+C attack d 3 damage, d shield 0, d remain 0 hp
+d is killed!!
+             
+ 11 1 211a   
+ 1111112113  
+ 11 1 11C1   
+             
+C attack a 3 damage, a shield 0, a remain 0 hp
+a is killed!!
+             
+ 11 1 2111   
+ 1111112113  
+ 11 1 11C1   
+             
+round 8:
+C 99 -1
+C's turn: card -1
+C heal 2, now hp is 7
+remove card: 5
+round 9:
+C 02 1 2
+C's turn: card 1 2
+C heal 3, now hp is 9
+round 10:
+C 99 -1
+C's turn: card -1
+C heal 2, now hp is 9
+remove card: 1
+round 11:
+hand: 2, 3; discard: 
+C 03 2 3
+C's turn: card 2 3
+C shield 3 this turn
+round 12:
+C 99 -1
+C heal 2, now hp is 9
+remove card: 2
+round 13:
+C is killed!!
+             
+ 11 1 2111   
+ 1111112113  
+ 11 1 1111   
+             
+monster win~
+請輸入出場角色數量:
+             
+ *1          
+ __3         
+ _1          
+             
+             
+ *1          
+ _A3         
+ _1          
+             
+             
+ 11          
+ BA3         
+ 11          
+             
+round 1:
+B 01 0 5
+A 02 1 3
+B's turn: card 0 5
+             
+ 11          
+ 1AB         
+ 11          
+             
+A's turn: card 1 3
+A heal 3, now hp is 9
+             
+ 11 1        
+ 1AB13       
+ 11 1        
+             
+round 2:
+B 02 1 2
+A 06 5 2
+B's turn: card 1 2
+B heal 3, now hp is 9
+A's turn: card 5 2
+             
+ 11 1        
+ 11B1A       
+ 11 1        
+             
+             
+ 11 1 211a   
+ 11B1A12113  
+ 11 1 111c   
+             
+round 3:
+A 01 0 6
+archer 01 move aa attack 0 range 0
+B 99 -1
+A's turn: card 0 6
+             
+ 11 1 211a   
+ 11B111211A  
+ 11 1 111c   
+             
+             
+ 11 1 2a11   
+ 11B111211A  
+ 11 1 111c   
+             
+no one lock
+             
+ 11 1 2a11   
+ 11B111211A  
+ 11 1 1c11   
+             
+no one lock
+B's turn: card -1
+B heal 2, now hp is 9
+remove card: 0
+round 4:
+archer 02 move dd attack 0 range 3 attack 0 range 3
+B 07 6 2
+A 99 -1
+             
+ 11 1 211a   
+ 11B111211A  
+ 11 1 1c11   
+             
+a lock A in distance 2
+a attack A 3 damage, A shield 0, A remain 6 hp
+a lock A in distance 2
+a attack A 3 damage, A shield 0, A remain 3 hp
+             
+ 11 1 211a   
+ 11B111211A  
+ 11 1 111c   
+             
+c lock A in distance 2
+c attack A 3 damage, A shield 0, A remain 0 hp
+A is killed!!
+             
+ 11 1 211a   
+ 11B1112113  
+ 11 1 111c   
+             
+no one lock
+B's turn: card 6 2
+             
+ 11 1 211a   
+ 1111112113  
+ 11 1 11Bc   
+             
+B attack a 3 damage, a shield 0, a remain 0 hp
+a is killed!!
+             
+ 11 1 2111   
+ 1111112113  
+ 11 1 11Bc   
+             
+round 5:
+archer 03 move aaa attack 0 range 1
+B 06 5 1
+             
+ 11 1 2111   
+ 1111112113  
+ 11 1 11Bc   
+             
+c lock B in distance 1
+c attack B 3 damage, B shield 0, B remain 6 hp
+B's turn: card 5 1
+B heal 3, now hp is 9
+round 6:
+archer 04 move ddd attack 0 range 2
+B 99 -1
+             
+ 11 1 2111   
+ 1111112113  
+ 11 1 11Bc   
+             
+c lock B in distance 1
+c attack B 3 damage, B shield 0, B remain 6 hp
+B's turn: card -1
+B heal 2, now hp is 8
+remove card: 6
+round 7:
+hand: 0, 1, 2, 5; discard: 
+B 03 2 5
+archer 05 attack 0 range 1 d
+             
+ 11 1 2111   
+ 111111211B  
+ 11 1 111c   
+             
+error target!!!
+B's turn: card 2 5
+B attack c 3 damage, c shield 0, c remain 0 hp
+c is killed!!
+             
+ 11 1 2111   
+ 111111211B  
+ 11 1 1111   
+             
+             
+ 11 1 2111 g 
+ 111111211B1 
+ 11 1 1111 h 
+             
+round 8:
+B 03 3 1
+archer 06 attack 0 range 0 attack 0 range 0
+B's turn: card 3 1
+B heal 3, now hp is 9
+B attack g 3 damage, g shield 0, g remain 3 hp
+B attack g 3 damage, g shield 0, g remain 0 hp
+g is killed!!
+             
+ 11 1 2111 1 
+ 111111211B1 
+ 11 1 1111 h 
+             
+h lock B in distance 2
+h attack B 3 damage, B shield 0, B remain 6 hp
+h lock B in distance 2
+h attack B 3 damage, B shield 0, B remain 3 hp
+round 9:
+archer 01 move aa attack 0 range 0
+B 99 -1
+             
+ 11 1 2111 1 
+ 111111211B1 
+ 11 1 1111 h 
+             
+h lock B in distance 2
+h attack B 3 damage, B shield 0, B remain 0 hp
+B is killed!!
+             
+ 11 1 2111 1 
+ 11111121111 
+ 11 1 1111 h 
+             
+monster win~

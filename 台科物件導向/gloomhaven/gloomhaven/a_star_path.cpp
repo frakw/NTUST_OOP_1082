@@ -44,7 +44,7 @@ int Map::a_star_path_step(Creature* coord, Creature* dest) {
 		if (open_list.empty()) {
 			return no_path_found;//找不到路徑，無法到達回傳-87
 		}
-		int min = open_list[0]->F;
+		int min = open_list.front()->F;
 		int pos = 0;
 		for (int i = 1;i < open_list.size();i++) {
 			if (open_list[i]->F < min) {
@@ -54,7 +54,7 @@ int Map::a_star_path_step(Creature* coord, Creature* dest) {
 		}
 		close_list.push_back(open_list[pos]);
 		open_list.erase(open_list.begin() + pos);
-		current = close_list[close_list.size() - 1];
+		current = close_list.back();
 		Coord direction[4] = { UP(current->coord),DOWN(current->coord),LEFT(current->coord),RIGHT(current->coord) };
 		for (int i = 0;i < 4;i++) {
 			char now_char = this->coord_in_body(direction[i]);
@@ -62,16 +62,10 @@ int Map::a_star_path_step(Creature* coord, Creature* dest) {
 			if (now_char == map_obj::wall) {//排除牆壁，!=改==修復bug
 				continue;
 			}
-			//if (now_life != nullptr && now_life != dest) {//排除敵人
-			//	if (coord->team_num != now_life->team_num) {
-			//		continue;
-			//	}
-			//}
 			if (exist_in(&close_list, direction[i]) == -1) {
 				int pos2 = exist_in(&open_list, direction[i]);
 				if (pos2 == -1) {
-					Grid* tmp = new Grid(direction[i], current, dest->position);
-					open_list.push_back(tmp);
+					open_list.push_back(new Grid(direction[i], current, dest->position));
 				}
 				else {
 					open_list[pos2]->calc_val(current, dest->position);

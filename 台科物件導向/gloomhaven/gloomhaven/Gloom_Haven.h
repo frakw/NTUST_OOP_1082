@@ -4,6 +4,7 @@
 #include <string>
 #include <tuple>
 #include <cstdio>
+#include <map>
 #include <ctime>
 #include <cmath>
 #include <cstdlib>
@@ -32,15 +33,17 @@
 #define prompt_input(output)
 #endif
 
+//#define command_line
+
 #define mygetline(cin,input)  if(cin.eof()){cin.clear();} getline(cin, input);
 #define mydelete(ptr) do{if(ptr!=nullptr){delete[] ptr;ptr = nullptr;}}while(0)
 #define mydelete_single(ptr) do{if(ptr!=nullptr){delete ptr;ptr = nullptr;}}while(0)
 #define delete_2d(ptr,row) do{if(ptr!=nullptr){for(int __i=0;__i<row;__i++){delete[] ptr[__i];}delete[] ptr;ptr=nullptr;}}while(0)
 #define self_assign_err_handle(input) do{if(this==&input)return;}while(0)
 #define no_path_found -87
-
+#define member_assign(a,b,member) (((a).(member)) = ((b).(member)))
 using namespace std;
-bool creature_order_compare(const Creature * const&a, const Creature * const&b);//生物與生物比較行動先後，可放怪物或角色
+bool creature_order_compare(const Creature * const&a,const Creature * const&b);//生物與生物比較行動先後，可放怪物或角色
 //待做:採用macro coord_in提升可讀性, regex
 //採用nullcoord 與 == coord creature die funtion
 //macro庫，集中管理遊戲輸出訊息
@@ -49,22 +52,35 @@ bool creature_order_compare(const Creature * const&a, const Creature * const&b);
 //提示輸入訊息
 
 //資料封裝，self assign，註解
+
+#ifdef DEBUG
+#define AUTOEXT
+#else
+#define AUTOEXT  extern
+#endif
+AUTOEXT  int debug_mode;
+#undef AUTOEXT
+
 class Gloom_Haven {
 public:
 	Gloom_Haven();
-	Gloom_Haven(tuple<Character*,int, Monster*,int, Map*> input, bool mode);//tuple依序為全部角色陣列的頭指標，角色數量，全部怪物陣列的頭指標，怪物數量，地圖指標
+	Gloom_Haven(tuple<Character*,int, Monster*,int, Map*> input);//tuple依序為全部角色陣列的頭指標，角色數量，全部怪物陣列的頭指標，怪物數量，地圖指標
 	~Gloom_Haven();
-	void set(tuple<Character*, int, Monster*, int, Map*> input, bool mode);
+	void set(tuple<Character*, int, Monster*, int, Map*> input);
 	
 	void start();//主要流程都在這裡
 	
 	int character_remain();//角色剩餘數
 	int monster_remain();//怪物剩餘數
 	int choose_remain();//剩餘幾個角色未選牌或長休
+
+	int monster_race_amount(string);
+	int monster_race_card_amount(string);
+	bool monster_race_in_discard(string,int);
+	bool monster_race_rewash(string, int);
 private:
 	Creature** all = nullptr;//所有角色與怪物指標排序後存放區，初始化時，先角色再怪物
 
-	bool DEBUG_MODE = false;
 	Map* map = nullptr;
 
 	Character* character = nullptr;

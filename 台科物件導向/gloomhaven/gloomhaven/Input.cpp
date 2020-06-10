@@ -96,6 +96,9 @@ void open_file(fstream& file, string filename) {//map1.txt
 	file.open(filename, ios::in);
 	while(!file.is_open()) {
 		cout <<'"'<<filename<<'"'<<" file open error please input file path again:";
+#ifdef command_line
+		exit(1);
+#endif
 		mygetline(cin, filename);
 		file.open(filename, ios::in);
 	}

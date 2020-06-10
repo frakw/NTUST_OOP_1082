@@ -1,15 +1,14 @@
 #include "Gloom_Haven.h"
 using namespace std;
 #include <iostream>
-#define command_line
 int main(int argc, char** argv) {
 	srand(time(0));
 	TXT preprocess;
 	string map_filename;
 	string play;
 	string input[4];
-	input[1] = "./character1.txt";
-	input[2] = "./monster1.txt";
+	input[1] = "./character3.txt";
+	input[2] = "./monster3.txt";
 	input[3] = "1";
 #ifdef command_line
 	int start_index = 1;
@@ -19,12 +18,13 @@ int main(int argc, char** argv) {
 	}
 	preprocess.read_character(argv[start_index + 0]);
 	preprocess.read_monster(argv[start_index + 1]);
+	debug_mode = (bool)atoi(argv[start_index + 2]);
 #else
 	preprocess.read_character(input[1]);
 	preprocess.read_monster(input[2]);
+	debug_mode = (bool)stoi(input[3]);
 #endif
 
-	
 	while (1) {
 		prompt_input("輸入遊玩指令play或離開指令exit");
 		mygetline(cin, play);
@@ -39,11 +39,8 @@ int main(int argc, char** argv) {
 		prompt_input("輸入地圖txt檔案路徑");
 		mygetline(cin, map_filename);
 		preprocess.read_map(map_filename);
-#ifdef command_line
-		Gloom_Haven game(preprocess.return_tuple(), (bool)atoi(argv[start_index + 2]));
-#else
-		Gloom_Haven game(preprocess.return_tuple(), (bool)atoi(input[3].c_str()));
-#endif
+		Gloom_Haven game(preprocess.return_tuple());
+
 		game.start();
 	}
 	prompt_input("bye bye~~");

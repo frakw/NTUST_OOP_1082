@@ -62,8 +62,8 @@ public:
 	bool card_in_hand(int);//傳入編號，回傳該牌是不是手牌，error handling用
 	bool card_in_discard(int);//傳入編號，回傳該牌在不在棄牌堆，error handling用
 	virtual void print()/*排序後的列印*/ { cout << "virtual error" << endl; }
-	virtual void action(bool) /*行動，bool為debug_mode*/{ cout << "virtual error" << endl; }
-	virtual void round_end(bool) /*回合結算階段，該回合結束後的重整(重設數值)*/{ cout << "virtual error" << endl; }
+	virtual void action() /*行動*/{ cout << "virtual error" << endl; }
+	virtual void round_end() /*回合結算階段，該回合結束後的重整(重設數值)*/{ cout << "virtual error" << endl; }
 	void check();//角色行動前，輸入check，要列出所有角色與怪物的hp與防禦值
 	Card use_card[2];//若為怪物則只有一張卡，存在use_card[0]
 	int life_value=0;//目前血量

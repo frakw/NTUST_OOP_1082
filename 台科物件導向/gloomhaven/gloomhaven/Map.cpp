@@ -15,6 +15,7 @@ Map::~Map() {
 	mydelete(door_pos);
 }
 void Map::set(string input) {
+	door_total_amount = 0;
 	for (int i = 0;i < row;i++) {
 		for (int j = 0;j < col;j++) {
 			body[i][j] = input[i * col + j];
@@ -55,12 +56,7 @@ bool Map::check_room() {
 	this->fill_room(fill_start);//產生新的show
 	for (int i = 0;i < monster_amount;i++) {
 		if (monster[i].show && monster[i].position.not_null() && monster[i].life_value > 0) {
-			if (coord_in(show,monster[i].position)) {
-				monster[i].show_in_room = true;
-			}
-			else {
-				monster[i].show_in_room = false;
-			}
+			monster[i].show_in_room = coord_in(show, monster[i].position);
 		}
 		else {
 			monster[i].show_in_room = false;
@@ -73,14 +69,15 @@ void Map::fill_room(Coord pos) {
 	if (!coord_legal(pos)) {
 		return;
 	}
-	if (coord_in(body,pos) == map_obj::wall || coord_in(show, pos)) {
+	if (coord_in(body, pos) == map_obj::wall || coord_in(show, pos)) {
 		return;
 	}
 	else if (coord_in(body, pos) == map_obj::door) {
 		coord_in(show, pos) = true;
 		return;
 	}
-	else if(coord_in(body, pos) != map_obj::m_floor && coord_in(body, pos) != map_obj::barrier){//角色或怪物
+	else if (coord_in(body, pos) != map_obj::m_floor && coord_in(body, pos) != map_obj::barrier)//角色或怪物
+	{
 		for (int i = 0;i < door_total_amount;i++) {
 			if (door_pos[i] == pos) {//若該地方為門，但有角色踩上去
 				coord_in(show, pos) = true;
@@ -92,7 +89,7 @@ void Map::fill_room(Coord pos) {
 	else {//地板或障礙
 		coord_in(show, pos) = true;
 	}
-	Coord direction[4] = {UP(pos),DOWN(pos),LEFT(pos),RIGHT(pos)};
+	Coord direction[4] = { UP(pos),DOWN(pos),LEFT(pos),RIGHT(pos) };
 	for (int i = 0;i < 4;i++) {
 		this->fill_room(direction[i]);
 	}
@@ -320,11 +317,11 @@ bool Map::in_vision(Coord a, Coord b) {//線性差值法
 		return true;
 	}
 	//用x做
-	double slope = ((double)b.y- (double)a.y) / ((double)b.x- (double)a.x);//m斜率
-	double bb = (double)a.y - slope * (double)a.x;//y=mx+b
-	for (int i = a.x;i < b.x;i++) {
-		check.x = i;
-		check.y = ceil((double)i* slope + bb);
+	long double slope = ((long double)b.y- (long double)a.y) / ((long double)b.x- (long double)a.x);//m斜率
+	long double bb = ((long double)a.y + 0.5) - slope * ((long double)a.x + 0.5);//y=mx+b
+	for (long double i = ((long double)a.x + 0.5);i < b.x;i+=0.0001f) {
+		check.x = floor(i);
+		check.y = floor((long double)i* slope + bb);
 		if (coord_in_body(check) == map_obj::wall) {
 			return false;
 		}

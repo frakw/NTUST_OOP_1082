@@ -1,13 +1,14 @@
+#define DEBUG
 #include "Gloom_Haven.h"
-
+#undef DEBUG
 using namespace std;
+std::map<string, int> Monster::race_card_number;//static
 
-Gloom_Haven::Gloom_Haven(tuple<Character*, int, Monster*, int, Map*>input, bool mode) :DEBUG_MODE(mode) {
-	this->set(input, mode);
+Gloom_Haven::Gloom_Haven(tuple<Character*, int, Monster*, int, Map*>input){
+	this->set(input);
 }
 
-void Gloom_Haven::set(tuple<Character*, int, Monster*, int, Map*> input, bool mode) {
-	this->DEBUG_MODE = mode;
+void Gloom_Haven::set(tuple<Character*, int, Monster*, int, Map*> input) {
 	this->map = get<4>(input);
 
 	this->character = get<0>(input);
@@ -44,17 +45,22 @@ void Gloom_Haven::start() {
 	prompt_input("開始遊戲");
 	int round_count = 1;
 	string choose;
-	while ((character_remain() != 0 && monster_remain() != 0) || this->map->door_amount()!=0) {
+	while (1){
+		if (monster_remain() == 0 && map->door_amount() == 0) {
+			cout << "character win~" << endl;
+			break;
+		}
+		else if (character_remain() == 0) {
+			cout << "monster win~" << endl;
+			break;
+		}
 		cout << "round " << round_count <<':'<< endl;
-		bool card_too_little = false;
 		for (int i = 0;i < character_amount;i++) {//檢查有無角色無法長休或出牌
 			if (character[i].card_hand_amount() < 2 && character[i].card_discard_amount() < 2 && character[i].life_value > 0/*該角色也必須存活*/) {
 				character[i].life_value = 0;
-				card_too_little = true;
+				cout << character[i].code << " is killed!!" << endl;
+				this->map->show_room();
 			}
-		}
-		if (card_too_little) {
-			this->map->show_room();//有角色死亡後輸出最終地圖
 		}
 		while(choose_remain()) {//角色選牌(這個不能用virtual，因為會check並且順序不一定)
 			choose = character_card_choose();
@@ -69,8 +75,20 @@ void Gloom_Haven::start() {
 				cout << "character not found,please input again!" << endl;
 			}
 		}
+		for (auto i = Monster::race_card_number.begin();i != Monster::race_card_number.end();i++) {
+			if (!monster_race_amount(i->first)) continue;
+			if (!debug_mode) {
+				int tmp_card_amount = monster_race_card_amount(i->first);
+				do {
+					i->second = rand() % tmp_card_amount;
+				} while (monster_race_in_discard(i->first, i->second));
+			}
+			else {
+				i->second++;
+			}
+		}
 		for (int i = 0;i < monster_amount;i++) {//怪物選牌
-			monster[i].choose_card(DEBUG_MODE);
+			monster[i].choose_card();
 		}
 		sort(all, all + character_amount + monster_amount, creature_order_compare);
 		prompt_input("角色與怪物行動順序如下:");
@@ -79,22 +97,24 @@ void Gloom_Haven::start() {
 		}
 		prompt_input("行動階段:");
 		for (int i = 0;i < character_amount + monster_amount;i++) {//行動時間
-			all[i]->action(DEBUG_MODE);//virtual
+			all[i]->action();//virtual
 		}
 		for (int i = 0;i < character_amount + monster_amount;i++) {//該回合結束後的重整(重設數值)
-			all[i]->round_end(DEBUG_MODE);//virtual
+			all[i]->round_end();//virtual
 		}
-
+		for (int i = 0;i < map->monster_amount;i++) {
+			monster[i].to_discard();
+		}
+		for (auto i = Monster::race_card_number.begin();i != Monster::race_card_number.end();i++) {
+			if (!monster_race_amount(i->first)) continue;
+			if (debug_mode && monster_race_rewash(i->first, i->second)) {
+				i->second = -1;
+			}
+		}
 		if (this->map->check_room()) {//重新檢查房間視野，並將開啟的門設為地板，有開門就重新輸出地圖
 			this->map->show_room();//有開門才需要輸出地圖
 		}
 		round_count++;
-	}
-	if (!monster_remain()) {
-		cout << "character win~" << endl;
-	}
-	else {
-		cout << "monster win~" << endl;
 	}
 }
 
@@ -140,7 +160,7 @@ int Gloom_Haven::choose_remain() {//剩餘幾個角色未選牌或長休
 	return count;
 }
 
-bool creature_order_compare(const Creature* const& a, const Creature* const& b) {
+bool creature_order_compare(const Creature* const& a,const Creature* const& b) {
 	if (a->use_card[0].agility == b->use_card[0].agility) {
 		if (a->team_num == b->team_num) {//隊伍與敏捷相同
 			if (a->team_num == Team_num::character) {//角色與角色敏捷相同
@@ -158,4 +178,41 @@ bool creature_order_compare(const Creature* const& a, const Creature* const& b) 
 		}
 	}
 	return a->use_card[0].agility < b->use_card[0].agility;
+}
+
+int Gloom_Haven::monster_race_amount(string name) {
+	int count = 0;
+	for (int i = 0;i < monster_amount;i++) {
+		if (monster[i].name == name && monster[i].show_in_room && monster[i].show && monster[i].life_value > 0) {
+			count++;
+		}
+	}
+	return count;
+}
+
+int Gloom_Haven::monster_race_card_amount(string name) {
+	for (int i = 0;i < monster_amount;i++) {
+		if (monster[i].name == name && monster[i].show_in_room && monster[i].show && monster[i].life_value > 0) {
+			return monster[i].card_amount;
+		}
+	}
+	return 0;
+}
+
+bool Gloom_Haven::monster_race_in_discard(string name, int card_num) {
+	for (int i = 0;i < monster_amount;i++) {
+		if (monster[i].name == name && monster[i].show_in_room && monster[i].show && monster[i].life_value > 0) {
+			return monster[i].card_in_discard(card_num);
+		}
+	}
+	return false;
+}
+
+bool Gloom_Haven::monster_race_rewash(string name, int card_num) {
+	for (int i = 0;i < monster_amount;i++) {
+		if (monster[i].name == name && monster[i].show_in_room && monster[i].show && monster[i].life_value > 0) {
+			return monster[i].find_card(card_num).rewash_mark;
+		}
+	}
+	return false;
 }

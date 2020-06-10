@@ -1,0 +1,11 @@
+1
+threekiller 9 6
+8
+0 01 attack 3 - heal 3
+1 02 attack 3 range 3 attack 3 range 3 - heal 3
+2 03 attack 3 range 6 - shield 2 shield 2
+3 04 attack 3 - shield 3
+4 05 attack 6 - move 3
+5 06 attack 6 range 6 - move 3
+6 07 attack 6 - move 9
+7 08 attack 3 - shield 3

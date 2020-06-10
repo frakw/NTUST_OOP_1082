@@ -1,0 +1,8 @@
+1
+archer 3 3 3 6 3 4
+archer 0 01 move aa attack 0 range 0 d
+archer 1 02 move dd attack 0 range 3 attack 0 range 3 d
+archer 2 03 move aaa attack 0 range 1 d
+archer 3 04 move ddd attack 0 range 2 d
+archer 4 05 attack 0 range 1 d
+archer 5 06 attack 0 range 0 attack 0 range 0 r

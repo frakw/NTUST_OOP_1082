@@ -8,10 +8,10 @@ struct _Coord_ {
 	_Coord_() :x(0), y(0) {}
 	_Coord_(int ix, int iy) :x(ix), y(iy) {}
 	int x, y;
-	bool operator==(Coord a) {
+	bool operator==(const Coord const& a) {
 		return (a.x == this->x) && (a.y == this->y);
 	}
-	bool operator!=(Coord a) {
+	bool operator!=(const Coord const& a) {
 		return !(*this==a);
 	}
 	void to_null() {
