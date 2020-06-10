@@ -10,7 +10,6 @@ tuple<Character*,int, Monster*,int, Map*> TXT::return_tuple() {
 	}
 	for (int i = 0;i < monster_amount;i++) {//地圖指標存入所有生物，方便之後的行動action
 		monster_output[i].map = map;
-		if (debug_mode) monster_output[i].set_debug(); 
 	}
 	return make_tuple(character_output,character_amount, monster_output,monster_amount, map);
 }
@@ -135,7 +134,7 @@ void TXT::read_monster(string filename) {
 				ss >> type >> value;
 				if (type != "range") {
 					if (type != "move") {
-						monster_db[i].card[j].skill_up[x].set(type, atoi(value.c_str()));
+						monster_db[i].card[j].skill_up[x].set(type, stoi(value));
 					}
 					else {
 						monster_db[i].card[j].skill_up[x].set(type, value.length());
@@ -144,7 +143,7 @@ void TXT::read_monster(string filename) {
 					x++;
 				}
 				else {
-					monster_db[i].card[j].skill_up[x - 1].range = atoi(value.c_str());
+					monster_db[i].card[j].skill_up[x - 1].range = stoi(value);
 				}
 			}
 		}

@@ -1,4 +1,5 @@
 #pragma once
+//增加可讀性的代換
 enum dir : char {
 	up = 'w',
 	left = 'a',

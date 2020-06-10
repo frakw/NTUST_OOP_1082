@@ -104,7 +104,7 @@ Card& Creature::find_card(int number) {//int ¶Ç¤J½s¸¹number¡A¦^¶Ç¸ÓCard referenc
 	}
 }
 
-void Creature::heal(int add) {
+void Creature::heal(int add) {//¦^¦å
 	if (add < 0) {
 		add = 0;
 	}
@@ -166,7 +166,7 @@ void Creature::check_card() {//¦L¥X¥dµP½s¸¹(¤âµP»P±óµP)¡A½s¸¹¥Ñ¤p¨ì¤j
 }
 
 
-void Creature::shield(int add) {
+void Creature::shield(int add) {//¼W¥[¨¾¿m
 	cout << code << " shield " << add << " this turn"<<endl;
 	TmpShield += add;
 	if (TmpShield < 0) {
@@ -174,7 +174,7 @@ void Creature::shield(int add) {
 	}
 }
 
-void Creature::be_attack(char attacker_code,int attack_val) {
+void Creature::be_attack(char attacker_code,int attack_val) {//§ðÀ»ªÌ·|¹ï³Q§ðÀ»ªÌ©I¥s¦¹function
 	if (attack_val < 0) {
 		attack_val = 0;
 	}
@@ -192,7 +192,7 @@ void Creature::be_attack(char attacker_code,int attack_val) {
 	}
 }
 
-void Creature::move(string step,int step_count) {
+void Creature::move(string step,int step_count) {//¨¤¦â»P©Çª«¨Ï¥Î¬Û¦P²¾°Êfunction
 	if (step.length() > step_count && team_num == Team_num::character) {//¨¤¦â¤£¥i¶W¹L³Ì¤j¨B¼Æ¡A­«·s¿é¤J
 		cout << "error move!!!" << endl;
 		this->move(wasd(), step_count);
@@ -238,7 +238,6 @@ void Creature::move(string step,int step_count) {
 				return;
 			}
 		}
-
 	}
 	if (team_num == Team_num::character && now != latest_allow) {//¨¤¦â³Ì²×¤£¥i°±¯d¦bªù»P¦aªO¥~ªº¦a¤è
 		cout << "error move!!!" << endl;
@@ -253,7 +252,7 @@ void Creature::check() {//¨¤¦â¦æ°Ê«e¡A¿é¤Jcheck¡A­n¦C¥X©Ò¦³¨¤¦â»P©Çª«ªºhp»P¨¾¿m­
 	cout << code << "-hp: " << life_value << ", shield: " << TmpShield << endl;
 }
 
-bool Creature::card_in_hand(int number) {//¶Ç¤J½s¸¹¡A¦^¶Ç¸ÓµP¬O¤£¬O¤âµP¡Aerror handling¥Î
+bool Creature::in_hand(int number) {//¶Ç¤J½s¸¹¡A¦^¶Ç¸ÓµP¬O¤£¬O¤âµP¡Aerror handling¥Î
 	for (int i = 0;i < card_amount;i++) {
 		if (card[i].number == number && card[i].available && !card[i].discard) {
 			return true;
@@ -262,7 +261,7 @@ bool Creature::card_in_hand(int number) {//¶Ç¤J½s¸¹¡A¦^¶Ç¸ÓµP¬O¤£¬O¤âµP¡Aerror h
 	return false;
 }
 
-bool Creature::card_in_discard(int number) {
+bool Creature::in_discard(int number) {
 	for (int i = 0;i < card_amount;i++) {
 		if (card[i].number == number && card[i].available && card[i].discard) {//¶Ç¤J½s¸¹¡A¦^¶Ç¸ÓµP¦b¤£¦b±óµP°ï¡Aerror handling¥Î
 			return true;
@@ -270,3 +269,7 @@ bool Creature::card_in_discard(int number) {
 	}
 	return false;
 }
+
+void Creature::print()/*±Æ§Ç«áªº¦C¦L*/ {}
+void Creature::action() /*¦æ°Ê*/ {}
+void Creature::round_end() /*¦^¦Xµ²ºâ¶¥¬q¡A¸Ó¦^¦Xµ²§ô«áªº­«¾ã(­«³]¼Æ­È)*/ {}

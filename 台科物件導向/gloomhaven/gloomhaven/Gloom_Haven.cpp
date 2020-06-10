@@ -2,7 +2,7 @@
 #include "Gloom_Haven.h"
 #undef DEBUG
 using namespace std;
-std::map<string, int> Monster::race_card_number;//static
+
 
 Gloom_Haven::Gloom_Haven(tuple<Character*, int, Monster*, int, Map*>input){
 	this->set(input);
@@ -29,6 +29,7 @@ void Gloom_Haven::set(tuple<Character*, int, Monster*, int, Map*> input) {
 	}
 	for (int i = 0;i < this->monster_amount;i++) {
 		this->all[i+ this->character_amount] = this->monster + i;
+		this->add_to_group(this->monster + i);
 	}
 }
 
@@ -75,20 +76,17 @@ void Gloom_Haven::start() {
 				cout << "character not found,please input again!" << endl;
 			}
 		}
-		for (auto i = Monster::race_card_number.begin();i != Monster::race_card_number.end();i++) {
-			if (!monster_race_amount(i->first)) continue;
+		for (int i = 0;i < all_group.size();i++) {
+			if (!monster_race_amount(all_group[i].name)) continue;
 			if (!debug_mode) {
-				int tmp_card_amount = monster_race_card_amount(i->first);
 				do {
-					i->second = rand() % tmp_card_amount;
-				} while (monster_race_in_discard(i->first, i->second));
+					all_group[i].card_number = rand() % all_group[i].member[i]->card_amount;
+				} while (monster_race_in_discard(all_group[i].name, all_group[i].card_number));
 			}
 			else {
-				i->second++;
+				all_group[i].card_number++;
 			}
-		}
-		for (int i = 0;i < monster_amount;i++) {//怪物選牌
-			monster[i].choose_card();
+			all_group[i].choose_card();
 		}
 		sort(all, all + character_amount + monster_amount, creature_order_compare);
 		prompt_input("角色與怪物行動順序如下:");
@@ -102,17 +100,15 @@ void Gloom_Haven::start() {
 		for (int i = 0;i < character_amount + monster_amount;i++) {//該回合結束後的重整(重設數值)
 			all[i]->round_end();//virtual
 		}
-		for (int i = 0;i < map->monster_amount;i++) {
-			monster[i].to_discard();
-		}
-		for (auto i = Monster::race_card_number.begin();i != Monster::race_card_number.end();i++) {
-			if (!monster_race_amount(i->first)) continue;
-			if (debug_mode && monster_race_rewash(i->first, i->second)) {
-				i->second = -1;
-			}
-		}
+
+
 		if (this->map->check_room()) {//重新檢查房間視野，並將開啟的門設為地板，有開門就重新輸出地圖
 			this->map->show_room();//有開門才需要輸出地圖
+		}
+		
+		for (int i = 0;i < all_group.size();i++) {
+			if (!monster_race_amount(all_group[i].name)) continue;
+			all_group[i].round_end();
 		}
 		round_count++;
 	}
@@ -190,29 +186,41 @@ int Gloom_Haven::monster_race_amount(string name) {
 	return count;
 }
 
-int Gloom_Haven::monster_race_card_amount(string name) {
-	for (int i = 0;i < monster_amount;i++) {
-		if (monster[i].name == name && monster[i].show_in_room && monster[i].show && monster[i].life_value > 0) {
-			return monster[i].card_amount;
-		}
-	}
-	return 0;
-}
-
 bool Gloom_Haven::monster_race_in_discard(string name, int card_num) {
 	for (int i = 0;i < monster_amount;i++) {
 		if (monster[i].name == name && monster[i].show_in_room && monster[i].show && monster[i].life_value > 0) {
-			return monster[i].card_in_discard(card_num);
+			return monster[i].in_discard(card_num);
 		}
 	}
 	return false;
 }
 
-bool Gloom_Haven::monster_race_rewash(string name, int card_num) {
-	for (int i = 0;i < monster_amount;i++) {
-		if (monster[i].name == name && monster[i].show_in_room && monster[i].show && monster[i].life_value > 0) {
-			return monster[i].find_card(card_num).rewash_mark;
+
+void Gloom_Haven::add_to_group(Monster* add) {
+	for (int i = 0;i < all_group.size();i++) {
+		if (all_group[i].name == add->name) {
+			all_group[i].member.push_back(add);
+			return;
 		}
 	}
-	return false;
+	Race new_group;
+	new_group.name = add->name;
+	all_group.push_back(new_group);
+	all_group.back().member.push_back(add);
+}
+
+void Race::choose_card() {
+	for (int i = 0;i < member.size();i++) {
+		member[i]->use_card[0] = member[i]->find_card(card_number);
+		member[i]->find_card(card_number).discard = true;
+	}
+}
+
+void Race::round_end() {
+	if (member[0]->find_card(card_number).rewash_mark) {
+		for (int i = 0;i < member.size();i++) {
+			member[i]->discard_to_hand();
+			card_number = -1;
+		}
+	}
 }

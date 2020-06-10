@@ -6,6 +6,7 @@ class Skill;
 class Character : public Creature {
 public:
 	Character();
+	virtual ~Character();
 	Character& operator=(const Character& input);
 	void choose_card(string);//選擇2張卡或長休或check，bool回傳是否選擇成功，string傳入"0 3"
 	virtual void print() override;//排序後的列印

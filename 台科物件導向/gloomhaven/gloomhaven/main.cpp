@@ -7,8 +7,8 @@ int main(int argc, char** argv) {
 	string map_filename;
 	string play;
 	string input[4];
-	input[1] = "./character3.txt";
-	input[2] = "./monster3.txt";
+	input[1] = "./character1.txt";
+	input[2] = "./monster1.txt";
 	input[3] = "1";
 #ifdef command_line
 	int start_index = 1;

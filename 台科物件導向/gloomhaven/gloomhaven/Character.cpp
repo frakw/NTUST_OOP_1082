@@ -3,6 +3,9 @@
 Character::Character() :Creature() {
 	this->team_num = Team_num::character;
 }
+Character::~Character(){
+	mydelete(card);
+}
 Character& Character::operator=(const Character& input) {
 	this->name = input.name;
 	this->life_value = input.life_value;
@@ -65,14 +68,14 @@ void Character::choose_card(string input) {
 	}
 	else {
 		ss >> card_number2;
-		if (card_in_hand(atoi(card_number1.c_str())) &&
-			card_in_hand(card_number2) && /*檢查是否重複*/
-			atoi(card_number1.c_str())!= card_number2) 
+		if (in_hand(stoi(card_number1)) &&
+			in_hand(card_number2) && /*檢查是否重複*/
+			stoi(card_number1)!= card_number2) 
 		{
-			use_card[0] = find_card(atoi(card_number1.c_str()));
+			use_card[0] = find_card(stoi(card_number1));
 			use_card[1] = find_card(card_number2);
 			finished_choose = true;
-			sleep = false;//remember
+			sleep = false;
 		}
 		else {
 			cout << "card number is not correct(not exist or discard or duplication or unavailable)! please input again!"<<endl;
@@ -80,18 +83,18 @@ void Character::choose_card(string input) {
 	}
 }
 
-void Character::print(){//virtual
+void Character::print() {//virtual
 	if (life_value > 0) {//角色不判斷是否出現
-		cout << code << ' ' <<setw(2) << setfill('0') << use_card[0].agility << ' ';
+		cout << code << ' ' << setw(2) << setfill('0') << use_card[0].agility << ' ';
 		if (!sleep) {
 			cout << use_card[0].number << ' ' << use_card[1].number;
 		}
 		else {
 			cout << "-1";
-		} 
+		}
 		cout << endl;
 	}
-}
+};
 
 void Character::action() {//virtual
 	if (life_value <= 0) {
@@ -103,7 +106,7 @@ void Character::action() {//virtual
 		this->heal(2);
 		prompt_input("請從棄牌堆中輸入要移除卡牌編號:");
 		int remove_number = getline_int();
-		while (!card_in_discard(remove_number)) {
+		while (!in_discard(remove_number)) {
 			cout << "card number is not correct(not exist or in hand or unavailable)! please input again!" << endl;
 			remove_number = getline_int();
 		}
@@ -119,18 +122,18 @@ void Character::action() {//virtual
 	int num;
 num_err:
 	NumUD = character_card_first_ud();
-	while(NumUD == "check") {
+	while (NumUD == "check") {
 		map->check();
 		goto num_err;
 	}
-	num = atoi(NumUD.substr(0, NumUD.length() - 1).c_str());
-	if (num != use_card[0].number && 
-		num != use_card[1].number) 
+	num = stoi(NumUD.substr(0, NumUD.length() - 1));
+	if (num != use_card[0].number &&
+		num != use_card[1].number)
 	{
 		cout << "card number error!,please choose one of the two selected cards" << endl;
 		goto num_err;
 	}
-	card_first_index = (use_card[0].number == (NumUD[0] - '0'))?false:true;
+	card_first_index = (use_card[0].number == (NumUD[0] - '0')) ? false : true;
 	if (NumUD[1] == 'u') {//上半部
 		for (int i = 0;i < use_card[card_first_index].skill_up_amount;i++) {//第一張
 			run_skill(use_card[card_first_index].skill_up[i]);
@@ -147,7 +150,7 @@ num_err:
 			run_skill(use_card[!card_first_index].skill_up[i]);
 		}
 	}
-}
+};
 
 void Character::run_skill(const Skill const& skill) {
 	switch (skill.type) {
@@ -213,4 +216,4 @@ void Character::round_end() {//virtual//該回合結束後的重整(重設數值)
 	finished_choose = life_value <= 0;
 	sleep = false;
 	TmpShield = 0;
-}
+};

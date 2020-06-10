@@ -20,9 +20,9 @@ public:
 	Coord& find_pos(Coord*, int max, Coord pos);
 	int now_monster_amount();//目前場上怪物數(活著)
 	int door_amount();//門剩餘的數量
-	Creature* creature_in(Coord);
-	char& coord_in_body(Coord);
-	bool coord_legal(Coord);
+	Creature* creature_in(Coord);//回傳該座標的生物指標，沒有則回傳nullptr
+	char& coord_in_body(Coord);//回傳該座標的char
+	bool coord_legal(Coord);//檢查該座標是否合法
 	void check();//角色行動前，輸入check，要列出所有角色與怪物的hp與防禦值
 
 	int a_star_path_step(Creature*, Creature*);//A星演算法找尋最短步數
@@ -35,8 +35,9 @@ public:
 	Coord fill_start;//遞迴起始位置，預設start_pos[0]
 	Coord* door_pos = nullptr;//門的位置，開門後記得設為-1,-1
 	int door_total_amount = 0;//總共門的數量(輸入地圖時計算)
-	Character* character = nullptr;
-	int character_amount = 0;
-	Monster* monster = nullptr;
-	int monster_amount = 0;
+
+	Character* character = nullptr;//角色陣列頭指標
+	int character_amount = 0;//角色陣列數量
+	Monster* monster = nullptr;//怪物陣列頭指標
+	int monster_amount = 0;//怪物陣列數量
 };

@@ -5,6 +5,7 @@
 #include <tuple>
 #include <cstdio>
 #include <map>
+#include <set>
 #include <ctime>
 #include <cmath>
 #include <cstdlib>
@@ -15,13 +16,13 @@
 #include <conio.h>
 #include <regex>
 #include <iomanip>
-#include "Coord.h"//先後順序要對
-#include "basic.h"//先後順序要對
-#include "Character.h"//先後順序要對
-#include "Monster.h"//先後順序要對
-#include "Map.h"//先後順序要對
+#include "Coord.h"
+#include "basic.h"
+#include "Character.h"
+#include "Monster.h"
+#include "Map.h"
 #include "a_star_path.h"
-#include "read_file.h"//先後順序要對
+#include "read_file.h"
 #include "Input.h"
 #include "enum.h"
 //提示輸入，註解掉就沒有提示
@@ -33,7 +34,8 @@
 #define prompt_input(output)
 #endif
 
-//#define command_line
+//cmd輸入，註解掉改為黑視窗輸入
+#define command_line
 
 #define mygetline(cin,input)  if(cin.eof()){cin.clear();} getline(cin, input);
 #define mydelete(ptr) do{if(ptr!=nullptr){delete[] ptr;ptr = nullptr;}}while(0)
@@ -42,16 +44,9 @@
 #define self_assign_err_handle(input) do{if(this==&input)return;}while(0)
 #define no_path_found -87
 #define member_assign(a,b,member) (((a).(member)) = ((b).(member)))
-using namespace std;
-bool creature_order_compare(const Creature * const&a,const Creature * const&b);//生物與生物比較行動先後，可放怪物或角色
-//待做:採用macro coord_in提升可讀性, regex
-//採用nullcoord 與 == coord creature die funtion
-//macro庫，集中管理遊戲輸出訊息
-//cout與txt檔同時輸出
-//input output 包裝成class可任意更改輸入或輸出，也可多個輸出
-//提示輸入訊息
 
-//資料封裝，self assign，註解
+using namespace std;
+bool creature_order_compare(const Creature * const&a,const Creature * const&b);//生物與生物比較行動先後，可傳入怪物或角色
 
 #ifdef DEBUG
 #define AUTOEXT
@@ -61,7 +56,15 @@ bool creature_order_compare(const Creature * const&a,const Creature * const&b);/
 AUTOEXT  int debug_mode;
 #undef AUTOEXT
 
-class Gloom_Haven {
+struct Race{//怪物種類
+	string name;
+	vector<Monster*> member;
+	int card_number = -1;
+	void choose_card();
+	void round_end();
+};
+
+class Gloom_Haven {//遊戲主體class
 public:
 	Gloom_Haven();
 	Gloom_Haven(tuple<Character*,int, Monster*,int, Map*> input);//tuple依序為全部角色陣列的頭指標，角色數量，全部怪物陣列的頭指標，怪物數量，地圖指標
@@ -74,18 +77,19 @@ public:
 	int monster_remain();//怪物剩餘數
 	int choose_remain();//剩餘幾個角色未選牌或長休
 
-	int monster_race_amount(string);
-	int monster_race_card_amount(string);
-	bool monster_race_in_discard(string,int);
-	bool monster_race_rewash(string, int);
+	void add_to_group(Monster*);//新增生物指標到 所有怪物種類的vector
+	int monster_race_amount(string);//回傳該種類怪物場上剩餘數，滅絕則該回合debug mode卡牌編號不加1
+	bool monster_race_in_discard(string,int);//該種類怪物的int編號卡牌是否在棄牌堆裡
 private:
 	Creature** all = nullptr;//所有角色與怪物指標排序後存放區，初始化時，先角色再怪物
 
-	Map* map = nullptr;
+	Map* map = nullptr;//地圖指標
 
-	Character* character = nullptr;
-	int character_amount=0;
+	Character* character = nullptr;//角色陣列頭指標
+	int character_amount=0;//角色陣列數量
 
-	Monster* monster = nullptr;
-	int monster_amount = 0;
+	Monster* monster = nullptr;//怪物陣列頭指標
+	int monster_amount = 0;//怪物陣列數量
+
+	vector<Race> all_group;//所有怪物種類的vector
 };

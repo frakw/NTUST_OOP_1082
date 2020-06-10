@@ -26,6 +26,7 @@ void Grid::calc_val(Grid* the_father, Coord end_point) {
 	}
 }
 
+//檢查vector內有無要check的座標
 int exist_in(vector<Grid*>* data_ptr, Coord check) {
 	for (int i = 0;i < data_ptr->size();i++) {
 		if ((*data_ptr)[i]->coord == check) {
@@ -35,9 +36,10 @@ int exist_in(vector<Grid*>* data_ptr, Coord check) {
 	return -1;
 }
 
+//A星演算法
 int Map::a_star_path_step(Creature* coord, Creature* dest) {
-	vector<Grid*> close_list;//不可以用vector<Grid>，因為指標Grid*不可以指向vector中的元素
-	vector<Grid*> open_list;//不可以用vector<Grid>，因為指標Grid*不可以指向vector中的元素
+	vector<Grid*> close_list;
+	vector<Grid*> open_list;
 	Grid* current = new Grid(coord->position, nullptr, dest->position);
 	open_list.push_back(current);
 	do {

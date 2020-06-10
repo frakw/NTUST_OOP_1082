@@ -23,8 +23,6 @@ class Card {
 public:
 	Card();
 	Card(const Card& input);//copy constructor，因為skill會當成參數傳到funtion裡
-	Card(int in_agility, bool mark, Skill* a);
-	Card(int in_agility, bool mark, Skill* a, Skill* b);
 	~Card();
 	Card& operator=(const Card& input);
 
@@ -46,7 +44,7 @@ public:
 class Creature {
 public:
 	Creature();
-	~Creature();
+	virtual ~Creature();
 	Card* card = nullptr;//選擇卡牌
 	string name="";
 	Card& find_card(int);//int 傳入編號number，回傳該Card reference
@@ -59,12 +57,14 @@ public:
 	int card_available_amount();//持有卡牌數(棄牌堆+手牌)
 	int card_hand_amount();//可用卡牌數
 	int card_discard_amount();//棄牌堆數
-	bool card_in_hand(int);//傳入編號，回傳該牌是不是手牌，error handling用
-	bool card_in_discard(int);//傳入編號，回傳該牌在不在棄牌堆，error handling用
-	virtual void print()/*排序後的列印*/ { cout << "virtual error" << endl; }
-	virtual void action() /*行動*/{ cout << "virtual error" << endl; }
-	virtual void round_end() /*回合結算階段，該回合結束後的重整(重設數值)*/{ cout << "virtual error" << endl; }
+	bool in_hand(int);//傳入編號，回傳該牌是不是手牌，error handling用
+	bool in_discard(int);//傳入編號，回傳該牌在不在棄牌堆，error handling用
 	void check();//角色行動前，輸入check，要列出所有角色與怪物的hp與防禦值
+
+	virtual void print();/*排序後的列印*/
+	virtual void action();/*行動*/
+	virtual void round_end(); /*回合結算階段，該回合結束後的重整(重設數值)*/
+
 	Card use_card[2];//若為怪物則只有一張卡，存在use_card[0]
 	int life_value=0;//目前血量
 	int max_life_value = 0;//最大血量
@@ -74,7 +74,7 @@ public:
 	int TmpShield = 0;//該輪護甲值
 	Coord position = {-1,-1};
 	int team_num = 0;//隊伍編號，角色為0，怪物為1
-	Map* map = nullptr;
+	Map* map = nullptr;//地圖指標
 	bool finished_choose = false;//該回合是否完成選牌或選擇長休
 };
 

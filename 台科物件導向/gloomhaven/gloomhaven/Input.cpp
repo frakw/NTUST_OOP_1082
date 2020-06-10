@@ -1,8 +1,5 @@
 #include "Gloom_Haven.h"
 #include "Input.h"
-
-
-
 using namespace std;
 
 int character_amount_input() {
@@ -16,7 +13,7 @@ check:
 		cout << err << endl;
 		mygetline(cin, input);
 	}
-	result = atoi(input.c_str());
+	result = stoi(input);
 	if (result > 4 || result < 2) {
 		cout << "character amount should be 2~4 , input again!" << endl;
 		goto check;
@@ -148,7 +145,7 @@ int getline_int() {
 		cout << err << endl;
 		mygetline(cin, in);
 	}
-	return atoi(in.c_str());
+	return stoi(in);
 }
 
 char getline_char() {
