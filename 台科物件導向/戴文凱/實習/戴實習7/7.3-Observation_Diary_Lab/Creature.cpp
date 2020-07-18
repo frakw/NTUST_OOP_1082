@@ -35,7 +35,7 @@ Creature& Creature::operator=(int input) {
 	if (!body[index].amount && input) {
 		output = output + " appeared (";
 	}
-	else if (input == 0 && body[index].amount == 0) {
+	else if (input == 0 && body[index].amount == 0) {//特別! 0變0不用輸出
 		return *this;
 	}
 	else if (!input) {

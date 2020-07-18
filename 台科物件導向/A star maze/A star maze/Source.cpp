@@ -204,7 +204,7 @@ int main() {
 	cout << "Maze x * y :";
 	cin >> col >> row;
 	Maze maze(col, row);
-	maze.create(true, 5);
+	maze.create(true, 1);
 	maze.output("maze.txt");//update stack_maze
 	while (1) {
 		A_star_path(maze, choose_dot(maze));

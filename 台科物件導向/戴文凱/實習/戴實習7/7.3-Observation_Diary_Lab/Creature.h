@@ -23,7 +23,7 @@ public:
 private:
 	int index = 0;
 	string name;
-	int start_day_index;
+	int start_day_index;//記錄哪一天(index)誕生的
 	vector<body_parts> body;
 };
 

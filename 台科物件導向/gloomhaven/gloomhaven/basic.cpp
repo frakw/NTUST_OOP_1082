@@ -30,8 +30,6 @@ Card::Card():skill_up(nullptr),skill_down(nullptr){}
 Card::Card(const Card& input) {
 	*this = input;
 }
-Card::Card(int in_agility, bool mark, Skill* a) : agility(in_agility), rewash_mark(mark), skill_up(a) {}
-Card::Card(int in_agility, bool mark, Skill* a, Skill* b) : agility(in_agility), rewash_mark(mark), skill_up(a), skill_down(b) {}
 Card::~Card() {
 	mydelete(skill_up);
 	skill_up_amount = 0;
@@ -230,12 +228,18 @@ void Creature::move(string step,int step_count) {//角色與怪物使用相同移動functio
 				this->move(wasd(),step_count);
 				return;
 			}
+			else if (now_life->team_num != team_num && team_num == Team_num::character) {//怪物撞到敵人
+				break;
+			}
 		}
 		else {//剩餘的是障礙物與牆壁
 			if (team_num == Team_num::character) {//角色不可穿過障礙物牆壁，怪物則會被擋住
 				cout << "error move!!!" << endl;
 				this->move(wasd(), step_count);
 				return;
+			}
+			else if (team_num == Team_num::monster) {//怪物撞到障礙物或牆壁就停下(後面的都不做)
+				break;
 			}
 		}
 	}

@@ -166,7 +166,10 @@ bool creature_order_compare(const Creature* const& a,const Creature* const& b) {
 				return a->use_card[1].agility < b->use_card[1].agility;
 			}
 			else if (a->team_num == Team_num::monster) {//怪物與怪物敏捷相同
-				return a->code < b->code;
+				if (a->name == b->name) {
+					return a->code < b->code;
+				}
+				return a->name < b->name;
 			}
 		}
 		else {//角色與怪物敏捷相同

@@ -58,7 +58,7 @@ VecNf VecNf::operator-(VecNf const& in) {
 	}
 	return result;
 }
-float VecNf::operator*(VecNf const& in) {
+float VecNf::operator*(VecNf const& in) {//¤º¿n
 	float sum = 0;
 	if (cnt != in.cnt) {
 		cout << "dimensions inconsistent" << endl;

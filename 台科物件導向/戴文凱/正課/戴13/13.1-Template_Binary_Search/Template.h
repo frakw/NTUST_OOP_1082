@@ -23,12 +23,7 @@ void ItrBinarySearch(const T a[], int first, int last, T key, bool& found, int& 
 
 template<typename T>
 void RecBinarySearch(const T a[], int first, int last, T key, bool& found, int& location) {
-	if (first >= last) {//要用>= 不可用>
-		if (a[first] == key) {
-			found = true;
-			location = first;
-			return;
-		}
+	if (first > last) {//要用>= 不可用>
 		found = false;
 		return;
 	}
