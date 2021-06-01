@@ -1,0 +1,26 @@
+Insert "Cat" "Jim" 10
+Insert "Cat" "Jim" 15
+Insert "Cat" "Jim" 21
+Insert "Cat" "Jim" 14
+Insert "Cat" "Jim" 20
+Insert "Cat" "Jim" 4
+Insert "Cat" "Jim" 5
+Insert "Cat" "Jim" 11
+Insert "Cat" "Jim" 13
+Insert "Cat" "Jim" 2
+Insert "Cat" "Jim" 7
+Insert "Cat" "Jim" 19
+Insert "Cat" "Jim" 12
+Insert "Cat" "Jim" 6
+Insert "Cat" "Jim" 17
+Insert "Cat" "Jim" 22
+Insert "Cat" "Jim" 1
+Insert "Cat" "Jim" 8
+Insert "Cat" "Jim" 16
+Insert "Cat" "Jim" 23
+Insert "Cat" "Jim" 3
+Insert "Cat" "Jim" 18
+Insert "Cat" "Jim" 9
+Delete Edition "Cat" "Jim" 10
+Delete Edition "Cat" "Jim" 20
+Find Book "Cat" "Jim"

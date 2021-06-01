@@ -1,0 +1,23 @@
+Insert JK's Harry, Edition: 1.
+Datum already exist.
+Insert Unknown's Rapunzel, Edition: 1812.
+Insert Unknown's Momotaro, Edition: 17.
+Insert JK's Harry, Edition: 2.
+Insert JK's Harry, Edition: 4.
+Insert Glen Keane's Rapunzel, Edition: 2010.
+Title: Harry	Author: JK	Edition: 1, 2, 4
+Unknown's Books: Momotaro, Rapunzel
+Title: Harry	Author: JK	Edition: 1, 2, 4
+Title: Momotaro	Author: Unknown	Edition: 17
+Title: Rapunzel	Author: Glen Keane	Edition: 2010
+Title: Rapunzel	Author: Unknown	Edition: 1812
+No book found.
+Datum doesn't exist.
+Book doesn't exist.
+Delete JK's Harry, Edition: 1.
+Delete Glen Keane's Rapunzel.
+Title: Harry	Author: JK	Edition: 2, 4
+Title: Momotaro	Author: Unknown	Edition: 17
+Title: Rapunzel	Author: Unknown	Edition: 1812
+Unknown Command.
+Incomplete Command.

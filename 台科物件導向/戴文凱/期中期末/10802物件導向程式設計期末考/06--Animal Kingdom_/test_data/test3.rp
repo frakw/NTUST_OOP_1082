@@ -1,0 +1,31 @@
+#include <iostream>
+#include "Animal.h"
+using namespace std;
+int main() {
+	Cat cat("Cat");
+	Crow crow("Crow");
+	Duck duck("Duck");
+	Pig pig("Pig");
+	Fox fox("Fox");
+
+	Mammal* mammals[] = { &pig,&cat,&fox };
+	Bird* birds[] = { &crow,&duck };
+	for (int i = 0; i < 2; i++)
+	{
+		cout << *(birds[i]) << endl;
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		cout << *(mammals[i]) << endl;
+	}
+	cout << "The Animal chorus rehearsal:" << endl;
+	for (int i = 0; i < 3; i++)
+		cout << pig.makeASound() << " ";
+	for (int i = 0; i < 2; i++)
+		cout << cat.makeASound() << " ";
+	for (int i = 0; i < 5; i++)
+		cout << duck.makeASound() << " ";
+	for (int i = 0; i < 1; i++)
+		cout << fox.makeASound() << " ";
+	return 0;
+}

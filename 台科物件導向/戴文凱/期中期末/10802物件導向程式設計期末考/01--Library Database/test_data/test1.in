@@ -1,0 +1,18 @@
+Insert "Harry" "JK" 1
+Insert "Harry" "JK" 1
+Insert "Rapunzel" "Unknown" 1812
+Insert "Momotaro" "Unknown" 17
+Insert "Harry" "JK" 2
+Insert "Harry" "JK" 4
+Insert "Rapunzel" "Glen Keane" 2010
+Find Book "Harry" "JK"
+Find Author "Unknown"
+Sort by Title
+Find Author "KK"
+Delete Edition "Harry" "JK" 3
+Delete Book "Mamamia" "ABBA"
+Delete Edition "Harry" "JK" 1
+Delete Book "Rapunzel" "Glen Keane"
+Sort by Author
+insert
+Insert 5

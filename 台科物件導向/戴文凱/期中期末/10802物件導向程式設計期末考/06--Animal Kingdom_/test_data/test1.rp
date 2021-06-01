@@ -1,0 +1,17 @@
+#include <iostream>
+#include "Animal.h"
+using namespace std;
+int main() {
+	Cat cat("C");
+	Crow crow("Jim");
+	Duck duck("Donald");
+	cout << cat.getName() << endl;
+	cat.run();
+	duck.history();
+	cat.setName("Gelatoni");
+	Animal* animals[] = { &cat,&crow,&duck };
+	for (int i = 0; i < 3; i++){
+		cout << *(animals[i]) << endl;
+	}
+	return 0;
+}
